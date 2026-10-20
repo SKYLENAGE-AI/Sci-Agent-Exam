@@ -5,6 +5,8 @@ leaderboard: 10 frontier LLM agents across 11 scientific fields and 7 research
 task types, scored on two axes (programmatic execution and LLM-judge
 presentation) plus a `Pass@0.95` reliability metric.
 
+**Live:** <https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/>
+
 ```
 leaderboard/
 ├── build.py                 # generator: data/leaderboard.json -> index.html
@@ -75,3 +77,22 @@ Pass@0.95 only at the `overall` level.
 All runs are from the **Claude Code harness at high effort**, scored rows only
 (infra failures, refusals, and in-progress runs excluded), with per task a mean
 of up to three time-uniform runs.
+
+## Publishing (GitHub Pages)
+
+The page is static, so hosting needs no build step. After pushing the repo to
+`SKYLENAGE-AI/Sci-Agent-Exam`, enable Pages once:
+
+1. **Settings → Pages**.
+2. **Source: Deploy from a branch**.
+3. **Branch: `master`**, folder **`/ (root)`** → **Save**.
+
+GitHub serves the repo as-is; the leaderboard is then live at
+
+```
+https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/
+```
+
+(the owner subdomain is lowercased; the repo path keeps its original case). It
+may take a minute on the first deploy. No Actions workflow is required — every
+later `git push` that changes `leaderboard/index.html` republishes automatically.

@@ -12,6 +12,11 @@ This is a *representative extract*, not the full benchmark: large-scale batch
 runners, result aggregation, and the complete task set are omitted. Everything
 needed to understand and reproduce a single evaluation is included.
 
+> **📊 Live leaderboard:** <https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/>
+> — 10 frontier agents across 11 scientific fields and 7 task types, sortable by
+> Programmatic / LLM-Judge / Combined / Pass@0.95. Source + generator in
+> [`leaderboard/`](leaderboard/).
+
 ---
 
 ## 1. What the benchmark measures
