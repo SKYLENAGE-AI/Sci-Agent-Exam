@@ -1,0 +1,55 @@
+artifacts = ["/home/agent/results"]
+
+[metadata]
+task_id = "SCI06-TO-2026-0001"
+domain = "SCI-06"
+domain_name = "Physics Simulation"
+tags = [
+  "COG-01", "COG-02", "COG-05", "COG-06",
+  "TOOL-01", "TOOL-02", "TOOL-04", "TOOL-06",
+  "DATA-01", "DATA-03", "DATA-04",
+  "INT-03", "INT-05",
+  "TSK-01", "TSK-03", "TSK-06"
+]
+task_type = "tool_orchestration"
+
+[task]
+name = "sciagent/physics-simulation-tool-orchestration-01"
+description = "Orchestrate SQLite catalog/contract lookup, Smilei laser-plasma namelist parsing, HDF5 inspection/loading, and FFT diagnostics to validate harmonic generation in a magnetized PIC fixture."
+
+[input_data]
+description = "Offline Smilei benchmark-style namelist, local run catalog, and HDF5 diagnostics for a magnetized laser-plasma harmonic-generation workflow."
+data_path = "/home/agent/data/"
+files = [
+  { name = "run_catalog.sqlite", size_mb = 0.02, format = "sqlite", description = "Local run catalog with accepted/rejected harmonic records and diagnostic-contract schema/validation constants" },
+  { name = "smilei_inputs/tst1d_laser_magnetized_harmonics.py", size_mb = 0.01, format = "python", description = "Smilei laser-plasma benchmark-style namelist with perpendicular magnetic field" },
+  { name = "diagnostics/Probes0.h5", size_mb = 0.13, format = "hdf5", description = "Smilei-style probe output with time-resolved Ey, Bz, charge, and current channels" },
+  { name = "diagnostics/Fields0.h5", size_mb = 0.02, format = "hdf5", description = "Smilei-style field-energy scalar diagnostic" },
+  { name = "diagnostic_manifest.json", size_mb = 0.01, format = "json", description = "Input manifest and unit conventions" },
+  { name = "source_url.txt", size_mb = 0.01, format = "text", description = "Primary open-source project URL for provenance" }
+]
+
+[expected_output]
+description = "answer.json final harmonic metrics, executable code/solve.py, required intermediate handoffs, report.md, and one diagnostic figure."
+
+[expected_output.schema]
+answer_json_keys = ["selected_run_id", "selected_harmonic_order", "harmonic_frequency_omega0", "frequency_error_fraction", "harmonic_to_fundamental_power_ratio", "magnetization_parameter", "polarization_phase_lag_rad", "verdict"]
+code_files = ["code/solve.py"]
+figures = ["harmonic_spectrum.png"]
+artifact_files = []
+
+[eval_config]
+programmatic_weight = 0.55
+llm_judge_weight = 0.45
+judge_model = "claude-sonnet-5"
+rubric_file = "tests/rubric.json"
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+ANTHROPIC_BASE_URL = "${ANTHROPIC_BASE_URL}"
+SCICODE_TASK_TYPE = "tool_orchestration"
+
+[reference_solution]
+script = "solution/solve.py"
+golden_answer_json = "solution/answer.json"
+figures = ["solution/figures/harmonic_spectrum.png"]

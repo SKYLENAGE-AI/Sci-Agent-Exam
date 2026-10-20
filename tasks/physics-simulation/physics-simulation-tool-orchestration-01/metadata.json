@@ -1,0 +1,18 @@
+{
+  "task_id": "task_d4a1417686bb439e97c1dc9ec067ad95",
+  "task_name": "Physics Simulation — Tool Orchestration 01",
+  "task_status_id": "complete",
+  "domain": "Physics Simulation",
+  "transitioned_at": "2026-07-30T12:21:41.781989Z",
+  "scicode_task_directory": "physics-simulation-tool-orchestration-01",
+  "status": "Reviewed",
+  "slug": "physics-simulation-tool-orchestration-01",
+  "files": 33,
+  "bytes": 757487,
+  "flag": "",
+  "closed_model_evals_removed": [
+    "claude-sonnet-4-6",
+    "google-gemini-3.1-pro-preview",
+    "gpt-5.4"
+  ]
+}

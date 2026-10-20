@@ -1,0 +1,59 @@
+{
+  "task_context": "You are evaluating a physics-simulation tool-orchestration task. The agent had to query a local harmonic candidate catalog and diagnostic contract, parse a Smilei-style magnetized laser-plasma namelist, inspect and load HDF5 probe and field diagnostics, compute an FFT-band harmonic spectrum, validate charge-channel coupling and Ey/Bz polarization phase for the selected harmonic, use field energy as a separate consistency handoff, and report the workflow.",
+  "text_deliverables": [
+    {
+      "label": "report",
+      "tag": "agent_report",
+      "path": "report.md"
+    },
+    {
+      "label": "answer.json",
+      "tag": "agent_answer",
+      "path": "answer.json",
+      "note": "Exact numeric correctness is owned by check_programmatic.py; judge only interpretation and cross-artifact consistency."
+    },
+    {
+      "label": "code",
+      "tag": "agent_code",
+      "code_dir": "code",
+      "required_files": ["solve.py"],
+      "max_files": 4,
+      "note": "Verify orchestration and validation claims against executable code, not only prose."
+    },
+    {
+      "label": "intermediate artifacts",
+      "tag": "agent_intermediate",
+      "code_dir": "intermediate",
+      "required_files": [
+        "catalog_selection.csv",
+        "candidate_audit.csv",
+        "namelist_summary.json",
+        "probe_h5dump_tree.txt",
+        "fields_h5dump_tree.txt",
+        "windowed_signal.csv",
+        "harmonic_spectrum.csv",
+        "noise_floor_audit.csv",
+        "charge_coupling_audit.csv",
+        "harmonic_validation.json",
+        "polarization_validation.json",
+        "field_energy.csv"
+      ],
+      "globs": ["**/*.csv", "**/*.json", "**/*.txt"],
+      "max_files": 16
+    },
+    {
+      "label": "trajectory excerpt",
+      "tag": "agent_trajectory",
+      "path": "/logs/agent/trajectory.json",
+      "optional": true,
+      "note": "Use trajectory only to corroborate or contradict reported tool execution."
+    }
+  ],
+  "figure_files": [
+    {
+      "name": "harmonic_spectrum.png",
+      "label": "Harmonic spectrum diagnostic"
+    }
+  ],
+  "figure_dir": "figures"
+}

@@ -1,0 +1,92 @@
+# task-template.toml — annotated template for a Sci-Agent-Exam task
+#
+# Copy this into a new task directory as `task.toml` and fill it in. This is the
+# NATIVE two-component-scoring schema used by this benchmark (programmatic check +
+# LLM judge, weighted per task type) — not the binary-reward Terminal-Bench schema.
+# Fields marked (required) must be present; the verifier and harbor runner read them.
+#
+# Companion files expected alongside this one (see tasks/README.md for the full
+# directory contract):
+#   instruction.md  environment/{Dockerfile,requirements.lock,data/}
+#   tests/{test.sh,check_programmatic.py,llm_judge.py,judge_config.json,rubric.json}
+#   solution/{solve.py|solve.sh,answer.json,...}
+
+# (required) Paths inside the container that the verifier collects as the agent's
+# deliverables. Almost always just the results directory.
+artifacts = ["/home/agent/results"]
+
+[metadata]
+# (required) Stable unique id. Convention: SCI<NN>-<TYPE>-<YEAR>-<NNN>.
+task_id = "SCI00-TYPE-2026-000"
+# (required) Domain code and human-readable name.
+domain = "SCI-00"
+domain_name = "Example Domain"
+# Capability tags (free-form taxonomy): COG-* cognition, TOOL-* tool use,
+# DATA-* data handling, INT-* integration, TSK-* task shape. Optional but useful
+# for slicing results.
+tags = ["COG-01", "COG-02", "TOOL-02", "DATA-03", "TSK-01"]
+# (required) Drives the scoring weights in tests/test.sh. One of:
+#   code_generation | error_diagnosis | tool_orchestration |
+#   end_to_end_analysis | hypothesis_validation | result_interpretation |
+#   literature_synthesis
+# Must match [verifier.env].SCICODE_TASK_TYPE below.
+task_type = "code_generation"
+
+[task]
+# (required) Internal name "sciagent/<domain>-<type>-<nn>" and a one-line summary.
+name = "sciagent/example-domain-code-generation-00"
+description = "One-sentence statement of what the agent must accomplish."
+
+[input_data]
+# (required) What is mounted read-only under data_path, and a per-file manifest.
+description = "Short description of the mounted datasets / code / papers."
+data_path = "/home/agent/data/"
+files = [
+  { name = "paper.pdf",   size_mb = 0.0, format = "pdf",    description = "Primary source (cite author/year + license in the task README)." },
+  { name = "inputs.json", size_mb = 0.0, format = "json",   description = "Visible input fixture." },
+  { name = "starter.py",  size_mb = 0.0, format = "python", description = "Runnable starter the agent extends (optional)." },
+]
+
+[expected_output]
+# (required) Prose description of the deliverables the agent must write to
+# /home/agent/results/.
+description = "An importable module, a structured answer.json, a short report, self-tests."
+
+[expected_output.schema]
+# Keys the agent's results/answer.json must contain. The programmatic check and
+# the judge's artifact preflight read this.
+answer_json_keys = ["key_a", "key_b", "key_c"]
+# Code files expected under results/code/.
+code_files = ["code/module.py"]
+# Figure files expected under results/ (empty if none).
+figures = []
+# Other result artifacts (tables, tsv/json outputs) expected under results/.
+artifact_files = []
+
+[eval_config]
+# (required) The two component weights. These MUST equal the pair that
+# tests/test.sh resolves from task_type (see the scoring table in README §4);
+# they are duplicated here for documentation and must stay consistent.
+programmatic_weight = 0.70
+llm_judge_weight = 0.30
+# Judge model recorded for provenance. The judge endpoint/model is supplied at
+# run time via env (ANTHROPIC_* for the native path, JUDGE_* for judge_adapter.py).
+judge_model = "claude-sonnet-5"
+rubric_file = "tests/rubric.json"
+
+[verifier.env]
+# (required) Environment passed into the verifier container. The API creds are
+# interpolated from the host env by harbor; SCICODE_TASK_TYPE selects the scoring
+# weights in test.sh and MUST match [metadata].task_type above.
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+ANTHROPIC_BASE_URL = "${ANTHROPIC_BASE_URL}"
+SCICODE_TASK_TYPE = "code_generation"
+
+[reference_solution]
+# (required) The golden solution, used by run_judge.sh for grader QC. Provide a
+# solve.py (invoked as `python solve.py <results_dir>`) or solve.sh
+# (`bash solve.sh <results_dir>`); it must populate results/ the same way an
+# agent would.
+script = "solution/solve.py"
+golden_answer_json = "solution/answer.json"
+figures = []

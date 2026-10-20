@@ -1,0 +1,118 @@
+{
+  "claims": [
+    {
+      "id": "claim_42_k5",
+      "v": 42,
+      "k": 5,
+      "source_marker": "table_3_v42"
+    },
+    {
+      "id": "claim_90_k5",
+      "v": 90,
+      "k": 5,
+      "source_marker": "appendix_a_v90"
+    },
+    {
+      "id": "claim_92_k6",
+      "v": 92,
+      "k": 6,
+      "source_marker": "section_3_3_v92"
+    },
+    {
+      "id": "claim_106_k6",
+      "v": 106,
+      "k": 6,
+      "source_marker": "appendix_a_v106"
+    },
+    {
+      "id": "claim_122_k6",
+      "v": 122,
+      "k": 6,
+      "source_marker": "section_3_1_v122"
+    },
+    {
+      "id": "claim_83_section_k5",
+      "v": 83,
+      "k": 5,
+      "source_marker": "section_3_1_v83"
+    },
+    {
+      "id": "claim_102_section_k5",
+      "v": 102,
+      "k": 5,
+      "source_marker": "section_3_1_v102"
+    },
+    {
+      "id": "claim_144_section_k5",
+      "v": 144,
+      "k": 5,
+      "source_marker": "section_3_1_v144"
+    },
+    {
+      "id": "claim_62_section_k6",
+      "v": 62,
+      "k": 6,
+      "source_marker": "section_3_1_v62"
+    },
+    {
+      "id": "claim_63_section_k6",
+      "v": 63,
+      "k": 6,
+      "source_marker": "section_3_1_v63"
+    },
+    {
+      "id": "claim_123_section_k6",
+      "v": 123,
+      "k": 6,
+      "source_marker": "section_3_1_v123"
+    },
+    {
+      "id": "claim_151_section_k6",
+      "v": 151,
+      "k": 6,
+      "source_marker": "section_3_1_v151"
+    },
+    {
+      "id": "claim_122_k5",
+      "v": 122,
+      "k": 5,
+      "source_marker": "appendix_a_v122"
+    },
+    {
+      "id": "claim_125_k6",
+      "v": 125,
+      "k": 6,
+      "source_marker": "appendix_a_v125"
+    },
+    {
+      "id": "claim_126_k5",
+      "v": 126,
+      "k": 5,
+      "source_marker": "appendix_a_v126"
+    },
+    {
+      "id": "claim_126_k6",
+      "v": 126,
+      "k": 6,
+      "source_marker": "table_4_v126"
+    },
+    {
+      "id": "claim_143_k5",
+      "v": 143,
+      "k": 5,
+      "source_marker": "table_3_v143"
+    },
+    {
+      "id": "claim_167_k5",
+      "v": 167,
+      "k": 5,
+      "source_marker": "table_3_v167"
+    },
+    {
+      "id": "claim_64_k6",
+      "v": 64,
+      "k": 6,
+      "source_marker": "table_4_v64"
+    }
+  ]
+}

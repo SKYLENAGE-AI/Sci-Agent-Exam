@@ -1,0 +1,13 @@
+{
+  "summary_sha256": "d92aa22439a3a3f474f63bd72c9838d089d850c3a74a5a62baa0a53590a632da",
+  "summary_fields": [
+    "instance_summaries",
+    "feasibility_summaries",
+    "parameter_review_summaries",
+    "source_claim_summaries",
+    "policy_summaries",
+    "review_recommendation",
+    "review_blockers"
+  ],
+  "canonicalization": "JSON summary object with sort_keys=true and separators(',', ':')"
+}

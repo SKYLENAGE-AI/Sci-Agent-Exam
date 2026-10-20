@@ -1,0 +1,10 @@
+HDF5 "Fields0.h5" {
+FILE_CONTENTS {
+ group      /
+ dataset    /iteration
+ group      /scalar_diagnostics
+ dataset    /scalar_diagnostics/electromagnetic_field_energy
+ dataset    /time_omega_p_inv
+ dataset    /x
+ }
+}

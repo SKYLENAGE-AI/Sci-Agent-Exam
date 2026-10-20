@@ -1,0 +1,14 @@
+HDF5 "Probes0.h5" {
+FILE_CONTENTS {
+ group      /
+ dataset    /iteration
+ dataset    /probe_x
+ group      /signals
+ group      /signals/xmin
+ dataset    /signals/xmin/Bz
+ dataset    /signals/xmin/Ey
+ dataset    /signals/xmin/Jx
+ dataset    /signals/xmin/Rho
+ dataset    /time_omega_p_inv
+ }
+}

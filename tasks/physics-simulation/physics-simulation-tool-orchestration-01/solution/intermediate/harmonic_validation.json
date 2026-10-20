@@ -1,0 +1,10 @@
+{
+  "energy_modulation_index": 1.772630143354977,
+  "frequency_resolution_omega0": 0.04998047637641889,
+  "fundamental_power": 0.5009555621802447,
+  "sample_count": 2561,
+  "selected_harmonic_power": 0.009921324331004577,
+  "selected_peak_prominence": 687185227199098.4,
+  "selected_phase_error_rad": 3.229506533308779e-07,
+  "window_function": "blackmanharris"
+}

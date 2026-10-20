@@ -1,0 +1,10 @@
+{
+  "frequency_error_fraction": -0.00039047247163400317,
+  "harmonic_frequency_omega0": 2.998828582585098,
+  "harmonic_to_fundamental_power_ratio": 0.019804799227750396,
+  "magnetization_parameter": 0.7333859777674537,
+  "polarization_phase_lag_rad": -1.1800003229506533,
+  "selected_harmonic_order": 3,
+  "selected_run_id": "magnetized_h3_probe",
+  "verdict": "magnetized_harmonic_confirmed"
+}

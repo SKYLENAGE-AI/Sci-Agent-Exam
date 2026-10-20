@@ -1,0 +1,5 @@
+harness/harbor_jobs/
+outputs/
+.env
+__pycache__/
+*.pyc

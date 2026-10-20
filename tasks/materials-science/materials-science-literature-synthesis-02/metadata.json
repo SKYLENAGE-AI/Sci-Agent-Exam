@@ -1,0 +1,18 @@
+{
+  "task_id": "task_324583af17284191922c79b430ab9feb",
+  "task_name": "Materials Science — Literature Synthesis 02",
+  "task_status_id": "complete",
+  "domain": "Materials Science",
+  "transitioned_at": "2026-08-01T21:54:08.844400Z",
+  "scicode_task_directory": "materials-science-literature-synthesis-02",
+  "status": "Reviewed",
+  "slug": "materials-science-literature-synthesis-02",
+  "files": 19,
+  "bytes": 16471216,
+  "flag": "",
+  "closed_model_evals_removed": [
+    "claude-sonnet-4-6",
+    "google-gemini-3.1-pro-preview",
+    "gpt-5.4"
+  ]
+}

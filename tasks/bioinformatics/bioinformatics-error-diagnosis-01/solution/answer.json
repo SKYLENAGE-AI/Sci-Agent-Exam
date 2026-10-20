@@ -1,0 +1,7 @@
+{
+  "bug_type": "data_alignment",
+  "earliest_fault": "eligibility_construction",
+  "repair_scope": "eligibility_only",
+  "bias_direction": "optimistic",
+  "fixed": true
+}

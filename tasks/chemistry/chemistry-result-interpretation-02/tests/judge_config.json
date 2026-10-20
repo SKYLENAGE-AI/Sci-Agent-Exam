@@ -1,0 +1,42 @@
+{
+  "task_context": "You are an expert evaluator in computational chemistry, reaction kinetics, and molecular catalysis. You are grading an agent that interpreted whether precomputed DFT stationary points, split-reference energy profiles, mechanistic observables, and bounded Eyring calculations establish a locally plausible pathway, a closed catalytic cycle, and practically meaningful turnover for acetone hydrogenation by CAl3MgH2-.",
+  "text_deliverables": [
+    {
+      "label": "interpretation report",
+      "tag": "agent_report",
+      "path": "report.md"
+    },
+    {
+      "label": "bounded calculation table",
+      "tag": "agent_calculations",
+      "path": "bounded_calculations.csv"
+    },
+    {
+      "label": "Gibbs-reference audit",
+      "tag": "agent_reference_audit",
+      "path": "reference_audit.csv"
+    },
+    {
+      "label": "calculation code",
+      "tag": "agent_code",
+      "code_dir": "code",
+      "required_files": ["interpret_cycle.py"],
+      "globs": ["**/*.py"],
+      "max_files": 4,
+      "note": "Runtime API behavior and exact outputs are owned by check_programmatic.py; expose the required implementation here for deliverable-contract completeness."
+    },
+    {
+      "label": "answer.json",
+      "tag": "agent_answer",
+      "path": "answer.json",
+      "note": "Exact verdict correctness is owned by check_programmatic.py; judge its consistency with the report's evidence and calibration."
+    }
+  ],
+  "figure_files": [
+    {
+      "name": "rate_sensitivity.png",
+      "label": "Authoritative segment Eyring rates and deterministic barrier sensitivity"
+    }
+  ],
+  "figure_dir": "figures"
+}

@@ -1,0 +1,4 @@
+split	n_documents	n_candidate_assays	n_tier_compounds	n_base_qualifying_assays	n_target_mirroring_pairs	n_mirroring_excluded_assays	n_qualifying_assays	n_retained_assays	n_evaluable_assays	mean_r2	retained_assay_sha256
+test	7	16	161	9	2	2	7	5	5	0.79036721	604a8d93db832ba38b04eb1ca7c2df951e5cf19b80eec02423fa14cc608631dc
+train	1	3	39	NA	0	0	NA	3	3	0.91334516	4adf2b4d7f4da6e15222657027dde7b36fcf7b005e686d69c51ec4cd3069191c
+validation	6	12	228	12	1	2	10	5	5	0.22218218	b069db3973a922eb5c30e05d176f30150b8f392dea4c2b27978bb8c15a68fed4

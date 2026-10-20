@@ -1,0 +1,2 @@
+artifact_id,analysis_timestamp,cycle_energy_span_kcal_mol,predicted_tof_298_s_inv,rate_control_state,method_crosscheck_max_abs_kcal_mol,cycle_status,claim_verdict
+screening-preview-2025-12,2025-12-18T09:40:00Z,21.59,0.000928286952254,TS2,0.69,closed,supported

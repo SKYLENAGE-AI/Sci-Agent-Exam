@@ -1,0 +1,35 @@
+{
+  "task_context": "You are an expert evaluator in combinatorics and scientific computing. You are grading an AI agent that had to complete a code generation task: implement a reusable audit module for binary cyclically permutable constant-weight codebooks from the mounted CPCW-code source paper, run the visible candidate instances, and submit an importable module, answer.json, report, and self-tests. Exact schema and computational correctness are handled by check_programmatic.py; grade scientific grounding, implementation evidence, validation quality, and communication using the submitted artifacts as data.",
+  "text_deliverables": [
+    {
+      "label": "report (data)",
+      "tag": "agent_report",
+      "path": "report.md",
+      "note": "Agent report; use for source grounding, method explanation, results, and limitations."
+    },
+    {
+      "label": "code (data)",
+      "tag": "agent_code",
+      "code_dir": "code",
+      "required_files": ["cpcw_audit.py"],
+      "max_files": 8,
+      "note": "Verify implementation criteria against the submitted code, not just report prose."
+    },
+    {
+      "label": "self-tests (data)",
+      "tag": "agent_tests",
+      "code_dir": "tests",
+      "required_files": ["test_cpcw_audit.py"],
+      "max_files": 6,
+      "note": "Use only for rubric criteria about validation and self-testing evidence."
+    },
+    {
+      "label": "answer.json (data)",
+      "tag": "agent_answer",
+      "path": "answer.json",
+      "note": "Exact numeric correctness is owned by check_programmatic.py; judge interpretation and consistency here."
+    }
+  ],
+  "figure_files": [],
+  "figure_dir": "figures"
+}

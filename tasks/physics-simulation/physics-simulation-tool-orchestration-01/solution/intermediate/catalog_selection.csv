@@ -1,0 +1,2 @@
+run_id,namelist_path,probe_h5,fields_h5,target_harmonic,min_power_ratio,max_frequency_error_fraction,expected_phase_lag_rad,phase_tolerance_rad,min_peak_prominence,min_charge_coupling_ratio,max_charge_coupling_ratio
+magnetized_h3_probe,smilei_inputs/tst1d_laser_magnetized_harmonics.py,diagnostics/Probes0.h5,diagnostics/Fields0.h5,3,0.015,0.018,-1.18,0.18,12,0.2,0.45

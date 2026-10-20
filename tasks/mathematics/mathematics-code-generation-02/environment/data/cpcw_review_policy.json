@@ -1,0 +1,33 @@
+{
+  "policies": [
+    {
+      "id": "full_difference_certificate",
+      "requires_cpcw": true,
+      "requires_bound_attainment": true,
+      "max_uncovered_nonzero": 0
+    }
+  ],
+  "review_recommendation_policy": {
+    "status_precedence": [
+      "requires_followup",
+      "withhold_for_exclusion",
+      "certify_complete"
+    ],
+    "followup_fields": [
+      "source_unresolved_parameter_ids",
+      "unresolved_parameter_ids"
+    ],
+    "withhold_fields": [
+      "source_excluded_parameter_ids",
+      "screen_excluded_parameter_ids"
+    ],
+    "certification_fields": [
+      "policy_uncertified_instance_ids"
+    ],
+    "blocker_templates": {
+      "followup_fields": "requires_followup:{value}",
+      "withhold_fields": "withhold_for_exclusion:{value}",
+      "certification_fields": "policy_gap:{value}"
+    }
+  }
+}

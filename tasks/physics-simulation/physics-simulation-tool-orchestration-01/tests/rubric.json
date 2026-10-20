@@ -1,0 +1,280 @@
+{
+  "rubrics": [
+    {
+      "id": 1,
+      "category": "Execution & Validation",
+      "weight": 5,
+      "criterion": "Explains the harmonic candidate-audit rationale before carrying one catalog row downstream.",
+      "description": "The report and code must show that accepted laser_plasma_harmonics harmonic_probe candidates were evaluated against the joined diagnostic contract before downstream reporting. The explanation must connect audit evidence to carrying exactly one harmonic branch forward; exact row and metric correctness are owned by the deterministic checker.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/catalog_selection.csv",
+        "intermediate/candidate_audit.csv"
+      ]
+    },
+    {
+      "id": 2,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Recovers the magnetized laser-plasma setup from the Smilei-style namelist.",
+      "description": "The submitted artifacts must recover the laser frequency, laser amplitude, timestep, diagnostic cadence, plasma density, and external magnetic field from the Python namelist structure. A workflow that assumes these values without parsing the deck fails.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/namelist_summary.json"
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Interprets the magnetic field as perpendicular to laser propagation.",
+      "description": "The report must tie the laser propagation direction and the external B-field component to a perpendicular magnetized interaction, and must use that setup when explaining the harmonic diagnostic. Generic harmonic language without the perpendicular-field framing fails.",
+      "grader_inputs": [
+        "report.md",
+        "intermediate/namelist_summary.json"
+      ]
+    },
+    {
+      "id": 4,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Uses magnetization as a physical parameter, not a catalog label.",
+      "description": "The report must interpret magnetization as a recovered physical parameter tied to the external magnetic field and the laser scale recorded in the namelist summary. Merely repeating that the run is magnetized without connecting the recovered B-field and laser quantities fails.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json",
+        "intermediate/namelist_summary.json"
+      ]
+    },
+    {
+      "id": 5,
+      "category": "Execution & Validation",
+      "weight": 4,
+      "criterion": "Preserves and interprets probe HDF5 tree inspection before spectral extraction.",
+      "description": "Submitted code or report evidence must show HDF5 tree inspection for the probe diagnostics before probe-signal validation. The explanation must identify the probe inspection as a schema/provenance handoff for the spectral signal rather than treating it as a cosmetic log file.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/probe_h5dump_tree.txt"
+      ]
+    },
+    {
+      "id": 6,
+      "category": "Execution & Validation",
+      "weight": 3,
+      "criterion": "Preserves and interprets selected field HDF5 tree inspection before energy loading.",
+      "description": "Submitted code or report evidence must show HDF5 tree inspection for the selected field diagnostic before loading electromagnetic energy. The explanation must keep this field inspection tied to the late-time energy handoff rather than to the primary harmonic spectrum.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/fields_h5dump_tree.txt",
+        "intermediate/field_energy.csv"
+      ]
+    },
+    {
+      "id": 7,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Explains how analysis-window, detrending, and windowing choices bound spectral interpretation.",
+      "description": "The report must explain why restricting the time window, removing the local mean, and applying a finite FFT window affect leakage, resolution, and harmonic-band interpretation. Exact compliance with the changed contract window and window function is owned by the deterministic rerun checks.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/windowed_signal.csv",
+        "intermediate/harmonic_validation.json"
+      ]
+    },
+    {
+      "id": 8,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Must NOT mask raw angular frequency or FFT-bin index against integer harmonic orders.",
+      "description": "Submitted code and report evidence must show that spectral peak locations are converted to omega/omega0 using the namelist laser frequency before harmonic-band masking or interpretation. A workflow that compares raw angular frequency, sample frequency, or bin index directly to integer harmonic orders fails even if its prose says harmonic order.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/namelist_summary.json",
+        "intermediate/harmonic_spectrum.csv"
+      ]
+    },
+    {
+      "id": 9,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Treats the Ey FFT band power as the harmonic-generation observable.",
+      "description": "The report and code must use the probe Ey spectrum and contract-defined harmonic bands to quantify generated harmonic content. Fitting time-domain oscillations, using a single unwindowed sample, or using field energy as the harmonic amplitude fails.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/harmonic_spectrum.csv"
+      ]
+    },
+    {
+      "id": 10,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Interprets harmonic conversion relative to the fundamental band.",
+      "description": "The report must explain the harmonic-to-fundamental power ratio as a spectral conversion diagnostic, not as an absolute field value or a candidate count. Exact ratio correctness is owned by the deterministic checker.",
+      "grader_inputs": [
+        "report.md",
+        "intermediate/harmonic_spectrum.csv",
+        "intermediate/harmonic_validation.json"
+      ]
+    },
+    {
+      "id": 11,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Uses peak prominence as a spectral-validity guard.",
+      "description": "The report must treat peak prominence as protection against accepting noise-floor or leakage artifacts as harmonics. A discussion that validates a harmonic solely because a band has nonzero power fails.",
+      "grader_inputs": [
+        "report.md",
+        "intermediate/candidate_audit.csv",
+        "intermediate/harmonic_validation.json"
+      ]
+    },
+    {
+      "id": 12,
+      "category": "Execution & Validation",
+      "weight": 3,
+      "criterion": "Uses an off-harmonic noise-floor audit to support peak-prominence validation.",
+      "description": "The report, code, or intermediate evidence must connect peak prominence to the median off-harmonic background outside integer harmonic bands. A workflow that treats prominence as an unexplained threshold scalar, or derives it from the selected harmonic band itself, fails.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/noise_floor_audit.csv",
+        "intermediate/harmonic_spectrum.csv"
+      ]
+    },
+    {
+      "id": 13,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Interprets Ey/Bz complex phase lag as a polarization validation.",
+      "description": "The report must explain that the selected harmonic's polarization validation comes from the phase of the complex Bz coefficient relative to the Ey coefficient at the harmonic peak. A visual or real-valued amplitude-only polarization claim fails.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/polarization_validation.json"
+      ]
+    },
+    {
+      "id": 14,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Combines frequency, power, prominence, and phase criteria into the harmonic verdict.",
+      "description": "The report must state that a validated branch needs all catalog spectral and polarization criteria, rather than accepting a harmonic on frequency location or power alone. Exact boolean flags are owned by the deterministic checker.",
+      "grader_inputs": [
+        "report.md",
+        "intermediate/candidate_audit.csv",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 15,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Keeps field-energy diagnostics separate from the primary harmonic spectrum.",
+      "description": "The report must use electromagnetic field energy as a late-time consistency handoff while keeping the primary harmonic order, power, and phase conclusions based on the probe spectrum. Treating field energy as the selected harmonic signal fails.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/field_energy.csv"
+      ]
+    },
+    {
+      "id": 16,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Interprets energy modulation as a consistency diagnostic rather than a verdict by itself.",
+      "description": "The report must explain that energy modulation can support inspection of the run but cannot replace the catalog frequency, power, prominence, and phase checks. Exact energy-modulation value correctness is owned by the deterministic checker.",
+      "grader_inputs": [
+        "report.md",
+        "intermediate/field_energy.csv",
+        "intermediate/harmonic_validation.json"
+      ]
+    },
+    {
+      "id": 17,
+      "category": "Communication",
+      "weight": 3,
+      "criterion": "Report traces the harmonic signal from catalog candidate to spectral verdict.",
+      "description": "The report must explicitly link the workflow stages: catalog selection identifies candidate harmonics, namelist-derived omega0 normalizes the probe FFT, Ey/Bz peak metrics determine validation, and the selected branch determines the verdict. A report with isolated conclusions but no such handoff chain fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 18,
+      "category": "Communication",
+      "weight": 2,
+      "criterion": "Figure communicates the harmonic spectrum from computed workflow outputs.",
+      "description": "The figure must show the computed Ey spectral power against omega/omega0 and identify the fundamental and selected harmonic locations. A decorative, time-domain-only, or unrelated plot fails.",
+      "grader_inputs": [
+        "figures/harmonic_spectrum.png",
+        "report.md",
+        "intermediate/harmonic_spectrum.csv"
+      ]
+    },
+    {
+      "id": 19,
+      "category": "Completeness",
+      "weight": 2,
+      "criterion": "Discusses finite-window and spectral-leakage limitations.",
+      "description": "The report must identify limitations from finite FFT windowing, diagnostic cadence, band width, leakage, or noise-floor separation. Purely generic caveats fail.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 20,
+      "category": "Completeness",
+      "weight": 2,
+      "criterion": "Discusses offline PIC-fixture limitations.",
+      "description": "The report must note that the task analyzes a shipped Smilei-style diagnostic bundle rather than rerunning a full PIC campaign. Generic caveats that do not distinguish offline fixture analysis from a new simulation campaign fail.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 21,
+      "category": "Communication",
+      "weight": 3,
+      "criterion": "Maintains cross-artifact consistency for selected harmonic identity.",
+      "description": "The narrative, answer fields, catalog selection, candidate audit, spectrum table, and figure must agree on which harmonic branch is selected. Internal contradictions in selected harmonic identity fail even when individual numbers are plausible.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json",
+        "intermediate/",
+        "figures/harmonic_spectrum.png"
+      ]
+    },
+    {
+      "id": 22,
+      "category": "Communication",
+      "weight": 3,
+      "criterion": "Maintains cross-artifact consistency for polarization interpretation.",
+      "description": "The report, answer fields, candidate audit, harmonic validation, and polarization validation must consistently treat the selected phase lag as the Ey/Bz complex-coefficient phase relation. Internal contradictions in phase convention or tolerance interpretation fail.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json",
+        "intermediate/"
+      ]
+    },
+    {
+      "id": 23,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Interprets charge-channel coupling as plasma-response evidence.",
+      "description": "The report and code must treat the Rho-to-Ey harmonic-band power ratio as a separate charge-channel coupling validation for plasma response, not as a replacement for the electromagnetic Ey spectrum or as a decorative unused table. Exact charge-coupling numerical correctness is owned by the deterministic checker.",
+      "grader_inputs": [
+        "report.md",
+        "code/solve.py",
+        "intermediate/charge_coupling_audit.csv",
+        "intermediate/candidate_audit.csv"
+      ]
+    }
+  ]
+}

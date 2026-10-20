@@ -1,0 +1,6 @@
+{
+  "expected_phase_lag_rad": -1.18,
+  "ey_bz_phase_lag_rad": -1.1800003229506533,
+  "phase_error_rad": 3.229506533308779e-07,
+  "phase_tolerance_rad": 0.18
+}

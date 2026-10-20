@@ -1,0 +1,16 @@
+state,bond,value_angstrom,method
+A,Mg-H1,1.76,omegaB97XD
+A,C-O,1.22,omegaB97XD
+TS1,Mg-H1,1.81,omegaB97XD
+TS1,C-O,1.24,omegaB97XD
+B,Mg-O,1.82,omegaB97XD
+B,C-O,1.37,omegaB97XD
+C,H2-H3,0.75,omegaB97XD
+C,Mg-H2,2.74,omegaB97XD
+C,O-H3,2.59,omegaB97XD
+TS2,H2-H3,1.05,omegaB97XD
+TS2,Mg-H2,1.98,omegaB97XD
+TS2,O-H3,1.21,omegaB97XD
+D,Mg-H2,1.74,omegaB97XD
+D,O-H3,0.98,omegaB97XD
+D,Mg-O,2.17,omegaB97XD

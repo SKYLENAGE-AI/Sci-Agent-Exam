@@ -1,0 +1,286 @@
+{
+  "rubrics": [
+    {
+      "id": 1,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "Explains the CPCW auto-correlation condition through ordered modular differences.",
+      "description": "The report must state that the auto-correlation condition is checked by the multiset Delta C of differences in Z_v and that a k-subset contributes k(k-1) ordered nonzero differences. Fail when it describes only ordinary absolute differences, unordered pair distances, or subset size.",
+      "source": "axioms-15-00035-v2.pdf, Definition 1 and Introduction",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 2,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "Explains the cross-correlation condition as disjoint difference multisets across codewords.",
+      "description": "The report must explain that distinct codewords are cross-valid only when their difference multisets do not overlap, matching the paper's relation Delta C1 intersect Delta C2 is empty. Fail when it only checks each codeword separately.",
+      "source": "axioms-15-00035-v2.pdf, Definition 1 and Section 1.1",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Uses the source upper bound for optimality.",
+      "description": "The report must state the bound floor((v-1)/(k(k-1))) and interpret optimality as validity plus reaching that bound. Fail when it treats the largest visible candidate as optimal without the bound or uses v/(k(k-1)).",
+      "source": "axioms-15-00035-v2.pdf, Section 1.1",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 4,
+      "category": "Scientific Correctness",
+      "weight": 2,
+      "criterion": "Classifies Appendix construction source claims correctly.",
+      "description": "The report must explain why Appendix A construction entries are construction evidence for CPCW parameter claims. Fail when it describes Appendix A construction entries as search gaps, open markers, or unsupported non-construction evidence.",
+      "source": "axioms-15-00035-v2.pdf, Section 3.1 and Appendix A",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 5,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Interprets the visible source example correctly.",
+      "description": "The report must explain why excluding zero from the audit of ordered differences makes the visible case_43_alpha_k5 case an optimal partial code rather than a perfect code. Fail when it includes zero as a code-audit nonzero difference or marks the case invalid.",
+      "source": "axioms-15-00035-v2.pdf, Figure 1(a)",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 6,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Recognizes the visible repeated-difference case as invalid under modular ordered differences.",
+      "description": "The report must explain that repeated modular ordered differences in case_43_gamma_k5 violate the auto-correlation condition. Fail when it treats unique ordinary integer differences as sufficient.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 7,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Recognizes the visible overlap case as invalid through cross-correlation.",
+      "description": "The report must identify case_43_beta_k5 as invalid because distinct codeword representatives have overlapping difference sets. Fail when it checks only auto-correlation of each representative.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 8,
+      "category": "Scientific Correctness",
+      "weight": 2,
+      "criterion": "Explains decision labels from CPCW validity, optimality, and perfectness.",
+      "description": "The report must use the submitted decision labels consistently with validity, bound attainment, and full nonzero-difference coverage. Fail when it reverses valid_subbound, optimal_partial, or optimal_perfect.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 9,
+      "category": "Communication",
+      "weight": 2,
+      "criterion": "Describes residue normalization and malformed-codeword handling.",
+      "description": "The report must state that codewords are interpreted as residues modulo v and that duplicate residues after reduction are invalid inputs. Fail when it treats unreduced integers as distinct points of Z_v.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 10,
+      "category": "Source Grounding",
+      "weight": 2,
+      "criterion": "Uses the source article's Appendix A codeword representation.",
+      "description": "The report must explain that an Appendix A row is audited as the k-subset formed by prepending 0 to the listed row entries. Fail when it treats Appendix-format rows as ordinary full codewords, invalid-size rows, or rows whose listed entries alone form the audited k-subset.",
+      "source": "axioms-15-00035-v2.pdf, Appendix A preface",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 11,
+      "category": "Communication",
+      "weight": 1,
+      "criterion": "Interprets uncovered nonzero differences.",
+      "description": "The Results section must explain that uncovered_nonzero_differences lists residues absent from the union of ordered differences and diagnoses failure to be perfect. Fail when it treats this field as an invalidity reason by itself.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 12,
+      "category": "Communication",
+      "weight": 2,
+      "criterion": "Interprets repeated ordered differences.",
+      "description": "The Results section must explain that repeated_ordered_differences records repeated modular ordered differences associated with auto-correlation or cross-correlation failure. Fail when it treats this field as interchangeable with uncovered residues.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 13,
+      "category": "Execution & Validation",
+      "weight": 2,
+      "criterion": "Submitted self-tests exercise the paper example.",
+      "description": "The submitted tests must exercise the visible case_43_alpha_k5 source example and assert at least one of these named audit properties: optimal-but-not-perfect status, uncovered nonzero differences, or absence of repeated ordered differences. The test may load the example from the visible instance data or use an equivalent cyclic representation. Fail when tests only check file existence, importability, or an unrelated property.",
+      "grader_inputs": [
+        "tests/"
+      ]
+    },
+    {
+      "id": 14,
+      "category": "Execution & Validation",
+      "weight": 2,
+      "criterion": "Submitted self-tests include an invalid-input path.",
+      "description": "At least one submitted test must assert ValueError for malformed CPCW input, such as duplicate residues modulo v or wrong codeword size.",
+      "grader_inputs": [
+        "tests/"
+      ]
+    },
+    {
+      "id": 15,
+      "category": "Completeness",
+      "weight": 2,
+      "criterion": "Applies the Section 3.2 theorem branch by residue class.",
+      "description": "The report must explain that the primary parameter screen uses Theorem 1 when v is congruent to 2 modulo 4 and Theorem 2 when v is congruent to 0 modulo 4 for lengths of the form k(k-1)t+2. Fail when it reverses the mapping or uses one theorem branch for all residue classes.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 16,
+      "category": "Completeness",
+      "weight": 2,
+      "criterion": "Keeps necessary-condition screening distinct from existence proof.",
+      "description": "The report must explain that nonnegative solutions to the primary system leave the case as a surviving screen result, separate from construction evidence. Fail when it turns a surviving screen result into an existence claim.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 17,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Uses audited optimal codebooks as construction evidence.",
+      "description": "The report and answer must identify audited CPCW codebooks that reach the source upper bound as construction evidence for their parameter cases. Fail when it treats a mounted candidate as construction evidence without CPCW validity and bound attainment.",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 18,
+      "category": "Scientific Correctness",
+      "weight": 2,
+      "criterion": "Classifies source construction evidence.",
+      "description": "The report must explain which source-claim markers provide construction evidence, including Appendix A entries and matching Section 3.1 table entries for constructed parameters. Fail when it leaves construction markers unresolved or treats them as exclusion evidence.",
+      "source": "axioms-15-00035-v2.pdf, Section 3.1, Tables 3-4, and Appendix A",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 19,
+      "category": "Scientific Correctness",
+      "weight": 2,
+      "criterion": "Classifies source exclusion evidence.",
+      "description": "The report must explain which source-claim markers provide exclusion evidence, including stricken or exclusion-designated entries in the matching source tables. Fail when it reports source-excluded markers as constructed or unresolved.",
+      "source": "axioms-15-00035-v2.pdf, Section 3.1 and Tables 3-4",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 20,
+      "category": "Scientific Correctness",
+      "weight": 2,
+      "criterion": "Keeps unresolved evidence as follow-up evidence.",
+      "description": "The report must explain that open source markers, search-gap markers, screen survival, and partial candidate evidence remain unresolved unless construction or exclusion evidence is present. Fail when it turns unresolved follow-up evidence into construction evidence or exclusion-only reasoning.",
+      "source": "axioms-15-00035-v2.pdf, Section 3.1 and Tables 3-4",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 21,
+      "category": "Source Grounding",
+      "weight": 2,
+      "criterion": "Bounds the Section 3.3 parity claim to the source-supported obstruction.",
+      "description": "The report must state that Section 3.3 excludes the (92,6) case after primary-system survival and must preserve the mounted screen's surviving rows as unresolved evidence. Fail when it extends the Section 3.3 certificate to surviving rows or treats Section 3.3 as a general classifier for all primary-screen survivors.",
+      "source": "axioms-15-00035-v2.pdf, Proposition 1",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 22,
+      "category": "Scientific Correctness",
+      "weight": 1,
+      "criterion": "Uses the matching source table for Section 3.1 markers.",
+      "description": "The report must explain that Section 3.1 source markers are resolved by reading the same-length row in Table 3 for k=5 or Table 4 for k=6. Fail when it treats section_3_1 as a standalone status or ignores the matching source-table row.",
+      "source": "axioms-15-00035-v2.pdf, Section 3.1 and Tables 3-4",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 23,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Keeps the perfect-code definition separate from the half-turn gap property.",
+      "description": "The report must preserve the source distinction between perfect codes covering every nonzero difference and optimal k(k-1)t+2 cases that can leave the half-turn residue uncovered. Fail when it treats a one-residue half-turn gap as perfectness or excludes that residue from the perfectness audit.",
+      "source": "axioms-15-00035-v2.pdf, Section 1.1 and Lemmas 1-2",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 24,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Applies the full-difference certification policy to audited codebooks.",
+      "description": "The report must connect policy_summaries to the submitted audit evidence: the full_difference_certificate policy requires CPCW validity, bound attainment, and no uncovered nonzero differences, so an optimal partial codebook with one uncovered nonzero residue is not policy-certified. Fail when the report treats bound attainment alone as certification or treats the one-residue uncovered case as certified.",
+      "source": "axioms-15-00035-v2.pdf, Section 1.1 and Lemmas 1-2; cpcw_review_policy.json",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    },
+    {
+      "id": 25,
+      "category": "Scientific Correctness",
+      "weight": 3,
+      "criterion": "Must NOT recommend final certification when blockers remain.",
+      "description": "The report must state the submitted review_recommendation and must NOT recommend final certification when source-claim, parameter-screen, or policy blockers remain in the submitted summaries. Fail when it overclaims certification despite submitted blockers.",
+      "source": "cpcw_review_policy.json; axioms-15-00035-v2.pdf, Section 3.1 and Sections 3.2-3.3",
+      "grader_inputs": [
+        "report.md",
+        "answer.json"
+      ]
+    }
+  ]
+}

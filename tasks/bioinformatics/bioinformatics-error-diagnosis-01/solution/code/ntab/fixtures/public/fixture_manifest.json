@@ -1,0 +1,26 @@
+{
+  "schema_version": 8,
+  "fixture": "public",
+  "synthetic": true,
+  "fingerprint_bits": 2048,
+  "source_convention": "purpose-built ChEMBL-style ligand-novelty, assay-evaluation, and same-document target-mirroring fixture",
+  "counts": {
+    "fixture": "public",
+    "n_splits": 3,
+    "n_documents": 14,
+    "n_assays": 31,
+    "n_activity_rows": 740,
+    "n_unique_compounds": 554,
+    "n_target_identity_pairs": 20,
+    "n_cross_document_compounds": 40,
+    "n_cross_split_compounds": 32,
+    "n_cross_assay_compounds": 151
+  },
+  "sha256": {
+    "activities.tsv": "79f3f359937f85ae4ca33ea6aba78532326d4c77ce1601c6b0d1bb25b0066c28",
+    "assay_documents.tsv": "8519da5f1e100e3a39288d7e9b2f28fbc84087fe5a50af4c1e8d562d97982022",
+    "compound_fingerprints.tsv": "8bea928d10d5c62a67aea406b6bea4ba9227f6ee21367f60872a978fd817ed45",
+    "target_identity.tsv": "0435bbfc154cdbc578bdb3de000d6b9fa461371540ef359d32342ff549df24da",
+    "release_summary.tsv": "a369892f0dd75310e7ce4076993df678af5036b9d54dd5531b35133d5f407c46"
+  }
+}

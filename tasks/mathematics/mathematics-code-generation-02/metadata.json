@@ -1,0 +1,18 @@
+{
+  "task_id": "task_61732dbe491443da8a0a990be5c0de2a",
+  "task_name": "Mathematics — Code Generation 02",
+  "task_status_id": "complete",
+  "domain": "Mathematics",
+  "transitioned_at": "2026-07-29T17:19:53.559907Z",
+  "scicode_task_directory": "mathematics-code-generation-02",
+  "status": "Reviewed",
+  "slug": "mathematics-code-generation-02",
+  "files": 25,
+  "bytes": 604052,
+  "flag": "",
+  "closed_model_evals_removed": [
+    "claude-sonnet-4-6",
+    "google-gemini-3.1-pro-preview",
+    "gpt-5.4"
+  ]
+}

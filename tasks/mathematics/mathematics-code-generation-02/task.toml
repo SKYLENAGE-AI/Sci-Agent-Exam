@@ -1,0 +1,88 @@
+artifacts = ["/home/agent/results"]
+
+[metadata]
+task_id = "SCI11-CODE-2026-218"
+domain = "SCI-11"
+domain_name = "Mathematics"
+tags = [
+  "COG-01",
+  "COG-02",
+  "COG-06",
+  "TOOL-02",
+  "DATA-03",
+  "DATA-05",
+  "INT-02",
+  "TSK-01",
+  "TSK-06",
+]
+task_type = "code_generation"
+
+[task]
+name = "sciagent/mathematics-code-generation-02"
+description = "Implement a reusable audit and parameter-screening module for binary cyclically permutable constant-weight codebooks from a combinatorics source paper."
+
+[input_data]
+description = "A source article on optimal CPCW codes, visible CPCW candidate instances, visible parameter-screening cases, visible source-claim review rows, visible certification policy rows, a codebook-summary helper, a public digest target, a runnable starter under /home/agent/data/starter/, and a schema dictionary."
+data_path = "/home/agent/data/"
+files = [
+  { name = "axioms-15-00035-v2.pdf", size_mb = 0.293, format = "pdf", description = "Baicheva and Topalova (2026), On the Existence of Optimal (v,5,1) and (v,6,1) Binary Cyclically Permutable Constant-Weight Codes." },
+  { name = "cpcw_instances.json", size_mb = 0.002, format = "json", description = "Visible candidate CPCW codebooks and audit cases." },
+  { name = "cpcw_feasibility_cases.json", size_mb = 0.001, format = "json", description = "Visible parameter cases for necessary-condition screening." },
+  { name = "cpcw_source_claims.json", size_mb = 0.001, format = "json", description = "Visible source-claim review rows." },
+  { name = "cpcw_review_policy.json", size_mb = 0.001, format = "json", description = "Visible certification policy rows." },
+  { name = "cpcw_profile_helper.py", size_mb = 0.002, format = "python", description = "Python helper for codebook summary profiles." },
+  { name = "cpcw_public_check.json", size_mb = 0.001, format = "json", description = "Visible digest target for the starter's public audit summary." },
+  { name = "starter/cpcw_audit.py", size_mb = 0.006, format = "python", description = "Runnable starter audit module." },
+  { name = "starter/run_public_check.py", size_mb = 0.002, format = "python", description = "Runnable public digest command for the starter module." },
+  { name = "data_dictionary.md", size_mb = 0.001, format = "markdown", description = "Schema notes for the visible JSON and output difference lists." },
+]
+
+[expected_output]
+description = "An importable Python CPCW audit and screening module, structured answer JSON, scientific report, and self-tests."
+
+[expected_output.schema]
+answer_json_keys = [
+  "instance_summaries",
+  "optimal_instance_ids",
+  "perfect_instance_ids",
+  "invalid_instance_ids",
+  "case_43_alpha_uncovered_nonzero",
+  "first_invalid_instance",
+  "feasibility_summaries",
+  "screened_surviving_ids",
+  "screened_excluded_ids",
+  "parameter_review_summaries",
+  "constructed_parameter_ids",
+  "screen_excluded_parameter_ids",
+  "unresolved_parameter_ids",
+  "source_claim_summaries",
+  "source_constructed_parameter_ids",
+  "source_excluded_parameter_ids",
+  "source_unresolved_parameter_ids",
+  "policy_summaries",
+  "policy_certified_instance_ids",
+  "policy_uncertified_instance_ids",
+  "review_recommendation",
+  "review_blockers",
+]
+code_files = [
+  "code/cpcw_audit.py",
+]
+figures = []
+artifact_files = []
+
+[eval_config]
+programmatic_weight = 0.70
+llm_judge_weight = 0.30
+judge_model = "claude-sonnet-5"
+rubric_file = "tests/rubric.json"
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+ANTHROPIC_BASE_URL = "${ANTHROPIC_BASE_URL}"
+SCICODE_TASK_TYPE = "code_generation"
+
+[reference_solution]
+script = "solution/solve.py"
+golden_answer_json = "solution/answer.json"
+figures = []

@@ -1,0 +1,16 @@
+{
+  "synthesis_verdict": "retain_generator_and_require_staged_validation",
+  "subclaim_verdicts": {
+    "DISCOVERY_FRONT_END_VALUE": "supported",
+    "SUN_IS_LAB_READINESS": "unsupported",
+    "GENERATED_IDENTITY_IS_DECISION_STABLE": "unsupported",
+    "DIRECT_ROUTING_IS_JUSTIFIED": "unsupported"
+  },
+  "evidence_statuses": {
+    "P1_LAYER_GROUP_CONTROL": "directly_supported",
+    "P1_SUN_TO_SYNTHESIZABILITY": "extrapolated",
+    "P2_BENCHMARK_RANK_TO_SLAYERGEN": "extrapolated",
+    "P3_SUCCESS_RATE_TO_SLAYERGEN": "extrapolated",
+    "P4_IDENTITY_TRANSFER": "extrapolated"
+  }
+}

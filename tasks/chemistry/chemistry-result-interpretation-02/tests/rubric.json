@@ -1,0 +1,144 @@
+{
+  "rubrics": [
+    {
+      "id": 1,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Explains why the final claim-authoritative segment-energetics record, rather than the superseded derived-cycle summary, is the proper evidentiary basis for interpretation.",
+      "description": "Pass requires a scientifically meaningful explanation that the selected basis is the final, claim_authority=true reported_segment_energetics record linked to the paper's peer-reviewed profile, whereas the competing derived_cycle_summary is superseded and claim_authority=false. Exact opaque-ID selection and propagation are owned by the programmatic checker.",
+      "source": "artifact_registry.csv and malhan_thirumoorthy_2026.pdf, Results and discussion, Figure 3 and Table 1, pp. 5-7",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 2,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Diagnoses why the superseded screening summary can look numerically coherent while its cycle span, predicted TOF, closed-cycle label, and supported verdict are not authorized by the final records.",
+      "description": "Pass requires tracing the screening TOF to use of the TS2 segment barrier as though it were a complete-cycle energy span and explaining why a small method discrepancy does not validate that reference-state assumption. Merely calling the artifact old or wrong is insufficient.",
+      "grader_inputs": ["report.md", "answer.json", "bounded_calculations.csv", "reference_audit.csv"]
+    },
+    {
+      "id": 3,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Explains the cycle-level scientific consequence of the split Gibbs-energy reference convention.",
+      "description": "Pass requires explaining that same-reference local barriers remain interpretable but unlike segment zeros cannot be concatenated without an inter-segment offset, so a cycle-level span and turnover frequency cannot be inferred. Exact comparison statuses and values are owned by the programmatic checker.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 4,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Interprets the one-imaginary-frequency transition states and two IRC traces as evidence for local A-TS1-B and C-TS2-D connectivity, not proof of pathway dominance or catalytic flux.",
+      "description": "Pass requires the correct evidentiary boundary for stationary-point and IRC validation and must not treat an IRC as a rate, selectivity, or cycle-closure result.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 5,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Combines H-H elongation, forming Mg-H/O-H contacts, and method-consistent opposite-sign H charges to support heterolytic H2 cleavage.",
+      "description": "A charge-only or distance-only assertion is insufficient. The report must connect the structural and electronic observations and preserve that they support the modeled local event rather than experimental occurrence.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 6,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Separates recovery of the CAl3MgH2- geometry inside bound product complex D from product release and regenerated free catalyst.",
+      "description": "Pass requires reporting recovery of catalyst-like geometry in D while also identifying D's 2.17 angstrom Mg-O contact and the paper's 2.28 angstrom stabilizing H-bond. It must distinguish this bound-complex evidence from product-release thermochemistry or kinetics and recovery of free catalyst; treating optimized D as demonstrated repeated turnover fails.",
+      "source": "malhan_thirumoorthy_2026.pdf, Results and discussion, Table 2/Figure 5 and Figure 6 product-complex discussion, pp. 6-9",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 7,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Interprets both Eyring values as rates conditional on their segment reactants and distinguishes them from an energy-span or turnover-frequency result.",
+      "description": "Pass requires a practical time-scale interpretation of the slower event, correct provenance, and an explicit explanation that no steady-state TOF follows without a common cycle and missing steps. Reporting the screening TOF as validated fails.",
+      "grader_inputs": ["report.md", "bounded_calculations.csv", "reference_audit.csv"]
+    },
+    {
+      "id": 8,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Treats the recorded barrier perturbation as deterministic sensitivity rather than statistical uncertainty.",
+      "description": "Pass requires explaining the exponential rate spread and avoiding confidence, probability, or coverage claims because no barrier-error distribution is supplied.",
+      "grader_inputs": ["report.md", "bounded_calculations.csv"]
+    },
+    {
+      "id": 9,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Limits the omegaB97XD versus DLPNO-CCSD(T) comparison to electronic single points on shared DFT geometries.",
+      "description": "Pass requires noting that small electronic-energy discrepancies do not validate thermal corrections, a common standard state, environment, alternative structures, or the screening artifact's cycle construction.",
+      "grader_inputs": ["report.md", "bounded_calculations.csv"]
+    },
+    {
+      "id": 10,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Interprets the uncatalyzed-versus-TS2 acceleration as a modeled barrier contrast rather than measured performance or proof of catalytic viability.",
+      "description": "Pass preserves the large modeled reduction while explaining that the comparison neither repairs reference gaps nor supplies experimental turnover evidence.",
+      "grader_inputs": ["report.md", "bounded_calculations.csv"]
+    },
+    {
+      "id": 11,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Calibrates the mechanistic claim to the article's computational hierarchy and model scope.",
+      "description": "Pass requires tying the result specifically to a bare gas-phase anion, DFT geometries and frequencies, and higher-level electronic single points on the DFT structures. It must explain which thermochemical and environmental questions that hierarchy does not validate; generic 'DFT needs experiment' language fails.",
+      "source": "malhan_thirumoorthy_2026.pdf, Computational details, pp. 3-4",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 12,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Distinguishes the modeled pathway from an experimentally realized and practically testable catalyst system.",
+      "description": "Pass requires using the source's lack of measured turnover and acknowledged absence of an effective laboratory synthesis route for stable planar-tetracoordinate-carbon species to calibrate practical claims. These are experimental-status facts, not evidence against the internally modeled local steps.",
+      "source": "malhan_thirumoorthy_2026.pdf, Introduction and Conclusion, pp. 2-3 and 8-9",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 13,
+      "category": "Completeness",
+      "weight": 5,
+      "criterion": "Connects environment and speciation omissions to plausible changes in the active structure or energetic ordering.",
+      "description": "Pass requires at least two task-specific omissions among counterion, solvation, aggregation, decomposition, or alternative low-lying cluster structures, with consequences rather than a generic list.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 14,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "States a proportionate compound verdict that credits the supported local mechanism but withholds unsupported cycle-level and practical claims.",
+      "description": "Pass requires a narrative justification for `partially_supported` that connects the validated local elementary chemistry to the missing common-reference and product-release evidence, explaining why the evidence warrants neither a stronger cycle claim nor rejection of the local pathway. Exact controlled fields are owned by the programmatic checker.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 15,
+      "category": "Completeness",
+      "weight": 5,
+      "criterion": "Proposes a computational follow-up that directly closes the cycle-level identifiability gap.",
+      "description": "Pass requires a common-standard-state cycle including association, the B/H2-to-C connection, product release, and regenerated catalyst, followed by energy-span or microkinetic analysis with alternatives and uncertainty.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 16,
+      "category": "Completeness",
+      "weight": 5,
+      "criterion": "Proposes an experimental test of catalytic rather than merely stoichiometric activity.",
+      "description": "Pass requires a defined realizable catalyst environment plus rate or turnover evidence and catalyst recovery. Synthesis alone or one product observation is insufficient.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 17,
+      "category": "Communication",
+      "weight": 5,
+      "criterion": "The rate-sensitivity figure identifies both curves as segment-conditioned Eyring rates and shows the recorded deterministic TS2 barrier scenario over 250-400 K, while explicitly stating that the plot is not a turnover frequency.",
+      "description": "Pass requires a logarithmic rate axis with units, identifiable TS1 and TS2 segment curves, the deterministic TS2 perturbation represented by either a shaded band or explicit bounding curves, the 250-400 K range, and an explicit not-TOF label. Each element safeguards the scientific meaning rather than imposing a cosmetic preference.",
+      "grader_inputs": ["figures/rate_sensitivity.png", "report.md"]
+    }
+  ]
+}

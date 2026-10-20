@@ -1,0 +1,62 @@
+artifacts = ["/home/agent/results"]
+
+[metadata]
+task_id = "SCI04-LS-2026-02"
+domain = "SCI-04"
+domain_name = "Materials Science"
+tags = [
+  "COG-01",
+  "COG-02",
+  "COG-06",
+  "COG-07",
+  "TOOL-01",
+  "TOOL-02",
+  "TOOL-06",
+  "DATA-05",
+  "INT-03",
+  "INT-05",
+  "TSK-02",
+  "TSK-03",
+  "TSK-04",
+  "TSK-06",
+]
+task_type = "literature_synthesis"
+
+[task]
+name = "sciagent/materials-science-literature-synthesis-02"
+description = "Synthesize four crystal-discovery studies to decide whether generated diperiodic structures can be routed directly to experimental synthesis."
+
+[input_data]
+description = "Four papers spanning symmetry-constrained crystal generation, generative-model benchmarking, experimental synthesizability, and composition-level crystal-structure search."
+data_path = "/home/agent/data/"
+files = [
+  { name = "2605.08262v1.pdf", size_mb = 2.08, format = "pdf", description = "SLayerGen methods, layer-group conventions, generation metrics, and diperiodic stability assessment" },
+  { name = "2512.04562v2.pdf", size_mb = 7.27, format = "pdf", description = "LeMat-GenBench definitions and cross-model stability, novelty, diversity, and reference-sensitivity results" },
+  { name = "2511.01790v1.pdf", size_mb = 3.12, format = "pdf", description = "Synthesizability scoring, candidate selection, synthesis experiments, and structural characterization" },
+  { name = "2510.23181v2.pdf", size_mb = 2.93, format = "pdf", description = "Physics-informed generation, structural-novelty filtering, global CSP, and identity changes after search" },
+]
+
+[expected_output]
+description = "A source-grounded synthesis decision, structured verdicts, reproducible evidence-chain code, and one cross-source figure."
+
+[expected_output.schema]
+answer_json_keys = ["synthesis_verdict", "subclaim_verdicts", "evidence_statuses"]
+code_files = ["code/build_evidence_chain.py"]
+figures = ["candidate_evidence_chain.png"]
+artifact_files = []
+
+[eval_config]
+programmatic_weight = 0.20
+llm_judge_weight = 0.80
+judge_model = "claude-sonnet-5"
+rubric_file = "tests/rubric.json"
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+ANTHROPIC_BASE_URL = "${ANTHROPIC_BASE_URL}"
+SCICODE_TASK_TYPE = "literature_synthesis"
+
+[reference_solution]
+script = "solution/solve.py"
+golden_answer_json = "solution/answer.json"
+figures = ["solution/figures/candidate_evidence_chain.png"]

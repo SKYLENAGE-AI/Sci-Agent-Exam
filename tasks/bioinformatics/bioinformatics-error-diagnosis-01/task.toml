@@ -1,0 +1,90 @@
+artifacts = ["/home/agent/results"]
+
+[metadata]
+task_id = "SCI-01-ERR-2026-01"
+domain = "SCI-01"
+domain_name = "Bioinformatics"
+tags = [
+  "COG-01",
+  "COG-02",
+  "COG-03",
+  "COG-06",
+  "COG-07",
+  "TOOL-01",
+  "TOOL-02",
+  "TOOL-08",
+  "DATA-02",
+  "DATA-03",
+  "INT-01",
+  "INT-02",
+  "TSK-01",
+  "TSK-06",
+]
+task_type = "error_diagnosis"
+
+[task]
+name = "sciagent/bioinformatics-error-diagnosis-01"
+description = "Diagnose and minimally repair a silent target-mirroring eligibility regression in an offline individual-ligand-novelty benchmark replay."
+
+[input_data]
+description = "One mounted 2026 bioRxiv primary paper, an offline fork of bamattsson/ntab, ChEMBL-style assay activities, compound fingerprints and catalog provenance, assay-document chronology, target-pair sequence identities, predictions, and a recorded release summary."
+data_path = "/home/agent/data/"
+files = [
+  { name = "2026.06.29.735309v1.full.pdf", size_mb = 4.38, format = "pdf", description = "Mattsson and Walters (2026), the sole primary source for the benchmark method and claim scope." },
+  { name = "analysis_config.json", size_mb = 0.01, format = "json", description = "Fixed novelty-tier, assay-policy, performance, aggregation, tolerance, and missing-value conventions." },
+  { name = "data_dictionary.md", size_mb = 0.02, format = "markdown", description = "Input and output schemas, joins, units, row identities, precedence, completeness, and serialization semantics." },
+  { name = "source_manifest.json", size_mb = 0.01, format = "json", description = "Current primary-paper and upstream-code provenance record." },
+  { name = "broken_project", size_mb = 0.50, format = "directory", description = "Offline NTAB scientific-software fork with one silent target-mirroring eligibility regression and deterministic public fixture." },
+]
+
+[expected_output]
+description = "A minimally patched runnable project, compositional diagnosis receipt, source-grounded report, complete compound, same-document assay-pair, assay, and document evidence, retained-assay performance, and regenerated summary."
+
+[expected_output.schema]
+answer_json_keys = ["bug_type", "earliest_fault", "repair_scope", "bias_direction", "fixed"]
+code_files = [
+  "code/ntab",
+  "code/ntab/pyproject.toml",
+  "code/ntab/UPSTREAM_LICENSE.toml",
+  "code/ntab/src/ntab_preprocess/__init__.py",
+  "code/ntab/src/ntab_preprocess/offline_replay.py",
+  "code/ntab/src/ntab_preprocess/similarity.py",
+  "code/ntab/src/ntab_preprocess/assay_filter.py",
+  "code/ntab/src/ntab_preprocess/target_mirroring.py",
+  "code/ntab/src/ntab_evaluate/__init__.py",
+  "code/ntab/src/ntab_evaluate/metrics.py",
+  "code/ntab/scripts/reproduce.py",
+  "code/ntab/tests/test_public_contract.py",
+  "code/ntab/fixtures/public/activities.tsv",
+  "code/ntab/fixtures/public/compound_fingerprints.tsv",
+  "code/ntab/fixtures/public/assay_documents.tsv",
+  "code/ntab/fixtures/public/target_identity.tsv",
+  "code/ntab/fixtures/public/release_summary.tsv",
+  "code/ntab/fixtures/public/fixture_manifest.json",
+]
+figures = []
+artifact_files = [
+  "compound_novelty.tsv",
+  "assay_pair_audit.tsv",
+  "assay_inventory.tsv",
+  "document_retention.tsv",
+  "assay_performance.tsv",
+  "summary.tsv",
+  "reproduction.json",
+]
+
+[eval_config]
+programmatic_weight = 0.65
+llm_judge_weight = 0.35
+judge_model = "claude-sonnet-5"
+rubric_file = "tests/rubric.json"
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+ANTHROPIC_BASE_URL = "${ANTHROPIC_BASE_URL}"
+SCICODE_TASK_TYPE = "error_diagnosis"
+
+[reference_solution]
+script = "solution/solve.py"
+golden_answer_json = "solution/answer.json"
+figures = []

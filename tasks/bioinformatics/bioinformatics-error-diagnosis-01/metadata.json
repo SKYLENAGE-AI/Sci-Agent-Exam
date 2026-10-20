@@ -1,0 +1,18 @@
+{
+  "task_id": "task_c3103613916c4f2fb0d2b81026d76857",
+  "task_name": "Bioinformatics — Error Diagnosis 01",
+  "task_status_id": "complete",
+  "domain": "Bioinformatics",
+  "transitioned_at": "2026-08-03T00:49:27.056921Z",
+  "scicode_task_directory": "bioinformatics-error-diagnosis-01",
+  "status": "Reviewed",
+  "slug": "bioinformatics-error-diagnosis-01",
+  "files": 58,
+  "bytes": 5786975,
+  "flag": "",
+  "closed_model_evals_removed": [
+    "claude-sonnet-4-6",
+    "google-gemini-3.1-pro-preview",
+    "gpt-5.4"
+  ]
+}

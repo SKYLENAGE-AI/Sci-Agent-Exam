@@ -1,0 +1,19 @@
+{
+  "task_id": "task_5e43dfcc290d4cc89fec981a3a8234d0",
+  "task_name": "Chemistry — Result Interpretation 02",
+  "task_status_id": "complete",
+  "domain": "Chemistry",
+  "transitioned_at": "2026-07-27T14:00:10.594960Z",
+  "scicode_task_directory": "chemistry-result-interpretation-02",
+  "status": "Reviewed",
+  "slug": "chemistry-result-interpretation-02",
+  "files": 25,
+  "bytes": 4562246,
+  "flag": "",
+  "closed_model_evals_removed": [
+    "claude-sonnet-4-6",
+    "google-gemini-3.1-pro-preview",
+    "gpt-5.4"
+  ],
+  "patched_after_export": "tests/check_programmatic.py — sys.modules loader fix"
+}

@@ -1,0 +1,80 @@
+artifacts = ["/home/agent/results"]
+
+[metadata]
+task_id = "SCI03-RI-2026-002"
+domain = "SCI-03"
+domain_name = "Chemistry"
+tags = [
+  "COG-01",
+  "COG-04",
+  "COG-06",
+  "COG-07",
+  "TOOL-02",
+  "TOOL-06",
+  "DATA-03",
+  "DATA-05",
+  "INT-05",
+  "TSK-01",
+  "TSK-02",
+  "TSK-04",
+  "TSK-06",
+]
+task_type = "result_interpretation"
+
+[task]
+name = "sciagent/chemistry-result-interpretation-02"
+description = "Resolve versioned computational results and interpret whether the authoritative DFT evidence establishes catalytic viability and turnover for acetone hydrogenation by CAl3MgH2-."
+
+[input_data]
+description = "A CC BY computational-catalysis paper plus a provenance registry, authoritative reported results, a superseded screening summary, mechanistic observables, and deterministic calculation settings."
+data_path = "/home/agent/data/"
+files = [
+  { name = "malhan_thirumoorthy_2026.pdf", size_mb = 4.09, format = "pdf", description = "Primary source by Malhan and Thirumoorthy (2026) reporting the proposed CAl3MgH2- acetone-hydrogenation pathway, stationary-point validation, mechanistic observables, and catalytic interpretation." },
+  { name = "artifact_registry.csv", size_mb = 0.001, format = "csv", description = "Version, provenance, scientific-role, review-state, and claim-authority metadata for supplied result artifacts." },
+  { name = "reported_energetics.csv", size_mb = 0.002, format = "csv", description = "Segment-specific Gibbs free energies, electronic-energy cross-checks, stationary-point types, and IRC endpoint labels." },
+  { name = "screening_summary.csv", size_mb = 0.001, format = "csv", description = "Superseded prepublication automated screening output with an internally coherent but non-authoritative cycle-level claim." },
+  { name = "natural_charges.csv", size_mb = 0.002, format = "csv", description = "Reported natural atomic charges for selected atoms and stationary points at omegaB97XD and M06 levels." },
+  { name = "bond_metrics.csv", size_mb = 0.001, format = "csv", description = "Selected reported bond distances along the proposed carbonyl-insertion and H2-cleavage pathway." },
+  { name = "calculation_settings.json", size_mb = 0.001, format = "json", description = "Temperature, exact physical constants, transmission coefficient, sensitivity perturbation, and plotting grid." },
+  { name = "data_dictionary.md", size_mb = 0.004, format = "markdown", description = "Column definitions, units, missing-value semantics, state labels, and required output metric names." },
+]
+
+[expected_output]
+description = "A provenance-resolved catalytic interpretation, controlled scientific decisions, reproducible bounded calculations, a reference-comparability audit, and one rate-sensitivity figure."
+
+[expected_output.schema]
+answer_json_keys = [
+  "claim_verdict",
+  "authoritative_artifact_id",
+  "cycle_energy_span_status",
+  "turnover_frequency_status",
+  "screening_summary_disposition",
+]
+code_files = [
+  "code/interpret_cycle.py",
+]
+figures = [
+  "rate_sensitivity.png",
+]
+artifact_files = [
+  "bounded_calculations.csv",
+  "reference_audit.csv",
+]
+
+[eval_config]
+programmatic_weight = 0.45
+llm_judge_weight = 0.55
+judge_model = "claude-sonnet-5"
+rubric_file = "tests/rubric.json"
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+ANTHROPIC_BASE_URL = "${ANTHROPIC_BASE_URL}"
+SCICODE_TASK_TYPE = "result_interpretation"
+
+[reference_solution]
+script = "solution/solve.py"
+golden_answer_json = "solution/answer.json"
+figures = [
+  "solution/figures/rate_sensitivity.png",
+]

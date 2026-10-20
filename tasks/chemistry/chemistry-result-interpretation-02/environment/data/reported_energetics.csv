@@ -1,0 +1,8 @@
+segment,state,state_role,reference_zero,delta_g_kcal_mol,delta_e_wb97xd_kcal_mol,delta_e_dlpno_ccsdt_kcal_mol,imaginary_frequency_count,irc_backward,irc_forward
+carbonyl_insertion,A,segment_reactant,A,0.00,0.00,0.00,0,,
+carbonyl_insertion,TS1,transition_state,A,6.96,6.58,5.89,1,A,B
+carbonyl_insertion,B,intermediate,A,-30.06,-32.94,-34.76,0,,
+h2_activation,C,segment_reactant,C,0.00,0.00,0.00,0,,
+h2_activation,TS2,transition_state,C,21.59,17.95,17.92,1,C,D
+h2_activation,D,product_complex,C,14.80,8.47,8.15,0,,
+uncatalyzed_comparison,UNCAT_TS,comparison_transition_state,uncatalyzed_reactants,73.82,,,1,,

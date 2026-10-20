@@ -1,0 +1,3 @@
+artifact_id,path,scientific_role,review_state,claim_authority,superseded_by,provenance
+screening-preview-2025-12,screening_summary.csv,derived_cycle_summary,superseded,false,segment-report-2026-01,prepublication automated screening export
+segment-report-2026-01,reported_energetics.csv,reported_segment_energetics,final,true,,transcription of the peer-reviewed source results

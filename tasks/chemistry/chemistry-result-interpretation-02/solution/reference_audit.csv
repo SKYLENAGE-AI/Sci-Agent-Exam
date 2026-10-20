@@ -1,0 +1,5 @@
+comparison,status,value,unit,source_artifact_id
+ts1_minus_a,identifiable,6.96,kcal/mol,segment-report-2026-01
+ts2_minus_c,identifiable,21.59,kcal/mol,segment-report-2026-01
+c_minus_b,not_identifiable,,kcal/mol,segment-report-2026-01
+d_minus_a,not_identifiable,,kcal/mol,segment-report-2026-01

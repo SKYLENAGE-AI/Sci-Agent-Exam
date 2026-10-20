@@ -1,0 +1,28 @@
+{
+  "cell_length": 0.05,
+  "electron_density": 0.18,
+  "external_magnetic_field": {
+    "component": "Bz",
+    "value": 0.72
+  },
+  "field_fields": [
+    "Ey",
+    "Bz",
+    "Rho"
+  ],
+  "geometry": "1Dcartesian",
+  "grid_length": 80.0,
+  "laser_a0": 1.65,
+  "laser_box_side": "xmin",
+  "laser_omega0": 0.9817477042468103,
+  "magnetization_parameter": 0.7333859777674537,
+  "probe_every": 1,
+  "probe_fields": [
+    "Ey",
+    "Bz",
+    "Rho",
+    "Jx"
+  ],
+  "simulation_time": 204.8,
+  "timestep": 0.05
+}

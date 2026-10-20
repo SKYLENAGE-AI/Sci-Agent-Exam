@@ -1,0 +1,19 @@
+{
+  "purpose": "Offline Smilei-style diagnostics for magnetized laser-plasma harmonic-generation orchestration",
+  "catalog": "run_catalog.sqlite",
+  "diagnostics": [
+    "diagnostics/Probes0.h5",
+    "diagnostics/Fields0.h5"
+  ],
+  "source_snapshot": "smilei_inputs/tst1d_laser_magnetized_harmonics.py",
+  "units": {
+    "time": "omega_p^-1",
+    "angular_frequency": "omega0-normalized",
+    "field": "Smilei normalized units"
+  },
+  "schema_summary": {
+    "probe_time_dataset": "time_omega_p_inv",
+    "probe_signal_group": "signals/xmin",
+    "field_energy_dataset": "scalar_diagnostics/electromagnetic_field_energy"
+  }
+}

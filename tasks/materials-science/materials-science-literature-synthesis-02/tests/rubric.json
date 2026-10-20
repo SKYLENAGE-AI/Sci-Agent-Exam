@@ -1,0 +1,325 @@
+{
+  "rubrics": [
+    {
+      "id": 1,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Recovers P1's result that 18 of 80 layer groups do not injectively map to a space group and explains its discovery significance.",
+      "description": "Award only if report.md gives the 18-of-80 non-injective mapping fact and explains why explicit layer-group control expands the symmetry-controlled candidate space. A generic statement that symmetry is important fails.",
+      "source": "2605.08262v1.pdf, Introduction and Section 2",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 2,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "Recovers P1's post-relaxation stability definition for generated non-BiDB candidates.",
+      "description": "Award only if report.md states that generated 2DMatPedia, C2DB, and Alex2D candidates are stable only when both E_hull is below 200 meV/atom against Materials Project v2023.02.07 and Gamma-point phonons are dynamically stable. Reusing 2DMatPedia's 150 meV/atom data-curation cutoff, omitting either condition, or presenting a curation rule as the generated-candidate metric fails.",
+      "source": "2605.08262v1.pdf, Section 5, Metrics",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Source Grounding",
+      "weight": 3,
+      "criterion": "Recovers P1's post-relaxation stability definition for generated BiDB candidates.",
+      "description": "Award only if report.md states that a generated BiDB candidate is stable only when both its relaxed bilayer energy is below the total energy of its separately relaxed constituent monolayers and its Gamma-point phonons are dynamically stable. Substituting the data-curation sliding screen, assigning a monolayer hull cutoff, or omitting either generated-candidate condition fails.",
+      "source": "2605.08262v1.pdf, Section 5, Metrics",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 4,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Explains why P1's generated-candidate stability and S.U.N. metrics do not establish experimental synthesizability.",
+      "description": "Award only if report.md identifies P1's generated-candidate result as a post-relaxation benchmark metric and explains that P1 performs no experimental synthesis test, so passing that metric cannot establish laboratory readiness. The report may use P1's rough-guide hull discussion as supporting scope evidence, but treating the data-curation thresholds themselves as the S.U.N. definition fails. Judge the scientific justification rather than the selected evidence-status token. A generic proxy caveat fails.",
+      "source": "2605.08262v1.pdf, Section 5, Data processing and Metrics",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 5,
+      "category": "Communication",
+      "weight": 3,
+      "criterion": "The evidence-chain figure represents the symmetry-validity evidence relationship consistently with the report.",
+      "description": "Award only if candidate_evidence_chain.png makes P1's support on the symmetry-validity axis and the absence of tested symmetry-validity evidence from P2-P4 determinable, using evidence-state labels that agree with report.md. Any contrary source-axis state fails.",
+      "grader_inputs": [
+        "figures/candidate_evidence_chain.png",
+        "report.md"
+      ]
+    },
+    {
+      "id": 6,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Preserves P1's bounded positive conclusion by limiting its support to symmetry-controlled candidate proposal.",
+      "description": "Award only if report.md explains why P1 supports retaining the generator as a discovery front end while withholding direct synthesis eligibility. Rejecting the generator entirely or treating P1's model metrics as lab evidence fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 7,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "States P2's stable and metastable definitions as E_hull <= 0 and 0 < E_hull <= 0.1 eV/atom, respectively.",
+      "description": "Award only if report.md gives both interval definitions and distinguishes them from P1's loose dataset filters.",
+      "source": "2512.04562v2.pdf, Section 3.2",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 8,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Explains P2's requirement that candidate and reference energies use one self-consistent MLIP hull rather than mixing MLIP candidate energies with a DFT hull.",
+      "description": "Award only if report.md identifies the systematic-offset problem and its ability to change stability labels. Merely requesting more accurate energies fails.",
+      "source": "2512.04562v2.pdf, Section 3.2 and Section 5.2",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 9,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Uses P2's reference-set sensitivity result that MatterGen novelty falls from 83.1% to 70.5% under LeMat-Bulk.",
+      "description": "Award only if report.md gives both MatterGen novelty values and explains that changing the structural reference can materially change a novelty conclusion.",
+      "source": "2512.04562v2.pdf, Section 5.4 and Appendix C.4",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 10,
+      "category": "Scientific Correctness",
+      "weight": 4,
+      "criterion": "Limits P2's exact model rankings to its evaluated generators and bulk-reference protocol because P2 omits SLayerGen.",
+      "description": "Award only if report.md preserves P2's transferable comparability lesson without assigning P2's winner or numerical rate directly to SLayerGen. Judge the scientific justification rather than the selected evidence-status token. A generic domain-shift warning fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 11,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Explains that P3's synthesizability label is composition-level: one non-theoretical polymorph makes the composition positive.",
+      "description": "Award only if report.md states that a composition is positive when any polymorph is not flagged theoretical and negative only when all polymorphs are theoretical. Treating the label as exact-structure proof fails.",
+      "source": "2511.01790v1.pdf, Section 2.1, Data Curation",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 12,
+      "category": "Source Grounding",
+      "weight": 3,
+      "criterion": "Identifies P3's final synthesizability measure as a rank-average of composition and structure model outputs rather than an absolute portable probability.",
+      "description": "Award only if report.md states that P3 converts each head's probabilities to ranks and ranks candidates by their average. Calling the 0.95 screening value a universal calibrated probability threshold fails.",
+      "source": "2511.01790v1.pdf, Section 2.1, Usage in Screening",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 13,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "Accounts for P3's post-score candidate selection by a web-searching language model and expert chemical review.",
+      "description": "Award only if report.md uses the additional selection to explain why experimental yield cannot be attributed to the score alone. A report that presents the cohort as an unfiltered random sample fails.",
+      "source": "2511.01790v1.pdf, Section 2.2",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 14,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Preserves P3's complete 24-attempt outcome accounting.",
+      "description": "Award only if report.md reports 24 attempted, 8 unavailable after crucible bonding, and among 16 characterized: 7 exact targets, 2 other polymorphs, and 7 failures. Reporting only the 44% exact-target fraction fails.",
+      "source": "2511.01790v1.pdf, Section 3 and Appendix A.3",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 15,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "Recovers P3's finding that several apparent discoveries were already represented or mislabeled in Materials Project or ICSD.",
+      "description": "Award only if report.md identifies both error classes and gives the respective count of three for each: target-or-polymorph outcomes nearly identical to existing structures, and similar ICSD structures mislabeled theoretical.",
+      "source": "2511.01790v1.pdf, Section 3 and Section 4.3",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 16,
+      "category": "Source Grounding",
+      "weight": 3,
+      "criterion": "Uses P3's 0.534 versus 0.764 precision result to distinguish its low-energy hull heuristic from its rank-average synthesizability classifier.",
+      "description": "Award only if report.md gives 0.534 for the <=50 meV/atom hull heuristic and 0.764 for the rank-average ensemble, and concludes that the simple hull heuristic is not equivalent to P3's learned screening measure. A qualitative assertion fails.",
+      "source": "2511.01790v1.pdf, Section 3 and Figure 2",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 17,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Classifies P4's CSP identity-change mechanism as directly supported using the LiNb7N8 reversal to the known W2C(hP3) prototype.",
+      "description": "Award only if report.md identifies the composition, known prototype, and stability change, and uses this observed reversal to establish that composition-level search can change candidate identity. Calling the geometry unchanged fails.",
+      "source": "2510.23181v2.pdf, Results and Figure 5a",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 18,
+      "category": "Source Grounding",
+      "weight": 5,
+      "criterion": "Uses P4's different post-CSP Rb2Er4O7 framework to classify generated structural identity as not decision-stable.",
+      "description": "Award only if report.md distinguishes the novel post-search framework from the generated candidate and explains why the original generated identity cannot be presumed stable for decisions. Calling P4 a validation of the original geometry fails.",
+      "source": "2510.23181v2.pdf, Results and Figure 5b",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 19,
+      "category": "Communication",
+      "weight": 3,
+      "criterion": "The evidence-chain figure represents the energetic-stability evidence relationships consistently with the report.",
+      "description": "Award only if candidate_evidence_chain.png makes P1's scoped energetic support and P2-P4's cautions on the energetic-stability axis determinable, using evidence-state labels that agree with report.md. Any contrary source-axis state fails.",
+      "grader_inputs": [
+        "figures/candidate_evidence_chain.png",
+        "report.md"
+      ]
+    },
+    {
+      "id": 20,
+      "category": "Source Grounding",
+      "weight": 3,
+      "criterion": "Recovers P4's finite FUSE stopping convention and the resulting search sizes for both compositions.",
+      "description": "Award only if report.md states that FUSE stops after 1,500 structures since the current minimum was located and reports 2,189 and 2,852 generated structures for LiNb7N8 and Rb2Er4O7, using that finite boundary to avoid claiming a guaranteed global minimum.",
+      "source": "2510.23181v2.pdf, Methods, Crystal structure prediction calculations with FUSE",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 21,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Separates metric incompatibility from genuine contradiction across P1-P4.",
+      "description": "Award only if report.md explains that P1's diperiodic model metrics, P2's self-consistent bulk benchmark, P3's selected experimental pipeline, and P4's post-CSP identities answer different questions, while still deriving one decision chain from them. Averaging their rates or declaring that one paper simply disproves another fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 22,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Must NOT claim the corpus supplies direct evidence for the complete SLayerGen-to-laboratory routing chain.",
+      "description": "Pass only if report.md identifies the full-chain evidence gap between SLayerGen generation and phase-resolved experimental realization, while preserving candidate-discovery value. Generic caution or rejection of the generator without this distinction fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 23,
+      "category": "Completeness",
+      "weight": 4,
+      "criterion": "Specifies a pre-lab energy gate that recomputes candidates and competing phases under one stated, self-consistent energy/reference protocol.",
+      "description": "Award only if report.md's proposed gate prevents mixed-energy hulls and re-evaluates rather than copying P1 or P2 rates. Generic DFT validation without a common reference fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 24,
+      "category": "Completeness",
+      "weight": 5,
+      "criterion": "Requires composition-level structural search before lab allocation to test whether the generated structural identity survives.",
+      "description": "Award only if report.md uses the generated candidate as a search input rather than an unquestioned final structure and compares the post-search structure with the generated candidate and known prototypes. A local relaxation alone fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 25,
+      "category": "Completeness",
+      "weight": 5,
+      "criterion": "Defines a prospective synthesis pilot that distinguishes exact target, alternate polymorph, failure, and uncharacterized attempt.",
+      "description": "Award only if report.md proposes phase-resolving characterization such as XRD/Rietveld analysis and keeps all attempted samples visible in the accounting. A binary composition-level success label fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 26,
+      "category": "Communication",
+      "weight": 3,
+      "criterion": "The evidence-chain figure represents the structural-identity-and-novelty evidence relationships consistently with the report.",
+      "description": "Award only if candidate_evidence_chain.png makes P1's scoped identity/novelty support and P2-P4's cautions on the structural-identity-and-novelty axis determinable, using evidence-state labels that agree with report.md. Any contrary source-axis state fails.",
+      "grader_inputs": [
+        "figures/candidate_evidence_chain.png",
+        "report.md"
+      ]
+    },
+    {
+      "id": 27,
+      "category": "Execution & Validation",
+      "weight": 3,
+      "criterion": "Executable figure code derives the evidence map from a structured, editable P1-P4 by five-axis representation.",
+      "description": "Award only if code/build_evidence_chain.py contains explicit source records and axis-level evidence states that drive the plotted cells. A copied image, an empty script, or unrelated plotting code fails.",
+      "grader_inputs": [
+        "code/"
+      ]
+    },
+    {
+      "id": 28,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Separates P4's directly observed identity-change mechanism from its transfer to actual SLayerGen candidates.",
+      "description": "Award only if report.md states that P4 directly observes post-CSP identity, stability, or novelty changes in two triperiodic PIGEN cases, while SLayerGen's diperiodic candidates remain untested. Judge the scientific scope and required SLayerGen-specific validation rather than the selected evidence-status token. Treating P4's two cases as a measured SLayerGen frequency or as proof that SLayerGen identity is preserved fails.",
+      "source": "2510.23181v2.pdf, Results and Figure 5",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 29,
+      "category": "Source Grounding",
+      "weight": 4,
+      "criterion": "Uses P2's reference-set sensitivity result that reported stability rates can shrink by about two to three times under LeMat-Bulk.",
+      "description": "Award only if report.md gives at least one matching example: PLaID++ falling from 31.0% to 12.4% or DiffCSP falling from 7.2% to 2.3%, and explains that changing the reference can materially change a stability conclusion.",
+      "source": "2512.04562v2.pdf, Section 5.4 and Appendix C.4",
+      "grader_inputs": [
+        "report.md"
+      ]
+    },
+    {
+      "id": 30,
+      "category": "Scientific Correctness",
+      "weight": 5,
+      "criterion": "Explains why P3's selected experimental cohort does not directly estimate SLayerGen's exact-phase synthesis yield.",
+      "description": "Award only if report.md identifies both the different candidate system and P3's additional machine-assisted and expert selection before experiment. Judge the transfer justification rather than the selected evidence-status token. Merely repeating P3's 44% exact-target fraction or a generic domain-shift warning fails.",
+      "grader_inputs": [
+        "report.md"
+      ]
+    }
+  ]
+}

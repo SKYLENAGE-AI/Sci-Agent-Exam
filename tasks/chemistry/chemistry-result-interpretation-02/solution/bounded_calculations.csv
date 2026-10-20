@@ -1,0 +1,9 @@
+metric,value,unit,source_artifact_id
+k_ts1_298_s_inv,49152619.0615,s^-1,segment-report-2026-01
+k_ts2_298_s_inv,0.000928286952254,s^-1,segment-report-2026-01
+segment_rate_ratio_ts1_to_ts2,52949811415.7,dimensionless,segment-report-2026-01
+k_ts2_minus_perturbation_298_s_inv,0.0271451608524,s^-1,segment-report-2026-01
+k_ts2_plus_perturbation_298_s_inv,3.17447618163e-05,s^-1,segment-report-2026-01
+barrier_acceleration_vs_uncatalyzed,1.92688446643e+38,dimensionless,segment-report-2026-01
+delta_e_method_ts1_kcal_mol,0.69,kcal/mol,segment-report-2026-01
+delta_e_method_ts2_kcal_mol,0.03,kcal/mol,segment-report-2026-01

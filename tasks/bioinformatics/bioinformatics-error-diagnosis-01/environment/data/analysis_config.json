@@ -1,0 +1,76 @@
+{
+  "schema_version": 8,
+  "public_fixture_dir": "broken_project/fixtures/public",
+  "novelty_tier": {
+    "apply_to_splits": ["validation", "test"],
+    "max_similarity_exclusive": 0.35,
+    "fingerprint_bits": 2048,
+    "fingerprint_encoding": "512 lowercase hexadecimal characters interpreted as one big-endian bitset",
+    "similarity": "Tanimoto intersection over union on set bits; zero union is 1.0",
+    "nearest_reference_tie_break": "lexicographically smallest ligand_chembl_id",
+    "reference_cutoff_year_by_split": {
+      "validation": 2022,
+      "test": 2023
+    },
+    "reference_cutoff_comparator": "strictly_less_than",
+    "reference_self_membership": "do not exclude a query ligand_id when that identifier belongs to the source-consistent reference population"
+  },
+  "assay_policy": {
+    "apply_to_splits": ["validation", "test"],
+    "accepted_standard_types": ["IC50", "Ki", "Kd"],
+    "only_equal_relation": true,
+    "minimum_unique_compounds": 10,
+    "minimum_comparator": "greater_than_or_equal",
+    "minimum_experimental_sd": 0.5,
+    "experimental_sd_unit": "pChEMBL = -log10(molar)",
+    "sample_sd_ddof": 1,
+    "one_assay_per_document": true,
+    "assay_size_metric": "unique compounds after relation filtering, missing-value removal, and exact duplicate collapse",
+    "tie_break": "lexicographically smallest assay_id, then standard_type"
+  },
+  "target_mirroring_policy": {
+    "apply_to_splits": ["validation", "test"],
+    "pair_evidence_population": "source-consistent same-document assay-pair population using shared equality-relation compounds with reported pChEMBL in both assays",
+    "minimum_shared_compounds": 10,
+    "minimum_shared_compounds_comparator": "greater_than_or_equal",
+    "maximum_sequence_identity_exclusive": 0.9,
+    "minimum_r2_inclusive": 0.6,
+    "only_equal_relation": true,
+    "exclusion_policy": "an otherwise qualifying validation or test assay incident to one or more target_mirroring pairs has final status target_mirroring_excluded",
+    "pair_status_precedence": [
+      "too_few_shared_compounds",
+      "missing_target_identity",
+      "target_identity_not_below_threshold",
+      "undefined_correlation",
+      "low_correlation",
+      "target_mirroring"
+    ]
+  },
+  "missing_values": {
+    "input_tokens": ["", "NA"],
+    "output_token": "NA",
+    "missing_experimental_pchembl": "exclude from assay eligibility and performance; do not impute",
+    "missing_prediction": "exclude only from complete-case performance; do not change eligibility or retention"
+  },
+  "eligibility_status_precedence": [
+    "too_few_unique_compounds",
+    "undefined_experimental_sd",
+    "low_experimental_sd",
+    "qualifying"
+  ],
+  "aggregation": {
+    "performance_unit": "retained assay and standard_type",
+    "correlation": "Pearson r on complete experimental-prediction pairs; r2 is r squared",
+    "mae_unit": "pChEMBL",
+    "split_mean_r2": "unweighted arithmetic mean over retained assays with defined r2"
+  },
+  "release_comparison": {
+    "row_identity": ["fixture"],
+    "coverage_fields": ["n_splits", "n_documents", "n_assays", "n_activity_rows"],
+    "scientific_scope": "input coverage only; independent of novelty, eligibility, retention, and performance"
+  },
+  "comparison": {
+    "absolute_tolerance": 1e-6,
+    "relative_tolerance": 1e-9
+  }
+}

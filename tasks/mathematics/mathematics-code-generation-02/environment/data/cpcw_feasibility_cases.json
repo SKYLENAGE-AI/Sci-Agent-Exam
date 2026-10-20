@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "id": "case_82_k5",
+      "v": 82,
+      "k": 5,
+      "source_section": "Section 3.2"
+    },
+    {
+      "id": "case_102_k5",
+      "v": 102,
+      "k": 5,
+      "source_section": "Section 3.2"
+    },
+    {
+      "id": "case_122_k6",
+      "v": 122,
+      "k": 6,
+      "source_section": "Section 3.2"
+    },
+    {
+      "id": "case_152_k6",
+      "v": 152,
+      "k": 6,
+      "source_section": "Section 3.2"
+    },
+    {
+      "id": "case_92_k6",
+      "v": 92,
+      "k": 6,
+      "source_section": "Section 3.3"
+    }
+  ]
+}

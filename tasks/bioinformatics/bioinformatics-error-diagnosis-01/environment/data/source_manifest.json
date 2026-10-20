@@ -1,0 +1,57 @@
+{
+  "schema_version": 3,
+  "primary_paper": {
+    "title": "Identifying and Addressing Systematic Data Leakage in Protein-Ligand Affinity Benchmarks",
+    "authors": ["Björn Mattsson", "W. Patrick Walters"],
+    "version": "bioRxiv v1",
+    "posted": "2026-06-30",
+    "doi": "10.64898/2026.06.29.735309",
+    "canonical_url": "https://www.biorxiv.org/content/10.64898/2026.06.29.735309v1.full.pdf",
+    "license": "CC-BY 4.0",
+    "path": "2026.06.29.735309v1.full.pdf",
+    "sha256": "5fab564cc3280fc061eee71531015a096989ea656e7ca0beedc983ff2add864d",
+    "extracted_text_sha256": "05a86253958b98716c44d6df76e2df4f191f284b4e1d968a53a4bddcaf3d6797"
+  },
+  "upstream_code": {
+    "repository": "https://github.com/bamattsson/ntab",
+    "commit": "ca9019a9b9f1ffaf7727834f716bfa347247802f",
+    "license": "MIT"
+  },
+  "mounted_dataset": {
+    "kind": "purpose-built ChEMBL-style individual-ligand-novelty, assay-retention, and same-document target-mirroring fixture with experimental pChEMBL values, predictions, compound catalog provenance, target-pair sequence identities, 2048-bit synthetic fingerprints, and assay-document chronology",
+    "synthetic": true,
+    "scientific_scope": "Deterministic interface fixture only; not evidence about real chemical novelty, target-mirroring or ChEMBL prevalence, prospective performance, or causal protein-ligand mechanisms",
+    "external_dataset_redistributed": false,
+    "fixture_manifest": {
+      "path": "broken_project/fixtures/public/fixture_manifest.json",
+      "sha256": "18c3b0a4833602245575379d9ebceb6d74ba76fe3614d5e27d18d50f704e5fb1"
+    },
+    "activities": {
+      "path": "broken_project/fixtures/public/activities.tsv",
+      "sha256": "79f3f359937f85ae4ca33ea6aba78532326d4c77ce1601c6b0d1bb25b0066c28"
+    },
+    "assay_documents": {
+      "path": "broken_project/fixtures/public/assay_documents.tsv",
+      "sha256": "8519da5f1e100e3a39288d7e9b2f28fbc84087fe5a50af4c1e8d562d97982022"
+    },
+    "compound_fingerprints": {
+      "path": "broken_project/fixtures/public/compound_fingerprints.tsv",
+      "sha256": "8bea928d10d5c62a67aea406b6bea4ba9227f6ee21367f60872a978fd817ed45",
+      "bits": 2048,
+      "representation": "synthetic precomputed binary interface fixture"
+    },
+    "target_identity": {
+      "path": "broken_project/fixtures/public/target_identity.tsv",
+      "sha256": "0435bbfc154cdbc578bdb3de000d6b9fa461371540ef359d32342ff549df24da",
+      "unit": "overall target-sequence identity in [0,1]"
+    },
+    "release_summary": {
+      "path": "broken_project/fixtures/public/release_summary.tsv",
+      "sha256": "a369892f0dd75310e7ce4076993df678af5036b9d54dd5531b35133d5f407c46"
+    },
+    "analysis_config": {
+      "path": "analysis_config.json",
+      "sha256": "3ebde44d68ee389be8f10bb6c237bc25b7189ef1774e935faac78232bd8f7d01"
+    }
+  }
+}

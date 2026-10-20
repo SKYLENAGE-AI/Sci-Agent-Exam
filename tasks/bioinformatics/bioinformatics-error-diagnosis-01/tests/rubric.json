@@ -1,0 +1,169 @@
+{
+  "rubrics": [
+    {
+      "id": 1,
+      "weight": 4,
+      "category": "Scientific Correctness",
+      "criterion": "Explains why the source-document boundary is scientifically load-bearing.",
+      "description": "Pass only when the report explains that target mirroring is campaign-local paired evidence: the same targets in another source document may have different compound support and activity agreement, so evidence cannot be pooled across documents or broadcast by target identity alone.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 2,
+      "weight": 4,
+      "category": "Source Grounding",
+      "criterion": "Explains why the paper requires paired reported-pChEMBL support rather than shared identifiers.",
+      "description": "Pass only when the report uses the paper to explain that paired correlation evidence is constructed from compounds tested in both assays with reported pChEMBL values. The configured minimum is operationally visible; credit the source-backed scientific role of paired reported measurements, not repetition of that number.",
+      "source": "2026.06.29.735309v1.full.pdf, Section 4, Target mirroring, pp. 3-4",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 3,
+      "weight": 4,
+      "category": "Source Grounding",
+      "criterion": "Explains the paper's use of overall target-sequence identity in target mirroring.",
+      "description": "Pass only when the report explains that the target-side comparison is overall sequence identity used to distinguish different targets with unexpectedly aligned assay outcomes, not a local/subsequence match or an ordinary same-target replicate. The configured boundary is operationally visible; credit the paper-backed role of the target comparison.",
+      "source": "2026.06.29.735309v1.full.pdf, Section 4, Target mirroring, pp. 3-4",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 4,
+      "weight": 4,
+      "category": "Scientific Correctness",
+      "criterion": "Interprets the paper's paired-activity agreement as target-mirroring evidence rather than causal mechanism.",
+      "description": "Pass only when the report explains that strong squared agreement across paired assay activities is evidence of a benchmark leakage risk at the assay-campaign level, not evidence of binding mechanism or target causality. The configured statistic and threshold are operationally visible; credit the source-backed interpretation and limit.",
+      "source": "2026.06.29.735309v1.full.pdf, Section 4, Target mirroring, pp. 3-4",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 5,
+      "weight": 4,
+      "category": "Scientific Correctness",
+      "criterion": "Interprets individual-ligand novelty as a distinct paper-described leakage axis.",
+      "description": "Pass only when the report explains why the paper's compound-level nearest-prior-neighbor novelty cannot establish assay-level leakage safety or replace target-mirroring analysis. Merely restating the configured fingerprint calculation, or substituting an assay/document average, does not satisfy the source-backed interpretation.",
+      "source": "2026.06.29.735309v1.full.pdf, Section 7 and Figure 4 caption, pp. 7-8; Appendix D, Novelty-tiers, p. 13",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 6,
+      "weight": 3,
+      "category": "Source Grounding",
+      "criterion": "Separates assay time-split provenance from novelty-reference provenance.",
+      "description": "Pass only when the report distinguishes source-document year, which assigns assay splits, from compound earliest ChEMBL publication, which admits novelty references before each cutoff.",
+      "source": "2026.06.29.735309v1.full.pdf, Appendix D, Time split and Novelty-tiers, pp. 12-13",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 7,
+      "weight": 5,
+      "category": "Scientific Correctness",
+      "criterion": "Treats ligand novelty and target mirroring as independent leakage axes.",
+      "description": "Pass when the report explains, with submitted evidence, that an individually novel ligand population may still belong to assays implicated by same-document target mirroring. No credit for treating ligand novelty as sufficient evidence that an assay is leakage-safe.",
+      "grader_inputs": ["report.md", "compound_novelty.tsv", "assay_pair_audit.tsv", "assay_inventory.tsv"]
+    },
+    {
+      "id": 8,
+      "weight": 5,
+      "category": "Scientific Correctness",
+      "criterion": "Localizes the earliest regression to construction of the target-mirroring evidence population.",
+      "description": "Pass when the report and patched code localize the defect to the independent same-document distinct assay/readout-unit evidence population: pair identities and paired statistics must both be formed from every mounted unit using source-valid observations after declared duplicate collapse but before novelty membership, base eligibility, exclusion, or document-representative selection. Enumerating complete pair identities while computing their statistics from a downstream-conditioned subset does not pass. Judge this scientific localization from the submission's own code and artifacts, not an exact implementation phrase or reference values.",
+      "grader_inputs": ["report.md", "code/ntab/", "assay_pair_audit.tsv"]
+    },
+    {
+      "id": 9,
+      "weight": 5,
+      "category": "Scientific Correctness",
+      "criterion": "Justifies a minimal repair that restores the complete independent pair evidence without changing unrelated policy.",
+      "description": "Pass when the repaired code constructs pair evidence without consuming novelty-conditioned, base-qualified, excluded, or representative-selected rows; qualifying-pair incidence is load-bearing in the conditional assay-eligibility decision; and primary activity membership and unrelated downstream stages retain their separate inputs. The report must support this non-vacuously from submitted code or artifact-supported invariant logic; deterministic agreement with reference outputs remains owned by the programmatic checker.",
+      "grader_inputs": ["report.md", "code/ntab/"]
+    },
+    {
+      "id": 10,
+      "weight": 3,
+      "category": "Scientific Correctness",
+      "criterion": "Uses paired finite equality-pChEMBL observations rather than raw shared identifiers.",
+      "description": "Pass when the report explains why a compound ID shared between assays is not pair evidence unless both sides provide the declared source-valid reported value after agreeing duplicate collapse, and why predictions do not enter this audit.",
+      "grader_inputs": ["report.md", "assay_pair_audit.tsv", "code/ntab/"]
+    },
+    {
+      "id": 11,
+      "weight": 3,
+      "category": "Scientific Correctness",
+      "criterion": "Interprets Pearson r and R-squared at their correct paired-assay unit.",
+      "description": "Pass when the report keeps signed Pearson r distinct from its square and applies the configured paired-assay threshold to R-squared rather than to signed r.",
+      "grader_inputs": ["report.md", "assay_pair_audit.tsv"]
+    },
+    {
+      "id": 12,
+      "weight": 3,
+      "category": "Scientific Correctness",
+      "criterion": "Explains why downstream conditioning cannot define the target-mirroring evidence population.",
+      "description": "Pass when the report explains that same-document paired-pChEMBL evidence has its own scientific population, so conditioning its construction on ligand novelty, base eligibility, exclusion, retention, or document representation changes the evidence estimand and can turn qualifying upstream evidence into apparent absence. Credit the scientific interpretation of independence, not exact pair rows, counterfactual execution, or table invariance, which are programmatic.",
+      "grader_inputs": ["report.md"]
+    },
+    {
+      "id": 13,
+      "weight": 3,
+      "category": "Scientific Correctness",
+      "criterion": "Applies the configured target-mirroring exclusion only at its declared context and precedence.",
+      "description": "Pass when the report distinguishes observed pair evidence from the conditional fixture policy: qualifying pair rows remain present and classified even when their incident assays are base-ineligible or outside the policy-active splits, while exclusion applies only to otherwise base-qualifying validation/test assays. Judge the precedence and preservation claims against the submission's own pair, assay, and document evidence; do not re-grade exact reference values.",
+      "grader_inputs": ["report.md", "assay_pair_audit.tsv", "assay_inventory.tsv", "document_retention.tsv"]
+    },
+    {
+      "id": 14,
+      "weight": 3,
+      "category": "Scientific Correctness",
+      "criterion": "Traces downstream consequences without replacing the scientific inference with membership or metric direction.",
+      "description": "Pass when the report connects restored pair evidence to final assay eligibility, document representation, retained-assay performance, and split aggregation, while keeping the finite split mean-R-squared definition of optimistic bias separate from potentially mixed membership changes.",
+      "grader_inputs": ["report.md", "assay_inventory.tsv", "document_retention.tsv", "assay_performance.tsv", "summary.tsv"]
+    },
+    {
+      "id": 15,
+      "weight": 3,
+      "category": "Scientific Correctness",
+      "criterion": "Separates prediction missingness from experimental-activity missingness.",
+      "description": "Pass when the report assigns missing predictions only to complete-case performance and excludes missing experimental pChEMBL from base-eligibility and paired-pChEMBL populations without treating either kind of missingness as zero or imputing it across stages.",
+      "grader_inputs": ["report.md", "compound_novelty.tsv", "assay_pair_audit.tsv", "assay_inventory.tsv", "assay_performance.tsv"]
+    },
+    {
+      "id": 16,
+      "weight": 4,
+      "category": "Execution & Validation",
+      "criterion": "Evaluates at least two one-factor scientific alternatives against explicit invariants.",
+      "description": "Pass when the report identifies, for each of at least two alternatives, the sole changed convention or selection rule, the fields or relationships that must remain invariant, and the discriminating consequence supported by submitted code or named final evidence. Accept an observed result or a logically derived result directly checkable from those artifacts. Prose that merely claims a counterfactual was run, compound multi-factor alternatives, or a claimed invariant contradicted by submitted evidence do not pass. Do not grade execution history itself.",
+      "grader_inputs": ["report.md", "code/ntab/", "compound_novelty.tsv", "assay_pair_audit.tsv", "assay_inventory.tsv"]
+    },
+    {
+      "id": 17,
+      "weight": 4,
+      "category": "Execution & Validation",
+      "criterion": "Reconciles the regenerated artifacts as one causal evidence chain, including an upstream no-effect case.",
+      "description": "Pass when the report gives an internally coherent repaired-layer trace from compound and pair evidence through assay eligibility, document retention, performance, summary, and receipt, supported by submitted artifacts. The trace must retain and explain qualifying upstream pair evidence whose incident assays are already base-ineligible, even though it has no downstream eligibility or performance consequence. Do not require the judge to verify historical changed-versus-unchanged claims against unavailable broken artifacts.",
+      "grader_inputs": ["report.md", "compound_novelty.tsv", "assay_pair_audit.tsv", "assay_inventory.tsv", "document_retention.tsv", "assay_performance.tsv", "summary.tsv", "reproduction.json"]
+    },
+    {
+      "id": 18,
+      "weight": 3,
+      "category": "Execution & Validation",
+      "criterion": "Demonstrates relational identity and ordering invariance.",
+      "description": "Pass when validation shows that grouping, joins, unordered target lookup, and pair canonicalization derive from declared relational keys rather than fixture IDs, contiguous row order, endpoint orientation, fixed ranks, or expected outputs.",
+      "grader_inputs": ["report.md", "code/ntab/"]
+    },
+    {
+      "id": 19,
+      "weight": 3,
+      "category": "Completeness",
+      "criterion": "Explains assay incidence as the necessary bridge from pair evidence to conditional eligibility.",
+      "description": "Pass when the report explains that the source-defined object is pair-level while the configured decision is assay-level, so qualifying-pair incidence is the necessary map between them; holding novelty and base eligibility fixed, a pair table that never informs assay incidence is scientifically decorative. The explanation must preserve the distinction between valid upstream pair evidence and a downstream no-effect case when incident assays are already ineligible. Grade this causal/estimand argument, not fresh derivation, exact rows, exact incidence counts, eligibility statuses, or hidden-case behavior, which are programmatic.",
+      "grader_inputs": ["report.md", "assay_pair_audit.tsv", "assay_inventory.tsv"]
+    },
+    {
+      "id": 20,
+      "weight": 3,
+      "category": "Completeness",
+      "criterion": "Must not extrapolate synthetic-replay observations beyond the mounted benchmark.",
+      "description": "Pass only when conclusions remain about the supplied synthetic offline benchmark and do not treat it as evidence about real-world leakage prevalence, prospective performance, binding mechanism, or causal biology. The listed examples illustrate one external-validity boundary rather than separate required claims.",
+      "grader_inputs": ["report.md", "code/ntab/"]
+    }
+  ]
+}
