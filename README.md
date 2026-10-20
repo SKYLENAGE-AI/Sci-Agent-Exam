@@ -33,14 +33,6 @@ correlation to rank, and even the strongest agent clears the **Pass@0.95**
 reliability bar on only ~a quarter of tasks (contenders ≤10%), leaving
 substantial headroom in execution correctness and scientific judgement alike.
 
-![Cost vs. score per agent](assets/cost_vs_score.png)
-
-> **📊 Leaderboard:** [`leaderboard/index.html`](leaderboard/index.html) — open it
-> directly in a browser (works offline, no server needed). Sortable by
-> Programmatic / LLM-Judge / Combined / Pass@0.95, plus per-run **Out-tokens /
-> Cost / Turns** efficiency columns, filterable by field and task type. Source +
-> generator in [`leaderboard/`](leaderboard/).
-
 ## Overview
 
 LLMs are increasingly embedded in scientific workflows, but it remains unclear

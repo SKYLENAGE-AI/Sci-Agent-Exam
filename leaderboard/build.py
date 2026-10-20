@@ -43,12 +43,30 @@ TEMPLATE = r"""<!DOCTYPE html>
 <title>Sci-Agent-Exam · Leaderboard</title>
 <style>
   :root{
-    --bg:#070a0f; --panel:#0d131c; --panel-2:#111a26; --line:#1d2a3a;
+    color-scheme:light;
+    --grid: 44px minmax(0,1fr) 58px 48px 48px 54px 58px 58px 54px 50px;
+    /* light theme (default) */
+    --bg:#eef2f7; --panel:#ffffff; --panel-2:#f1f5fa; --panel-grad-end:#f6f9fc; --line:#d9e1ec;
+    --txt:#1b2430; --muted:#5c6b7e;
+    --accent:#e07a4e; --accent-2:#109e88; --accent-3:#4f82e0;
+    --prog:#3f78d8; --judge:#9a5cf0; --comb:#cf8a2e; --pass:#17a06c;
+    --gold:#cf9412; --silver:#8296ab; --bronze:#b5733a;
+    --hover:rgba(0,0,0,.035); --barbg:rgba(0,0,0,.07); --grid-line:rgba(0,0,0,.022);
+    --shadow:0 16px 40px rgba(25,45,75,.12); --tip-bg:rgba(255,255,255,.98);
+    --h1-start:#243445; --ring:rgba(0,0,0,.5);
+    --glow-a:rgba(16,158,136,.10); --glow-b:rgba(224,122,78,.10);
+  }
+  html[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#070a0f; --panel:#0d131c; --panel-2:#111a26; --panel-grad-end:#0a0f16; --line:#1d2a3a;
     --txt:#e8eef6; --muted:#7d8ea4;
     --accent:#f08a5d; --accent-2:#38e8c6; --accent-3:#6ea8ff;
     --prog:#6ea8ff; --judge:#c98bff; --comb:#f0b45d; --pass:#4ee39b;
     --gold:#ffcf5c; --silver:#cfe0f0; --bronze:#e0975a;
-    --grid: 44px minmax(0,1fr) 58px 48px 48px 54px 58px 58px 54px 50px;
+    --hover:rgba(255,255,255,.025); --barbg:rgba(255,255,255,.06); --grid-line:rgba(255,255,255,.018);
+    --shadow:0 20px 60px rgba(0,0,0,.45); --tip-bg:rgba(13,19,28,.97);
+    --h1-start:#ffffff; --ring:#ffffff;
+    --glow-a:rgba(56,232,198,.08); --glow-b:rgba(240,138,93,.10);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
