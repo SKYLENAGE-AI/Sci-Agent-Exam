@@ -165,13 +165,13 @@
     {
       "key": "physics",
       "ic": "⚛️",
-      "label": "Physics",
+      "label": "Physical Science",
       "n": 12
     },
     {
       "key": "physics-sim",
       "ic": "🌀",
-      "label": "Physics Sim.",
+      "label": "Physics Simulation",
       "n": 11
     },
     {
