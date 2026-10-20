@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "SCI-AGENT-EXAM",
-    "subtitle": "Benchmarking frontier LLM agents on real scientific research workflows. Each task ships a Dockerized scientific problem; agents must produce three deliverables — executable code, a results table, and a short report with a machine-readable answer.json — scored on two axes: programmatic execution and LLM-judge presentation.",
+    "subtitle": "What can scientific agents deliver across diverse research activities, and how efficient and stable is their execution and presentation?",
     "n_tasks": 120,
     "n_fields": 11,
     "n_task_types": 7,
