@@ -41,6 +41,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sci-Agent-Exam · Leaderboard</title>
+<script>(function(){try{var t=localStorage.getItem("sae-theme");if(t!=="dark"&&t!=="light")t="light";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","light");}})();</script>
 <style>
   :root{
     color-scheme:light;
@@ -108,6 +109,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .navbtn:hover{color:var(--txt);border-color:var(--accent-2);transform:translateY(-1px)}
   .navbtn.on{color:#071016;font-weight:700;border-color:transparent;
     background:linear-gradient(100deg,var(--accent),var(--accent-2));box-shadow:0 6px 22px rgba(56,232,198,.22)}
+  .themebtn{margin-left:14px;min-width:84px}
   .view{display:none}
   .view.on{display:block;animation:fade .35s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -221,6 +223,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .rspoke{stroke:var(--line);opacity:.5}
   .rlbl{fill:var(--muted);font-size:10.5px}
   svg .pt{cursor:pointer;transition:r .15s}
+  svg .pt.front{stroke:var(--ring);stroke-width:1.4px}
   svg .pt:hover{r:8}
   svg polygon[data-mid]{cursor:pointer}
 
@@ -277,6 +280,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     <button class="navbtn" data-v="matrix">▦ Matrix</button>
     <button class="navbtn" data-v="pareto">◴ Pareto</button>
     <button class="navbtn" data-v="domains">◈ Domains</button>
+    <button class="navbtn themebtn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">☾ Dark</button>
   </nav>
 
   <!-- ===================== LEADERBOARD ===================== -->
@@ -346,7 +350,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     </div>
     <p class="cap">Each point is an agent on the 120-task peer subset. The dashed line is the <b>Pareto frontier</b>
       — agents no other agent beats on both axes. For Cost / Tokens / Time, cheaper-and-stronger is up-and-left;
-      <b id="pxRef"></b> is the reference model (hollow), excluded from the frontier.
+      <b id="pxRef"></b> is the reference model, drawn hollow but included in the frontier.
       Cost / token / time are per-run, harness-billed. <b>__COSTNOTE__</b></p>
   </section>
 
@@ -556,18 +560,17 @@ function renderPareto(){
   g+=`<line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}"/>`;
   g+=`<text class="axl" x="${(L+(W-R))/2}" y="${H-10}" text-anchor="middle">${esc(xa.lbl)}${xa.low?"  ◂ better":""}</text>`;
   g+=`<text class="axl" transform="translate(16,${(T+(H-B))/2}) rotate(-90)" text-anchor="middle">${esc(ya.lbl)}  ▸ better</text>`;
-  const fids = ids.filter(id=>!MODELS[id].ref);
-  const fr = frontier(fids, xa, ya);
+  const fr = frontier(ids, xa, ya);
   if(fr.length>1){ g+=`<polyline class="frln" points="${fr.map(p=>`${X(p.x).toFixed(1)},${Y(p.y).toFixed(1)}`).join(" ")}"/>`; }
   const onf = new Set(fr.map(p=>p.id));
   ids.forEach(id=>{
     const mo=MODELS[id], x=X(xa.get(id)), y=Y(ya.get(id)), ref=!!mo.ref;
     const tip=`${mo.name} — ${ya.lbl.replace(' (%)','')} ${ya.get(id).toFixed(1)} · ${xa.lbl.replace(/ \(.*/,'')} ${xa.fmt(xa.get(id))} · $/pt ${COST[id].dpp}`;
     if(ref){
-      g+=`<circle class="pt" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="none" stroke="${mo.color}" stroke-width="2"><title>${esc(tip)} · reference</title></circle>`;
+      g+=`<circle class="pt" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${onf.has(id)?7:6}" fill="none" stroke="${mo.color}" stroke-width="${onf.has(id)?3:2}"><title>${esc(tip)} · reference</title></circle>`;
     } else {
-      g+=`<circle class="pt" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${onf.has(id)?6.5:5.5}" fill="${mo.color}" `+
-         `stroke="${onf.has(id)?'#fff':'none'}" stroke-width="${onf.has(id)?1.4:0}" fill-opacity="${onf.has(id)?1:.78}"><title>${esc(tip)}</title></circle>`;
+      g+=`<circle class="pt${onf.has(id)?' front':''}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${onf.has(id)?6.5:5.5}" fill="${mo.color}" `+
+         `fill-opacity="${onf.has(id)?1:.78}"><title>${esc(tip)}</title></circle>`;
     }
     g+=`<text class="ptlbl" x="${(x+9).toFixed(1)}" y="${(y+3).toFixed(1)}">${esc(mo.name)}</text>`;
   });
@@ -671,7 +674,19 @@ function setView(v, push){
   RENDER[v]();
   if(push!==false){ const u=new URL(location); u.searchParams.set("view",v); history.replaceState(null,"",u); }
 }
-document.querySelectorAll(".navbtn").forEach(b=> b.addEventListener("click",()=>setView(b.dataset.v)));
+document.querySelectorAll(".navbtn[data-v]").forEach(b=> b.addEventListener("click",()=>setView(b.dataset.v)));
+
+// theme toggle (default light; dark persisted to localStorage)
+const themeBtn=document.getElementById("themeBtn");
+function syncThemeBtn(){const t=document.documentElement.getAttribute("data-theme")==="dark"?"dark":"light";
+  themeBtn.textContent = t==="dark" ? "☀ Light" : "☾ Dark";}
+themeBtn.addEventListener("click",()=>{
+  const nx = document.documentElement.getAttribute("data-theme")==="dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme",nx);
+  try{localStorage.setItem("sae-theme",nx);}catch(e){}
+  syncThemeBtn();
+});
+syncThemeBtn();
 
 const q = new URLSearchParams(location.search).get("view");
 renderBoard();                          // table ready underneath
