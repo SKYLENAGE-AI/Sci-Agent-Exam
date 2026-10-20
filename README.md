@@ -47,6 +47,10 @@ Sci-Agent-Exam/
 │   ├── base/Dockerfile         ← shared base image (Python, Node, agent CLI, common deps)
 │   ├── run_judge.sh            ← standalone verifier flow (grades the golden solution)
 │   └── judge_adapter.py        ← routes the judge through an OpenAI-compatible API
+├── leaderboard/                ← self-contained results webpage + its data
+│   ├── build.py                ← generator: data/leaderboard.json → index.html
+│   ├── index.html              ← the rendered leaderboard (open in a browser)
+│   └── data/leaderboard.json   ← all scores + model / category metadata
 └── tasks/                      ← five example tasks, grouped by domain (see tasks/README.md)
     ├── bioinformatics/bioinformatics-error-diagnosis-01/
     ├── chemistry/chemistry-result-interpretation-02/

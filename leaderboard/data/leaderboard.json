@@ -1,0 +1,1357 @@
+{
+  "meta": {
+    "title": "SCI-AGENT-EXAM",
+    "subtitle": "Benchmarking frontier LLM agents on real scientific research workflows. Each task ships a Dockerized scientific problem; agents must produce three deliverables — executable code, a results table, and a short report with a machine-readable answer.json — scored on two axes: programmatic execution and LLM-judge presentation.",
+    "n_tasks": 120,
+    "n_fields": 11,
+    "n_task_types": 7,
+    "n_models": 10,
+    "pass_threshold": 0.95,
+    "harness": "Claude Code (high effort)",
+    "pass_note": "Pass@0.95 = per-task fraction of runs whose combined score ≥ 0.95, macro-averaged over tasks. Overall values match the paper main table.",
+    "combined_formula": "Combined = 0.55·Programmatic + 0.45·LLM-Judge"
+  },
+  "models": [
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "prov": "OpenAI",
+      "color": "#10d39a"
+    },
+    {
+      "id": "claude-fable-5",
+      "name": "Claude Fable 5",
+      "prov": "Anthropic",
+      "color": "#e58a63"
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "prov": "Anthropic",
+      "color": "#cc785c"
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "prov": "Moonshot",
+      "color": "#5b8def"
+    },
+    {
+      "id": "qwen-3.8-max",
+      "name": "Qwen3.8 Max",
+      "prov": "Alibaba",
+      "color": "#8b6cff"
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "prov": "OpenAI",
+      "color": "#19c37d"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "prov": "Zhipu",
+      "color": "#3fb6c4"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "prov": "Anthropic",
+      "color": "#b8603e"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek-V4-Pro",
+      "prov": "DeepSeek",
+      "color": "#4d6bfe"
+    },
+    {
+      "id": "grok-4.6",
+      "name": "Grok-4.6",
+      "prov": "xAI",
+      "color": "#aab2bd"
+    }
+  ],
+  "fields": [
+    {
+      "key": "overall",
+      "ic": "🏆",
+      "label": "Overall",
+      "n": 120,
+      "hero": true
+    },
+    {
+      "key": "physics",
+      "ic": "⚛️",
+      "label": "Physics",
+      "n": 12
+    },
+    {
+      "key": "physics-sim",
+      "ic": "🌀",
+      "label": "Physics Sim.",
+      "n": 11
+    },
+    {
+      "key": "scientific-computation",
+      "ic": "🖥️",
+      "label": "Scientific Computation",
+      "n": 13
+    },
+    {
+      "key": "data-science",
+      "ic": "📊",
+      "label": "Data Science",
+      "n": 10
+    },
+    {
+      "key": "bioinformatics",
+      "ic": "🧬",
+      "label": "Bioinformatics",
+      "n": 11
+    },
+    {
+      "key": "biology",
+      "ic": "🔬",
+      "label": "Biology",
+      "n": 15
+    },
+    {
+      "key": "cs",
+      "ic": "💻",
+      "label": "Computer Science",
+      "n": 10
+    },
+    {
+      "key": "materials-science",
+      "ic": "🔩",
+      "label": "Materials Science",
+      "n": 10
+    },
+    {
+      "key": "chemistry",
+      "ic": "⚗️",
+      "label": "Chemistry",
+      "n": 11
+    },
+    {
+      "key": "mathematics",
+      "ic": "📐",
+      "label": "Mathematics",
+      "n": 9
+    },
+    {
+      "key": "engineering",
+      "ic": "🏗️",
+      "label": "Engineering",
+      "n": 8
+    }
+  ],
+  "task_types": [
+    {
+      "key": "code-generation",
+      "ic": "⌨️",
+      "label": "Code Generation",
+      "n": 20
+    },
+    {
+      "key": "end-to-end-analysis",
+      "ic": "🔄",
+      "label": "End-to-End Analysis",
+      "n": 25
+    },
+    {
+      "key": "error-diagnosis",
+      "ic": "🩹",
+      "label": "Error Diagnosis",
+      "n": 11
+    },
+    {
+      "key": "hypothesis-validation",
+      "ic": "🧪",
+      "label": "Hypothesis Validation",
+      "n": 16
+    },
+    {
+      "key": "literature-synthesis",
+      "ic": "📚",
+      "label": "Literature Synthesis",
+      "n": 10
+    },
+    {
+      "key": "result-interpretation",
+      "ic": "🔎",
+      "label": "Result Interpretation",
+      "n": 10
+    },
+    {
+      "key": "tool-orchestration",
+      "ic": "🛠️",
+      "label": "Tool Orchestration",
+      "n": 28
+    }
+  ],
+  "scores": {
+    "gpt-6-astra": {
+      "overall": {
+        "p": 0.777,
+        "j": 0.853,
+        "c": 0.809,
+        "r": 0.26
+      },
+      "physics": {
+        "p": 0.794,
+        "j": 0.888,
+        "c": 0.828,
+        "r": 0.417
+      },
+      "physics-sim": {
+        "p": 0.789,
+        "j": 0.858,
+        "c": 0.817,
+        "r": 0.242
+      },
+      "scientific-computation": {
+        "p": 0.812,
+        "j": 0.823,
+        "c": 0.823,
+        "r": 0.231
+      },
+      "data-science": {
+        "p": 0.794,
+        "j": 0.852,
+        "c": 0.808,
+        "r": 0.4
+      },
+      "bioinformatics": {
+        "p": 0.835,
+        "j": 0.868,
+        "c": 0.856,
+        "r": 0.333
+      },
+      "biology": {
+        "p": 0.651,
+        "j": 0.731,
+        "c": 0.698,
+        "r": 0.0
+      },
+      "cs": {
+        "p": 0.572,
+        "j": 0.931,
+        "c": 0.737,
+        "r": 0.3
+      },
+      "materials-science": {
+        "p": 0.854,
+        "j": 0.882,
+        "c": 0.865,
+        "r": 0.444
+      },
+      "chemistry": {
+        "p": 0.819,
+        "j": 0.902,
+        "c": 0.842,
+        "r": 0.212
+      },
+      "mathematics": {
+        "p": 0.751,
+        "j": 0.839,
+        "c": 0.781,
+        "r": 0.259
+      },
+      "engineering": {
+        "p": 0.941,
+        "j": 0.856,
+        "c": 0.895,
+        "r": 0.083
+      },
+      "code-generation": {
+        "p": 0.783,
+        "j": 0.807,
+        "c": 0.79,
+        "r": 0.4
+      },
+      "end-to-end-analysis": {
+        "p": 0.787,
+        "j": 0.89,
+        "c": 0.839,
+        "r": 0.319
+      },
+      "error-diagnosis": {
+        "p": 0.824,
+        "j": 0.865,
+        "c": 0.838,
+        "r": 0.485
+      },
+      "hypothesis-validation": {
+        "p": 0.592,
+        "j": 0.954,
+        "c": 0.773,
+        "r": 0.292
+      },
+      "literature-synthesis": {
+        "p": 0.942,
+        "j": 0.799,
+        "c": 0.828,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.903,
+        "j": 0.869,
+        "c": 0.885,
+        "r": 0.2
+      },
+      "tool-orchestration": {
+        "p": 0.747,
+        "j": 0.803,
+        "c": 0.772,
+        "r": 0.111
+      }
+    },
+    "claude-fable-5": {
+      "overall": {
+        "p": 0.627,
+        "j": 0.744,
+        "c": 0.673,
+        "r": 0.097
+      },
+      "physics": {
+        "p": 0.609,
+        "j": 0.523,
+        "c": 0.554,
+        "r": 0.091
+      },
+      "physics-sim": {
+        "p": 0.584,
+        "j": 0.759,
+        "c": 0.645,
+        "r": 0.0
+      },
+      "scientific-computation": {
+        "p": 0.552,
+        "j": 0.695,
+        "c": 0.618,
+        "r": 0.038
+      },
+      "data-science": {
+        "p": 0.697,
+        "j": 0.823,
+        "c": 0.758,
+        "r": 0.143
+      },
+      "bioinformatics": {
+        "p": 0.382,
+        "j": 0.618,
+        "c": 0.488,
+        "r": 0.0
+      },
+      "biology": {
+        "p": 0.637,
+        "j": 0.828,
+        "c": 0.714,
+        "r": 0.0
+      },
+      "cs": {
+        "p": 0.516,
+        "j": 0.89,
+        "c": 0.695,
+        "r": 0.188
+      },
+      "materials-science": {
+        "p": 0.699,
+        "j": 0.831,
+        "c": 0.755,
+        "r": 0.312
+      },
+      "chemistry": {
+        "p": 0.811,
+        "j": 0.783,
+        "c": 0.772,
+        "r": 0.133
+      },
+      "mathematics": {
+        "p": 0.647,
+        "j": 0.773,
+        "c": 0.695,
+        "r": 0.111
+      },
+      "engineering": {
+        "p": 0.848,
+        "j": 0.731,
+        "c": 0.798,
+        "r": 0.167
+      },
+      "code-generation": {
+        "p": 0.709,
+        "j": 0.776,
+        "c": 0.729,
+        "r": 0.206
+      },
+      "end-to-end-analysis": {
+        "p": 0.501,
+        "j": 0.677,
+        "c": 0.589,
+        "r": 0.043
+      },
+      "error-diagnosis": {
+        "p": 0.634,
+        "j": 0.765,
+        "c": 0.68,
+        "r": 0.273
+      },
+      "hypothesis-validation": {
+        "p": 0.396,
+        "j": 0.804,
+        "c": 0.6,
+        "r": 0.071
+      },
+      "literature-synthesis": {
+        "p": 0.966,
+        "j": 0.723,
+        "c": 0.772,
+        "r": 0.042
+      },
+      "result-interpretation": {
+        "p": 0.775,
+        "j": 0.609,
+        "c": 0.684,
+        "r": 0.0
+      },
+      "tool-orchestration": {
+        "p": 0.633,
+        "j": 0.795,
+        "c": 0.706,
+        "r": 0.038
+      }
+    },
+    "claude-opus-5": {
+      "overall": {
+        "p": 0.592,
+        "j": 0.718,
+        "c": 0.642,
+        "r": 0.105
+      },
+      "physics": {
+        "p": 0.642,
+        "j": 0.754,
+        "c": 0.689,
+        "r": 0.183
+      },
+      "physics-sim": {
+        "p": 0.568,
+        "j": 0.775,
+        "c": 0.663,
+        "r": 0.104
+      },
+      "scientific-computation": {
+        "p": 0.595,
+        "j": 0.772,
+        "c": 0.677,
+        "r": 0.114
+      },
+      "data-science": {
+        "p": 0.583,
+        "j": 0.756,
+        "c": 0.644,
+        "r": 0.02
+      },
+      "bioinformatics": {
+        "p": 0.495,
+        "j": 0.725,
+        "c": 0.588,
+        "r": 0.15
+      },
+      "biology": {
+        "p": 0.517,
+        "j": 0.71,
+        "c": 0.596,
+        "r": 0.022
+      },
+      "cs": {
+        "p": 0.495,
+        "j": 0.86,
+        "c": 0.655,
+        "r": 0.18
+      },
+      "materials-science": {
+        "p": 0.647,
+        "j": 0.673,
+        "c": 0.665,
+        "r": 0.178
+      },
+      "chemistry": {
+        "p": 0.598,
+        "j": 0.555,
+        "c": 0.551,
+        "r": 0.091
+      },
+      "mathematics": {
+        "p": 0.685,
+        "j": 0.755,
+        "c": 0.698,
+        "r": 0.044
+      },
+      "engineering": {
+        "p": 0.761,
+        "j": 0.508,
+        "c": 0.654,
+        "r": 0.125
+      },
+      "code-generation": {
+        "p": 0.71,
+        "j": 0.739,
+        "c": 0.719,
+        "r": 0.202
+      },
+      "end-to-end-analysis": {
+        "p": 0.563,
+        "j": 0.783,
+        "c": 0.673,
+        "r": 0.024
+      },
+      "error-diagnosis": {
+        "p": 0.474,
+        "j": 0.79,
+        "c": 0.585,
+        "r": 0.182
+      },
+      "hypothesis-validation": {
+        "p": 0.421,
+        "j": 0.737,
+        "c": 0.579,
+        "r": 0.085
+      },
+      "literature-synthesis": {
+        "p": 0.7,
+        "j": 0.497,
+        "c": 0.537,
+        "r": 0.025
+      },
+      "result-interpretation": {
+        "p": 0.779,
+        "j": 0.649,
+        "c": 0.707,
+        "r": 0.16
+      },
+      "tool-orchestration": {
+        "p": 0.564,
+        "j": 0.709,
+        "c": 0.629,
+        "r": 0.107
+      }
+    },
+    "kimi-k3": {
+      "overall": {
+        "p": 0.576,
+        "j": 0.712,
+        "c": 0.626,
+        "r": 0.061
+      },
+      "physics": {
+        "p": 0.434,
+        "j": 0.57,
+        "c": 0.499,
+        "r": 0.0
+      },
+      "physics-sim": {
+        "p": 0.571,
+        "j": 0.717,
+        "c": 0.625,
+        "r": 0.091
+      },
+      "scientific-computation": {
+        "p": 0.577,
+        "j": 0.64,
+        "c": 0.608,
+        "r": 0.0
+      },
+      "data-science": {
+        "p": 0.589,
+        "j": 0.71,
+        "c": 0.623,
+        "r": 0.0
+      },
+      "bioinformatics": {
+        "p": 0.535,
+        "j": 0.67,
+        "c": 0.596,
+        "r": 0.083
+      },
+      "biology": {
+        "p": 0.596,
+        "j": 0.767,
+        "c": 0.667,
+        "r": 0.033
+      },
+      "cs": {
+        "p": 0.399,
+        "j": 0.775,
+        "c": 0.558,
+        "r": 0.071
+      },
+      "materials-science": {
+        "p": 0.796,
+        "j": 0.833,
+        "c": 0.814,
+        "r": 0.279
+      },
+      "chemistry": {
+        "p": 0.713,
+        "j": 0.694,
+        "c": 0.658,
+        "r": 0.0
+      },
+      "mathematics": {
+        "p": 0.462,
+        "j": 0.737,
+        "c": 0.562,
+        "r": 0.0
+      },
+      "engineering": {
+        "p": 0.677,
+        "j": 0.746,
+        "c": 0.69,
+        "r": 0.042
+      },
+      "code-generation": {
+        "p": 0.54,
+        "j": 0.699,
+        "c": 0.587,
+        "r": 0.118
+      },
+      "end-to-end-analysis": {
+        "p": 0.532,
+        "j": 0.699,
+        "c": 0.615,
+        "r": 0.005
+      },
+      "error-diagnosis": {
+        "p": 0.492,
+        "j": 0.711,
+        "c": 0.569,
+        "r": 0.162
+      },
+      "hypothesis-validation": {
+        "p": 0.45,
+        "j": 0.789,
+        "c": 0.619,
+        "r": 0.078
+      },
+      "literature-synthesis": {
+        "p": 0.956,
+        "j": 0.664,
+        "c": 0.723,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.681,
+        "j": 0.655,
+        "c": 0.667,
+        "r": 0.05
+      },
+      "tool-orchestration": {
+        "p": 0.57,
+        "j": 0.729,
+        "c": 0.642,
+        "r": 0.012
+      }
+    },
+    "qwen-3.8-max": {
+      "overall": {
+        "p": 0.547,
+        "j": 0.742,
+        "c": 0.627,
+        "r": 0.074
+      },
+      "physics": {
+        "p": 0.414,
+        "j": 0.612,
+        "c": 0.501,
+        "r": 0.0
+      },
+      "physics-sim": {
+        "p": 0.52,
+        "j": 0.765,
+        "c": 0.613,
+        "r": 0.045
+      },
+      "scientific-computation": {
+        "p": 0.51,
+        "j": 0.719,
+        "c": 0.608,
+        "r": 0.0
+      },
+      "data-science": {
+        "p": 0.609,
+        "j": 0.743,
+        "c": 0.654,
+        "r": 0.05
+      },
+      "bioinformatics": {
+        "p": 0.55,
+        "j": 0.693,
+        "c": 0.617,
+        "r": 0.159
+      },
+      "biology": {
+        "p": 0.484,
+        "j": 0.758,
+        "c": 0.597,
+        "r": 0.047
+      },
+      "cs": {
+        "p": 0.391,
+        "j": 0.797,
+        "c": 0.564,
+        "r": 0.05
+      },
+      "materials-science": {
+        "p": 0.615,
+        "j": 0.778,
+        "c": 0.689,
+        "r": 0.2
+      },
+      "chemistry": {
+        "p": 0.706,
+        "j": 0.798,
+        "c": 0.719,
+        "r": 0.109
+      },
+      "mathematics": {
+        "p": 0.507,
+        "j": 0.757,
+        "c": 0.613,
+        "r": 0.111
+      },
+      "engineering": {
+        "p": 0.822,
+        "j": 0.764,
+        "c": 0.787,
+        "r": 0.0
+      },
+      "code-generation": {
+        "p": 0.515,
+        "j": 0.739,
+        "c": 0.582,
+        "r": 0.085
+      },
+      "end-to-end-analysis": {
+        "p": 0.548,
+        "j": 0.733,
+        "c": 0.641,
+        "r": 0.06
+      },
+      "error-diagnosis": {
+        "p": 0.497,
+        "j": 0.721,
+        "c": 0.576,
+        "r": 0.155
+      },
+      "hypothesis-validation": {
+        "p": 0.348,
+        "j": 0.796,
+        "c": 0.572,
+        "r": 0.0
+      },
+      "literature-synthesis": {
+        "p": 0.947,
+        "j": 0.759,
+        "c": 0.797,
+        "r": 0.25
+      },
+      "result-interpretation": {
+        "p": 0.681,
+        "j": 0.672,
+        "c": 0.676,
+        "r": 0.075
+      },
+      "tool-orchestration": {
+        "p": 0.513,
+        "j": 0.747,
+        "c": 0.618,
+        "r": 0.0
+      }
+    },
+    "gpt-5.6-sol": {
+      "overall": {
+        "p": 0.588,
+        "j": 0.621,
+        "c": 0.596,
+        "r": 0.069
+      },
+      "physics": {
+        "p": 0.528,
+        "j": 0.528,
+        "c": 0.528,
+        "r": 0.093
+      },
+      "physics-sim": {
+        "p": 0.475,
+        "j": 0.562,
+        "c": 0.505,
+        "r": 0.076
+      },
+      "scientific-computation": {
+        "p": 0.624,
+        "j": 0.631,
+        "c": 0.637,
+        "r": 0.038
+      },
+      "data-science": {
+        "p": 0.601,
+        "j": 0.577,
+        "c": 0.571,
+        "r": 0.1
+      },
+      "bioinformatics": {
+        "p": 0.556,
+        "j": 0.555,
+        "c": 0.548,
+        "r": 0.038
+      },
+      "biology": {
+        "p": 0.651,
+        "j": 0.629,
+        "c": 0.642,
+        "r": 0.0
+      },
+      "cs": {
+        "p": 0.41,
+        "j": 0.708,
+        "c": 0.549,
+        "r": 0.028
+      },
+      "materials-science": {
+        "p": 0.726,
+        "j": 0.714,
+        "c": 0.714,
+        "r": 0.26
+      },
+      "chemistry": {
+        "p": 0.612,
+        "j": 0.631,
+        "c": 0.592,
+        "r": 0.068
+      },
+      "mathematics": {
+        "p": 0.624,
+        "j": 0.721,
+        "c": 0.653,
+        "r": 0.056
+      },
+      "engineering": {
+        "p": 0.661,
+        "j": 0.6,
+        "c": 0.617,
+        "r": 0.0
+      },
+      "code-generation": {
+        "p": 0.632,
+        "j": 0.663,
+        "c": 0.641,
+        "r": 0.154
+      },
+      "end-to-end-analysis": {
+        "p": 0.552,
+        "j": 0.584,
+        "c": 0.568,
+        "r": 0.05
+      },
+      "error-diagnosis": {
+        "p": 0.576,
+        "j": 0.657,
+        "c": 0.604,
+        "r": 0.126
+      },
+      "hypothesis-validation": {
+        "p": 0.398,
+        "j": 0.722,
+        "c": 0.56,
+        "r": 0.125
+      },
+      "literature-synthesis": {
+        "p": 0.921,
+        "j": 0.662,
+        "c": 0.714,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.654,
+        "j": 0.601,
+        "c": 0.625,
+        "r": 0.0
+      },
+      "tool-orchestration": {
+        "p": 0.56,
+        "j": 0.543,
+        "c": 0.553,
+        "r": 0.01
+      }
+    },
+    "glm-5.3": {
+      "overall": {
+        "p": 0.477,
+        "j": 0.676,
+        "c": 0.559,
+        "r": 0.053
+      },
+      "physics": {
+        "p": 0.394,
+        "j": 0.593,
+        "c": 0.475,
+        "r": 0.091
+      },
+      "physics-sim": {
+        "p": 0.404,
+        "j": 0.671,
+        "c": 0.519,
+        "r": 0.0
+      },
+      "scientific-computation": {
+        "p": 0.489,
+        "j": 0.62,
+        "c": 0.554,
+        "r": 0.077
+      },
+      "data-science": {
+        "p": 0.488,
+        "j": 0.724,
+        "c": 0.585,
+        "r": 0.05
+      },
+      "bioinformatics": {
+        "p": 0.45,
+        "j": 0.679,
+        "c": 0.554,
+        "r": 0.061
+      },
+      "biology": {
+        "p": 0.497,
+        "j": 0.703,
+        "c": 0.59,
+        "r": 0.06
+      },
+      "cs": {
+        "p": 0.428,
+        "j": 0.758,
+        "c": 0.567,
+        "r": 0.1
+      },
+      "materials-science": {
+        "p": 0.41,
+        "j": 0.631,
+        "c": 0.495,
+        "r": 0.1
+      },
+      "chemistry": {
+        "p": 0.669,
+        "j": 0.721,
+        "c": 0.655,
+        "r": 0.0
+      },
+      "mathematics": {
+        "p": 0.422,
+        "j": 0.686,
+        "c": 0.531,
+        "r": 0.0
+      },
+      "engineering": {
+        "p": 0.663,
+        "j": 0.669,
+        "c": 0.665,
+        "r": 0.0
+      },
+      "code-generation": {
+        "p": 0.342,
+        "j": 0.561,
+        "c": 0.408,
+        "r": 0.019
+      },
+      "end-to-end-analysis": {
+        "p": 0.469,
+        "j": 0.729,
+        "c": 0.599,
+        "r": 0.021
+      },
+      "error-diagnosis": {
+        "p": 0.459,
+        "j": 0.738,
+        "c": 0.557,
+        "r": 0.197
+      },
+      "hypothesis-validation": {
+        "p": 0.356,
+        "j": 0.755,
+        "c": 0.556,
+        "r": 0.0
+      },
+      "literature-synthesis": {
+        "p": 0.905,
+        "j": 0.7,
+        "c": 0.741,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.533,
+        "j": 0.556,
+        "c": 0.546,
+        "r": 0.2
+      },
+      "tool-orchestration": {
+        "p": 0.504,
+        "j": 0.67,
+        "c": 0.579,
+        "r": 0.037
+      }
+    },
+    "claude-opus-4-8": {
+      "overall": {
+        "p": 0.546,
+        "j": 0.636,
+        "c": 0.571,
+        "r": 0.032
+      },
+      "physics": {
+        "p": 0.52,
+        "j": 0.56,
+        "c": 0.532,
+        "r": 0.083
+      },
+      "physics-sim": {
+        "p": 0.567,
+        "j": 0.671,
+        "c": 0.597,
+        "r": 0.0
+      },
+      "scientific-computation": {
+        "p": 0.611,
+        "j": 0.581,
+        "c": 0.601,
+        "r": 0.0
+      },
+      "data-science": {
+        "p": 0.594,
+        "j": 0.665,
+        "c": 0.601,
+        "r": 0.033
+      },
+      "bioinformatics": {
+        "p": 0.465,
+        "j": 0.582,
+        "c": 0.516,
+        "r": 0.023
+      },
+      "biology": {
+        "p": 0.554,
+        "j": 0.668,
+        "c": 0.597,
+        "r": 0.01
+      },
+      "cs": {
+        "p": 0.3,
+        "j": 0.699,
+        "c": 0.476,
+        "r": 0.0
+      },
+      "materials-science": {
+        "p": 0.466,
+        "j": 0.666,
+        "c": 0.55,
+        "r": 0.05
+      },
+      "chemistry": {
+        "p": 0.686,
+        "j": 0.624,
+        "c": 0.603,
+        "r": 0.091
+      },
+      "mathematics": {
+        "p": 0.484,
+        "j": 0.613,
+        "c": 0.502,
+        "r": 0.0
+      },
+      "engineering": {
+        "p": 0.764,
+        "j": 0.691,
+        "c": 0.712,
+        "r": 0.042
+      },
+      "code-generation": {
+        "p": 0.603,
+        "j": 0.693,
+        "c": 0.63,
+        "r": 0.099
+      },
+      "end-to-end-analysis": {
+        "p": 0.476,
+        "j": 0.654,
+        "c": 0.565,
+        "r": 0.0
+      },
+      "error-diagnosis": {
+        "p": 0.269,
+        "j": 0.56,
+        "c": 0.371,
+        "r": 0.023
+      },
+      "hypothesis-validation": {
+        "p": 0.437,
+        "j": 0.724,
+        "c": 0.58,
+        "r": 0.0
+      },
+      "literature-synthesis": {
+        "p": 0.926,
+        "j": 0.456,
+        "c": 0.55,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.643,
+        "j": 0.604,
+        "c": 0.622,
+        "r": 0.1
+      },
+      "tool-orchestration": {
+        "p": 0.569,
+        "j": 0.633,
+        "c": 0.598,
+        "r": 0.012
+      }
+    },
+    "deepseek-v4-pro": {
+      "overall": {
+        "p": 0.448,
+        "j": 0.611,
+        "c": 0.509,
+        "r": 0.019
+      },
+      "physics": {
+        "p": 0.421,
+        "j": 0.387,
+        "c": 0.407,
+        "r": 0.0
+      },
+      "physics-sim": {
+        "p": 0.354,
+        "j": 0.683,
+        "c": 0.492,
+        "r": 0.0
+      },
+      "scientific-computation": {
+        "p": 0.511,
+        "j": 0.656,
+        "c": 0.582,
+        "r": 0.077
+      },
+      "data-science": {
+        "p": 0.448,
+        "j": 0.601,
+        "c": 0.493,
+        "r": 0.0
+      },
+      "bioinformatics": {
+        "p": 0.313,
+        "j": 0.458,
+        "c": 0.384,
+        "r": 0.045
+      },
+      "biology": {
+        "p": 0.568,
+        "j": 0.646,
+        "c": 0.597,
+        "r": 0.0
+      },
+      "cs": {
+        "p": 0.272,
+        "j": 0.739,
+        "c": 0.475,
+        "r": 0.0
+      },
+      "materials-science": {
+        "p": 0.468,
+        "j": 0.683,
+        "c": 0.549,
+        "r": 0.1
+      },
+      "chemistry": {
+        "p": 0.563,
+        "j": 0.636,
+        "c": 0.555,
+        "r": 0.0
+      },
+      "mathematics": {
+        "p": 0.405,
+        "j": 0.572,
+        "c": 0.44,
+        "r": 0.0
+      },
+      "engineering": {
+        "p": 0.562,
+        "j": 0.688,
+        "c": 0.604,
+        "r": 0.0
+      },
+      "code-generation": {
+        "p": 0.476,
+        "j": 0.654,
+        "c": 0.529,
+        "r": 0.0
+      },
+      "end-to-end-analysis": {
+        "p": 0.41,
+        "j": 0.588,
+        "c": 0.499,
+        "r": 0.04
+      },
+      "error-diagnosis": {
+        "p": 0.282,
+        "j": 0.594,
+        "c": 0.392,
+        "r": 0.045
+      },
+      "hypothesis-validation": {
+        "p": 0.267,
+        "j": 0.725,
+        "c": 0.496,
+        "r": 0.062
+      },
+      "literature-synthesis": {
+        "p": 0.914,
+        "j": 0.578,
+        "c": 0.645,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.514,
+        "j": 0.521,
+        "c": 0.518,
+        "r": 0.0
+      },
+      "tool-orchestration": {
+        "p": 0.442,
+        "j": 0.585,
+        "c": 0.506,
+        "r": 0.0
+      }
+    },
+    "grok-4.6": {
+      "overall": {
+        "p": 0.49,
+        "j": 0.574,
+        "c": 0.524,
+        "r": 0.031
+      },
+      "physics": {
+        "p": 0.311,
+        "j": 0.425,
+        "c": 0.36,
+        "r": 0.0
+      },
+      "physics-sim": {
+        "p": 0.471,
+        "j": 0.672,
+        "c": 0.561,
+        "r": 0.03
+      },
+      "scientific-computation": {
+        "p": 0.581,
+        "j": 0.552,
+        "c": 0.582,
+        "r": 0.0
+      },
+      "data-science": {
+        "p": 0.435,
+        "j": 0.672,
+        "c": 0.549,
+        "r": 0.0
+      },
+      "bioinformatics": {
+        "p": 0.594,
+        "j": 0.563,
+        "c": 0.583,
+        "r": 0.133
+      },
+      "biology": {
+        "p": 0.486,
+        "j": 0.511,
+        "c": 0.476,
+        "r": 0.067
+      },
+      "cs": {
+        "p": 0.234,
+        "j": 0.576,
+        "c": 0.394,
+        "r": 0.0
+      },
+      "materials-science": {
+        "p": 0.599,
+        "j": 0.479,
+        "c": 0.534,
+        "r": 0.0
+      },
+      "chemistry": {
+        "p": 0.665,
+        "j": 0.679,
+        "c": 0.651,
+        "r": 0.091
+      },
+      "mathematics": {
+        "p": 0.566,
+        "j": 0.689,
+        "c": 0.606,
+        "r": 0.0
+      },
+      "engineering": {
+        "p": 0.443,
+        "j": 0.557,
+        "c": 0.505,
+        "r": 0.0
+      },
+      "code-generation": {
+        "p": 0.462,
+        "j": 0.448,
+        "c": 0.458,
+        "r": 0.053
+      },
+      "end-to-end-analysis": {
+        "p": 0.473,
+        "j": 0.655,
+        "c": 0.564,
+        "r": 0.04
+      },
+      "error-diagnosis": {
+        "p": 0.603,
+        "j": 0.655,
+        "c": 0.621,
+        "r": 0.121
+      },
+      "hypothesis-validation": {
+        "p": 0.294,
+        "j": 0.624,
+        "c": 0.459,
+        "r": 0.0
+      },
+      "literature-synthesis": {
+        "p": 0.467,
+        "j": 0.248,
+        "c": 0.291,
+        "r": 0.0
+      },
+      "result-interpretation": {
+        "p": 0.73,
+        "j": 0.611,
+        "c": 0.664,
+        "r": 0.0
+      },
+      "tool-orchestration": {
+        "p": 0.516,
+        "j": 0.633,
+        "c": 0.569,
+        "r": 0.013
+      }
+    }
+  }
+}
