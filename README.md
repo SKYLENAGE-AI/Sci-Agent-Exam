@@ -1,6 +1,6 @@
 # Sci-Agent-Exam
 
-**Sci-Agent-Exam: Evaluating LLM Agents on Real Scientific Software Workflows**
+**SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks**
 
 🔗 **Links:** Paper (under anonymous review) · [Leaderboard](leaderboard/index.html)
 
