@@ -10,7 +10,6 @@
     "harness": "Claude Code (high effort)",
     "pass_note": "Pass@0.95 = per-task fraction of runs whose combined score ≥ 0.95, macro-averaged over tasks. Overall values match the paper main table.",
     "combined_formula": "Combined = 0.55·Programmatic + 0.45·LLM-Judge",
-    "cost_note": "Cost / tokens / time are per-run, harness-billed figures over the same 120-task peer subset (claude-code, high effort, scored runs). Cross-model $ comparison assumes each model's own gateway pricing; differences are dominated by prompt-cache usage (Claude cheapest via caching; cacheless open models re-send full context each turn).",
     "cost_source": "analysis_src/traj_cost/cost_vs_score_table.md (2,643 trajectories)"
   },
   "models": [
@@ -26,8 +25,7 @@
         "turns": 56.8,
         "min": 22.1,
         "dpp": 0.26
-      },
-      "ref": true
+      }
     },
     {
       "id": "claude-fable-5",

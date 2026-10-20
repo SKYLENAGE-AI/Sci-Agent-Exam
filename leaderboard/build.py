@@ -45,7 +45,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <style>
   :root{
     color-scheme:light;
-    --grid: 44px minmax(0,1fr) 58px 48px 48px 54px 58px 58px 54px 50px;
+    --grid: 44px minmax(0,1fr) 58px 54px 50px 64px 62px 62px 56px 54px;
     /* light theme (default) */
     --bg:#eef2f7; --panel:#ffffff; --panel-2:#f1f5fa; --panel-grad-end:#f6f9fc; --line:#d9e1ec;
     --txt:#1b2430; --muted:#5c6b7e;
@@ -137,7 +137,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .board-head .meta b{color:var(--accent-2)}
 
   /* sortable header row */
-  .hrow{display:grid;grid-template-columns:var(--grid);gap:12px;align-items:end;
+  .hrow{display:grid;grid-template-columns:var(--grid);gap:16px;align-items:end;
     padding:12px 32px 10px 32px;border-bottom:1px dashed var(--line);
     font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   .hrow .hlbl{grid-column:2}
@@ -219,6 +219,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .axis{stroke:var(--line);stroke-width:1.2}
   .frln{stroke:var(--accent-2);stroke-width:1.6;stroke-dasharray:5 3;fill:none;opacity:.85}
   .ptlbl{fill:var(--txt);font-size:10px;font-weight:600}
+  .ptln{stroke:var(--muted);stroke-width:.8;opacity:.45}
   .rgrid{stroke:var(--line);fill:none;opacity:.5}
   .rspoke{stroke:var(--line);opacity:.5}
   .rlbl{fill:var(--muted);font-size:10.5px}
@@ -326,8 +327,8 @@ TEMPLATE = r"""<!DOCTYPE html>
     <div class="panel-card">
       <div class="mx"><div class="mxgrid" id="mxgrid"></div></div>
     </div>
-    <p class="cap">Rows are the 10 agents in <b>overall-Combined</b> order; each cell is the macro-averaged
-      score (×100) for the selected metric, shaded by value within the grid. Hover a cell for the exact number.</p>
+    <p class="cap">Rows are the 10 agents in <b>overall-Combined</b> order; cells shaded by the selected
+      metric (×100). Hover a cell for the exact number.</p>
   </section>
 
   <!-- ===================== PARETO ===================== -->
@@ -348,10 +349,8 @@ TEMPLATE = r"""<!DOCTYPE html>
       <div id="pxSub" class="cap" style="margin:0 2px 8px"></div>
       <div class="chartwrap"><svg class="chart" id="pareto" viewBox="0 0 760 468" role="img"></svg></div>
     </div>
-    <p class="cap">Each point is an agent on the 120-task peer subset. The dashed line is the <b>Pareto frontier</b>
-      — agents no other agent beats on both axes. For Cost / Tokens / Time, cheaper-and-stronger is up-and-left;
-      <b id="pxRef"></b> is the reference model, drawn hollow but included in the frontier.
-      Cost / token / time are per-run, harness-billed. <b>__COSTNOTE__</b></p>
+    <p class="cap">Each point is an agent. The dashed line is the <b>Pareto frontier</b> — agents no other
+      agent beats on both axes; on a cost/token/time axis, cheaper-and-stronger is up-and-left.</p>
   </section>
 
   <!-- ===================== DOMAINS ===================== -->
@@ -373,14 +372,12 @@ TEMPLATE = r"""<!DOCTYPE html>
       <div class="charttip" id="rdtip"></div>
     </div>
     <p class="cap">Each axis is one category (0–100 for the selected metric); each polygon is one agent.
-      Toggle agents in the legend above — defaults to the overall top 3. Spokes mark the category scores.</p>
+      Toggle agents in the legend — defaults to the overall top 3.</p>
   </section>
 
   <footer>
-    Scores are ×100, macro-averaged over tasks (__HARNESS__). <b>__FORMULA__</b>.<br>
-    <b>Pass@0.95</b>: __PASSNOTE__<br>
-    <b>Out-tok / Cost / Turns</b>: per-run means over the trajectory set — output tokens, USD, agent turns
-    (lower = leaner, not a quality signal; click to sort cheapest-first).<br>
+    Scores ×100, macro-averaged over tasks.<br>
+    <b>Out-tok / Cost / Turns</b> are per-run means (lower = leaner, not a quality signal).<br>
     <span class="leg">
       <i><span class="sw" style="background:var(--prog)"></span>Programmatic (execution)</i>
       <i><span class="sw" style="background:var(--judge)"></span>LLM-Judge (presentation)</i>
@@ -563,20 +560,29 @@ function renderPareto(){
   const fr = frontier(ids, xa, ya);
   if(fr.length>1){ g+=`<polyline class="frln" points="${fr.map(p=>`${X(p.x).toFixed(1)},${Y(p.y).toFixed(1)}`).join(" ")}"/>`; }
   const onf = new Set(fr.map(p=>p.id));
+  // points
   ids.forEach(id=>{
-    const mo=MODELS[id], x=X(xa.get(id)), y=Y(ya.get(id)), ref=!!mo.ref;
+    const mo=MODELS[id], x=X(xa.get(id)), y=Y(ya.get(id));
     const tip=`${mo.name} — ${ya.lbl.replace(' (%)','')} ${ya.get(id).toFixed(1)} · ${xa.lbl.replace(/ \(.*/,'')} ${xa.fmt(xa.get(id))} · $/pt ${COST[id].dpp}`;
-    if(ref){
-      g+=`<circle class="pt" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${onf.has(id)?7:6}" fill="none" stroke="${mo.color}" stroke-width="${onf.has(id)?3:2}"><title>${esc(tip)} · reference</title></circle>`;
-    } else {
-      g+=`<circle class="pt${onf.has(id)?' front':''}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${onf.has(id)?6.5:5.5}" fill="${mo.color}" `+
-         `fill-opacity="${onf.has(id)?1:.78}"><title>${esc(tip)}</title></circle>`;
-    }
-    g+=`<text class="ptlbl" x="${(x+9).toFixed(1)}" y="${(y+3).toFixed(1)}">${esc(mo.name)}</text>`;
+    g+=`<circle class="pt${onf.has(id)?' front':''}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${onf.has(id)?6.5:5.5}" fill="${mo.color}" `+
+       `fill-opacity="${onf.has(id)?1:.78}"><title>${esc(tip)}</title></circle>`;
+  });
+  // labels, de-overlapped: right-edge points label to the left; per side, greedy vertical spacing
+  const labs = ids.map(id=>({name:MODELS[id].name, px:X(xa.get(id)), py:Y(ya.get(id))}));
+  labs.forEach(l=> l.left = l.px > L+(W-L-R)*0.70 );
+  const MIN=13, lo=T+7, hi=H-B-3;
+  [true,false].forEach(side=>{
+    const grp=labs.filter(l=>l.left===side).sort((a,b)=>a.py-b.py);
+    for(let i=0;i<grp.length;i++){ grp[i].ly = i? Math.max(grp[i].py, grp[i-1].ly+MIN) : grp[i].py; }
+    for(let i=grp.length-1;i>=0;i--){ if(grp[i].ly>hi){ grp[i].ly=hi; if(i>0&&grp[i-1].ly>grp[i].ly-MIN) grp[i-1].ly=grp[i].ly-MIN; } if(grp[i].ly<lo) grp[i].ly=lo; }
+  });
+  labs.forEach(l=>{
+    const lx = l.left ? l.px-9 : l.px+9, anc = l.left ? "end" : "start";
+    if(Math.abs(l.ly-l.py)>4) g+=`<line class="ptln" x1="${l.px.toFixed(1)}" y1="${l.py.toFixed(1)}" x2="${(lx+(l.left?3:-3)).toFixed(1)}" y2="${(l.ly-3).toFixed(1)}"/>`;
+    g+=`<text class="ptlbl" text-anchor="${anc}" x="${lx.toFixed(1)}" y="${(l.ly).toFixed(1)}">${esc(l.name)}</text>`;
   });
   document.getElementById("pareto").innerHTML=g;
   document.getElementById("pxSub").innerHTML = `<b style="color:var(--accent-2)">${esc(ya.lbl)}</b> vs. <b style="color:var(--accent-2)">${esc(xa.lbl)}</b> · 120 tasks`;
-  const ref=MODEL_ORDER.find(id=>MODELS[id].ref); if(ref) document.getElementById("pxRef").textContent=MODELS[ref].name;
 }
 
 /* ---------------- domains (radar) ---------------- */
