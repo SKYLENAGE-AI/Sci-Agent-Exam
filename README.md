@@ -102,14 +102,6 @@ The public evaluation covers **11 scientific fields** and **7 task types**. This
 repository ships **five representative tasks** from that set, plus the full
 leaderboard.
 
-## Results by domain
-
-Per-field combined scores for the 10 agents (cell color = deviation from each
-field's mean). Rankings are broadly stable across fields, but no agent dominates
-everywhere — strengths are field-dependent.
-
-![Per-domain results heatmap](assets/domain_heatmap.png)
-
 ## Repository layout
 
 ```
