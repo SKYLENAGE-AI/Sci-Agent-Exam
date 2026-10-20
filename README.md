@@ -74,14 +74,6 @@ scientific judgement are measured separately.
 - **Strict, reproducible protocol:** verifier runs with no network egress, exact
   pip pins captured from the evaluation images, aborted runs score a real `0.0`.
 
-### Execution vs. presentation are decoupled
-
-Plotting each run's programmatic (execution) score against its LLM-judge
-(presentation) score shows the two channels capture genuinely different failure
-modes — agents land in all four quadrants, not just along the diagonal.
-
-![Execution vs. presentation decoupling, per agent](assets/decoupling.png)
-
 ## Benchmark construction
 
 Sci-Agent-Exam is built through a staged workflow: expert task design against

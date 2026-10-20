@@ -72,8 +72,8 @@ TEMPLATE = r"""<!DOCTYPE html>
   html,body{margin:0;padding:0}
   body{
     background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(56,232,198,.08), transparent 60%),
-      radial-gradient(1000px 500px at 10% 0%, rgba(240,138,93,.10), transparent 55%),
+      radial-gradient(1200px 600px at 80% -10%, var(--glow-a), transparent 60%),
+      radial-gradient(1000px 500px at 10% 0%, var(--glow-b), transparent 55%),
       var(--bg);
     color:var(--txt);
     font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -82,8 +82,8 @@ TEMPLATE = r"""<!DOCTYPE html>
   body::before{
     content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     background-image:
-      linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      linear-gradient(var(--grid-line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
     background-size:38px 38px;
     mask-image:radial-gradient(circle at 50% 20%, #000 0%, transparent 80%);
   }
@@ -94,7 +94,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .kicker .blink{animation:blink 1.1s steps(2,start) infinite}
   @keyframes blink{to{opacity:0}}
   h1{margin:0;font-size:clamp(30px,6vw,58px);line-height:1.02;font-weight:800;letter-spacing:-.02em;
-     background:linear-gradient(100deg,#fff 10%,var(--accent) 45%,var(--accent-2) 90%);
+     background:linear-gradient(100deg,var(--h1-start) 10%,var(--accent) 45%,var(--accent-2) 90%);
      -webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 40px rgba(240,138,93,.18)}
   .sub{margin:14px auto 0;max-width:660px;color:var(--muted);font-size:14px;line-height:1.6}
   .stats{display:flex;gap:26px;justify-content:center;margin-top:22px;flex-wrap:wrap}
@@ -126,7 +126,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .chip.hero.active{background:linear-gradient(100deg,var(--gold),var(--accent))}
 
   .board{margin-top:6px;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-    background:linear-gradient(180deg,var(--panel),#0a0f16);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+    background:linear-gradient(180deg,var(--panel),var(--panel-grad-end));box-shadow:var(--shadow)}
   .board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
     padding:15px 18px;border-bottom:1px solid var(--line);background:var(--panel-2)}
   .board-head .title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700}
@@ -153,7 +153,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .rows{position:relative;padding:8px 18px 14px}
   .row{display:grid;grid-template-columns:var(--grid);gap:12px;align-items:center;
     padding:13px 14px;border-radius:11px;transition:background .18s ease}
-  .row:hover{background:rgba(255,255,255,.025)}
+  .row:hover{background:var(--hover)}
   .rank{font-size:17px;font-weight:800;color:var(--muted);text-align:center}
   .row.top1 .rank,.row.top2 .rank,.row.top3 .rank{font-size:20px}
   .row.top1{background:linear-gradient(90deg,rgba(255,207,92,.10),transparent 55%)}
@@ -166,7 +166,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .mname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .prov{font-size:11px;color:var(--muted)}
 
-  .barwrap{height:9px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden}
+  .barwrap{height:9px;background:var(--barbg);border-radius:999px;overflow:hidden}
   .bar{height:100%;width:0;border-radius:999px;transition:width .7s cubic-bezier(.22,1,.36,1)}
   .bar.c{background:linear-gradient(90deg,var(--accent),var(--comb))}
   .bar.p{background:linear-gradient(90deg,var(--accent-3),var(--accent-2))}
@@ -182,7 +182,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* shared chart scaffolding (matrix / pareto / domains) */
   .panel-card{border:1px solid var(--line);border-radius:16px;
-    background:linear-gradient(180deg,var(--panel),#0a0f16);box-shadow:0 20px 60px rgba(0,0,0,.45);padding:20px 18px}
+    background:linear-gradient(180deg,var(--panel),var(--panel-grad-end));box-shadow:var(--shadow);padding:20px 18px}
   .ctrls{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin:0 2px 18px}
   .ctrl{display:flex;align-items:center;gap:9px}
   .ctrl .lab{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
@@ -225,7 +225,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   svg polygon[data-mid]{cursor:pointer}
 
   .charttip{position:absolute;z-index:5;pointer-events:none;display:none;max-width:280px;
-    background:rgba(13,19,28,.97);border:1px solid var(--line);border-radius:10px;padding:9px 11px;
+    background:var(--tip-bg);border:1px solid var(--line);border-radius:10px;padding:9px 11px;
     box-shadow:0 10px 30px rgba(0,0,0,.55);font-size:11px;line-height:1.5}
   .charttip .tt-h{font-weight:700;margin-bottom:5px;font-size:12px;border-bottom:1px solid var(--line);padding-bottom:4px}
   .charttip .tt-g{display:grid;grid-template-columns:1fr auto;gap:1px 14px;margin-top:5px}
