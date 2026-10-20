@@ -179,9 +179,13 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* matrix */
   .mx{overflow-x:auto;margin:0 -4px}
-  .mxgrid{display:grid;gap:3px;min-width:560px;padding:0 4px}
-  .mxh{font-size:14px;text-align:center;padding:5px 2px;white-space:nowrap}
-  .mxh.lbl{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .mxgrid{display:grid;gap:3px;min-width:680px;padding:0 4px}
+  .mxh{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px 7px;text-align:center}
+  .mxh .ic{font-size:15px;line-height:1}
+  .mxh .nm{font-size:9px;line-height:1.15;color:var(--muted);letter-spacing:.01em;
+    word-break:break-word;max-width:100%}
+  .mxh.lbl{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;
+    justify-content:flex-end;white-space:nowrap}
   .mxrh{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;white-space:nowrap;padding:0 10px 0 2px}
   .mxrh .pdot{width:9px;height:9px}
   .mxc{text-align:center;padding:10px 2px;border-radius:6px;font-size:12px;font-variant-numeric:tabular-nums;font-weight:700;cursor:default}
@@ -200,6 +204,15 @@ TEMPLATE = r"""<!DOCTYPE html>
   .rlbl{fill:var(--muted);font-size:10.5px}
   svg .pt{cursor:pointer;transition:r .15s}
   svg .pt:hover{r:8}
+  svg polygon[data-mid]{cursor:pointer}
+
+  .charttip{position:absolute;z-index:5;pointer-events:none;display:none;max-width:280px;
+    background:rgba(13,19,28,.97);border:1px solid var(--line);border-radius:10px;padding:9px 11px;
+    box-shadow:0 10px 30px rgba(0,0,0,.55);font-size:11px;line-height:1.5}
+  .charttip .tt-h{font-weight:700;margin-bottom:5px;font-size:12px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  .charttip .tt-g{display:grid;grid-template-columns:1fr auto;gap:1px 14px;margin-top:5px}
+  .charttip .tt-g span{color:var(--muted);white-space:nowrap}
+  .charttip .tt-g b{font-variant-numeric:tabular-nums;color:var(--txt);text-align:right}
 
   .legrow{display:flex;flex-wrap:wrap;gap:7px;margin:2px 2px 16px}
   .legbtn{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--line);
@@ -333,8 +346,9 @@ TEMPLATE = r"""<!DOCTYPE html>
         </div></div>
     </div>
     <div class="legrow" id="rdLegend"></div>
-    <div class="panel-card">
+    <div class="panel-card" style="position:relative">
       <div class="chartwrap"><svg class="chart" id="radar" viewBox="0 0 560 540" role="img"></svg></div>
+      <div class="charttip" id="rdtip"></div>
     </div>
     <p class="cap">Each axis is one category (0–100 for the selected metric); each polygon is one agent.
       Toggle agents in the legend above — defaults to the overall top 3. Spokes mark the category scores.</p>
@@ -466,9 +480,9 @@ function renderMatrix(){
   const [r,g,b] = hx(MCOLOR[mxMetric]);
   let mx=0; ids.forEach(id=>cats.forEach(c=>{mx=Math.max(mx,S[id][c.key][mxMetric]);}));
   const grid = document.getElementById("mxgrid");
-  grid.style.gridTemplateColumns = `minmax(118px,1.3fr) repeat(${cats.length},minmax(40px,1fr))`;
+  grid.style.gridTemplateColumns = `minmax(118px,1.3fr) repeat(${cats.length},minmax(48px,1fr))`;
   let html = `<div class="mxh lbl mxcol0" style="text-align:left">Agent ╲ ${mxAxis==="fields"?"Field":"Task type"}</div>`;
-  html += cats.map(c=>`<div class="mxh" title="${esc(c.label)}">${c.ic}</div>`).join("");
+  html += cats.map(c=>`<div class="mxh" title="${esc(c.label)}"><span class="ic">${c.ic}</span><span class="nm">${esc(c.label)}</span></div>`).join("");
   ids.forEach(id=>{
     const mo = MODELS[id];
     html += `<div class="mxrh mxcol0"><span class="pdot" style="color:${mo.color};background:${mo.color}"></span>${esc(mo.name)}</div>`;
@@ -581,12 +595,34 @@ function renderRadar(){
   overallSorted().filter(id=>rdSel.has(id)).forEach(id=>{
     const mo=MODELS[id];
     const pts=cats.map((c,i)=>px(i,Rr*S[id][c.key][rdMetric]).map(n=>n.toFixed(1)).join(",")).join(" ");
-    g+=`<polygon points="${pts}" fill="${mo.color}" fill-opacity="0.13" stroke="${mo.color}" stroke-width="2" stroke-opacity="0.9"/>`;
+    g+=`<polygon data-mid="${id}" points="${pts}" fill="${mo.color}" fill-opacity="0.13" stroke="${mo.color}" stroke-width="2" stroke-opacity="0.9"/>`;
     cats.forEach((c,i)=>{ const [vx,vy]=px(i,Rr*S[id][c.key][rdMetric]);
-      g+=`<circle class="pt" cx="${vx.toFixed(1)}" cy="${vy.toFixed(1)}" r="3" fill="${mo.color}"><title>${esc(mo.name)} · ${esc(c.label)}: ${(S[id][c.key][rdMetric]*100).toFixed(1)}${rdMetric==="r"?"%":""}</title></circle>`; });
+      g+=`<circle class="pt" data-mid="${id}" cx="${vx.toFixed(1)}" cy="${vy.toFixed(1)}" r="3" fill="${mo.color}"/>`; });
   });
   document.getElementById("radar").innerHTML=g;
 }
+// radar tooltip: hovering a model's polygon/vertex lists all its category values
+function rdTipHTML(id){
+  const cats = rdAxis==="fields" ? fieldCats() : TASKTYPES;
+  const mo = MODELS[id];
+  const rows = cats.map(c=>`<span>${c.ic} ${esc(c.label)}</span><b>${(S[id][c.key][rdMetric]*100).toFixed(1)}${rdMetric==="r"?"%":""}</b>`).join("");
+  return `<div class="tt-h" style="color:${mo.color}">${esc(mo.name)} · ${esc(mo.prov)} — ${METRIC_NAME[rdMetric]}</div><div class="tt-g">${rows}</div>`;
+}
+(function(){
+  const svg=document.getElementById("radar"), tip=document.getElementById("rdtip");
+  svg.addEventListener("mousemove",e=>{
+    const el=e.target.closest("[data-mid]");
+    if(!el){ tip.style.display="none"; return; }
+    tip.innerHTML=rdTipHTML(el.getAttribute("data-mid"));
+    tip.style.display="block";
+    const card=svg.closest(".panel-card").getBoundingClientRect();
+    let x=e.clientX-card.left+16, y=e.clientY-card.top+14;
+    if(x+tip.offsetWidth>card.width-6) x=e.clientX-card.left-tip.offsetWidth-14;
+    if(y+tip.offsetHeight>card.height-6) y=Math.max(6, card.height-tip.offsetHeight-6);
+    tip.style.left=x+"px"; tip.style.top=y+"px";
+  });
+  svg.addEventListener("mouseleave",()=>{ tip.style.display="none"; });
+})();
 
 /* ---------------- segmented-control wiring ---------------- */
 function seg(elId, apply){

@@ -2,7 +2,7 @@
 
 **Sci-Agent-Exam: Evaluating LLM Agents on Real Scientific Software Workflows**
 
-🔗 **Links:** Paper (under anonymous review) · [Live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/)
+🔗 **Links:** Paper (under anonymous review) · [Leaderboard](leaderboard/index.html)
 
 Sci-Agent-Exam is a workflow-oriented benchmark for LLM **agents** doing real
 scientific software engineering. Unlike final-answer science QA, every task drops
@@ -35,11 +35,11 @@ substantial headroom in execution correctness and scientific judgement alike.
 
 ![Cost vs. score per agent](assets/cost_vs_score.png)
 
-> **📊 Live leaderboard:** <https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/>
-> — sortable by Programmatic / LLM-Judge / Combined / Pass@0.95, plus per-run
-> **Out-tokens / Cost / Turns** efficiency columns, filterable by field and task
-> type. Fully self-contained (no server, works offline); source + generator in
-> [`leaderboard/`](leaderboard/).
+> **📊 Leaderboard:** [`leaderboard/index.html`](leaderboard/index.html) — open it
+> directly in a browser (works offline, no server needed). Sortable by
+> Programmatic / LLM-Judge / Combined / Pass@0.95, plus per-run **Out-tokens /
+> Cost / Turns** efficiency columns, filterable by field and task type. Source +
+> generator in [`leaderboard/`](leaderboard/).
 
 ## Overview
 
@@ -298,9 +298,8 @@ bash harness/run_judge.sh mathematics-code-generation-02
 The [`leaderboard/`](leaderboard/) directory is a **single self-contained HTML
 page** (no external assets, no network, no build step beyond one script) that
 renders the full-run results for 10 agents. Open `leaderboard/index.html` directly
-in a browser, serve the repo with any static host, or view it online via GitHub
-Pages. To update it, edit `leaderboard/data/leaderboard.json` and re-run
-`python3 leaderboard/build.py`.
+in a browser, or serve the repo with any static host. To update it, edit
+`leaderboard/data/leaderboard.json` and re-run `python3 leaderboard/build.py`.
 
 Columns: Programmatic / LLM-Judge / Combined / Pass@0.95 scores, plus per-run
 **Out-tokens / Cost / Turns** efficiency metrics (mean over the trajectory set).
