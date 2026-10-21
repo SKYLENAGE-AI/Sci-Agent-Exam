@@ -231,16 +231,6 @@ evaluation images** (Python 3.11.15). The stack is kept out of the base image on
 purpose: tasks pin different major versions (e.g. `numpy` 1.24 vs 1.26), so each
 task layer installs its own to avoid ABI corruption.
 
-## Leaderboard
-
-[`leaderboard/`](leaderboard/) is a **single self-contained HTML page** (no
-external assets, no network, no build step beyond one script) rendering the
-full-run results for 10 agents. Open `leaderboard/index.html` directly in a
-browser, or serve the repo with any static host. Columns: Programmatic /
-LLM-Judge / Combined / Pass@0.95 scores, plus per-run **Out-tokens / Cost /
-Turns** efficiency metrics, filterable by field and task type. To update it, edit
-`leaderboard/data/leaderboard.json` and re-run `python3 leaderboard/build.py`.
-
 ## Notes on anonymity & scope
 
 - Author / institution / infrastructure identifiers have been removed:
