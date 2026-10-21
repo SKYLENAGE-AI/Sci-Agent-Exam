@@ -291,7 +291,8 @@
       <div class="mx"><div class="mxgrid" id="mxgrid"></div></div>
     </div>
     <p class="cap">Rows are the 10 agents in <b>overall-Combined</b> order; cells shaded by the selected
-      metric (×100). Hover a cell for the exact number.</p>
+      metric (×100), the ramp stretched from the lowest to the highest value in view for contrast.
+      Hover a cell for the exact number.</p>
   </section>
 
   <!-- ===================== PARETO ===================== -->
@@ -460,7 +461,9 @@ function renderMatrix(){
   const cats = mxAxis==="fields" ? fieldCats() : TASKTYPES;
   const ids = overallSorted();
   const [r,g,b] = hx(MCOLOR[mxMetric]);
-  let mx=0; ids.forEach(id=>cats.forEach(c=>{mx=Math.max(mx,S[id][c.key][mxMetric]);}));
+  let mx=0, mn=Infinity;
+  ids.forEach(id=>cats.forEach(c=>{const v=S[id][c.key][mxMetric]; mx=Math.max(mx,v); mn=Math.min(mn,v);}));
+  const span = mx>mn ? mx-mn : 1;
   const grid = document.getElementById("mxgrid");
   grid.style.gridTemplateColumns = `minmax(118px,1.3fr) repeat(${cats.length},minmax(48px,1fr))`;
   let html = `<div class="mxh lbl mxcol0" style="text-align:left">Agent ╲ ${mxAxis==="fields"?"Field":"Task type"}</div>`;
@@ -469,8 +472,8 @@ function renderMatrix(){
     const mo = MODELS[id];
     html += `<div class="mxrh mxcol0"><span class="pdot" style="color:${mo.color};background:${mo.color}"></span>${esc(mo.name)}</div>`;
     cats.forEach(c=>{
-      const v = S[id][c.key][mxMetric], norm = mx? v/mx : 0, a = (0.07+0.86*norm).toFixed(3);
-      const dark = norm>0.52;
+      const v = S[id][c.key][mxMetric], norm = (v-mn)/span, a = (0.10+0.88*norm).toFixed(3);
+      const dark = norm>0.55;
       const disp = (v*100).toFixed(mxMetric==="r"?1:0);
       html += `<div class="mxc" title="${esc(mo.name)} · ${esc(c.label)} — ${METRIC_NAME[mxMetric]} ${(v*100).toFixed(1)}${mxMetric==="r"?"%":""}" `+
               `style="background:rgba(${r},${g},${b},${a});color:${dark?'#071016':'var(--muted)'}">${disp}</div>`;
