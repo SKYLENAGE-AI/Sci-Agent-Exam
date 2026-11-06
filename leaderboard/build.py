@@ -111,6 +111,8 @@ TEMPLATE = r"""<!DOCTYPE html>
   .navbtn.on{color:#071016;font-weight:700;border-color:transparent;
     background:linear-gradient(100deg,var(--accent),var(--accent-2));box-shadow:0 6px 22px rgba(56,232,198,.22)}
   .themebtn{margin-left:14px;min-width:84px}
+  .ghbtn{display:inline-flex;align-items:center;text-decoration:none}
+  .ghbtn:hover{color:var(--txt);border-color:var(--accent-2)}
   .view{display:none}
   .view.on{display:block;animation:fade .35s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -292,6 +294,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     <button class="navbtn" data-v="matrix">▦ Matrix</button>
     <button class="navbtn" data-v="pareto">◴ Pareto</button>
     <button class="navbtn" data-v="domains">◈ Domains</button>
+    <a class="navbtn ghbtn" href="https://github.com/SKYLENAGE-AI/Sci-Agent-Exam" target="_blank" rel="noopener" title="View on GitHub">&#9733; GitHub</a>
     <button class="navbtn themebtn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">☾ Dark</button>
   </nav>
 
