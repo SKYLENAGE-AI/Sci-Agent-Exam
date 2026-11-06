@@ -2,7 +2,7 @@
 
 **SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks**
 
-🔗 **Links:** Paper (under anonymous review) · [Live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/)
+🔗 **Links:** [Live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/)
 
 Sci-Agent-Exam is a workflow-oriented benchmark for LLM **agents** doing real
 scientific software engineering. Unlike final-answer science QA, every task drops
