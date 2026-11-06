@@ -28,6 +28,12 @@ reliability bar on only ~a quarter of tasks (contenders ≤10%) — substantial
 headroom remains. Full interactive results on the
 [live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/).
 
+<p align="center">
+  <a href="https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/">
+    <img src="assets/leaderboard.png" alt="Sci-Agent-Exam leaderboard — overall ranking" width="900">
+  </a>
+</p>
+
 ## Quickstart
 
 **Prerequisites:** Docker, Python 3.12, and `harbor==0.20.0`.
