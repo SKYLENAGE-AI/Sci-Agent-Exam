@@ -13,10 +13,10 @@ papers, and asks it to *deliver working artifacts* — code, result tables, a
 figure, a short report, and a machine-readable `answer.json` — then scores them
 with a **hybrid verifier**: deterministic programmatic checks plus an LLM-judge
 rubric, measuring execution correctness and scientific judgement separately.
-
+<!-- 
 <p align="center">
   <img src="assets/overview.png" alt="Sci-Agent-Exam vs. existing benchmarks" width="820">
-</p>
+</p> -->
 
 ## Results snapshot
 
