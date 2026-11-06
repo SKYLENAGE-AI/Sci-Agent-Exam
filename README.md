@@ -2,7 +2,9 @@
 
 **SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks**
 
-🔗 **Links:** [Live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/)
+🔗 **Links:** [Paper](https://arxiv.org/pdf/2610.32441) · [Live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/)
+
+![SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks](assets/main-figure.png)
 
 Sci-Agent-Exam is a workflow-oriented benchmark for LLM **agents** doing real
 scientific software engineering. Unlike final-answer science QA, every task drops
@@ -12,15 +14,9 @@ figure, a short report, and a machine-readable `answer.json` — then scores the
 with a **hybrid verifier**: deterministic programmatic checks plus an LLM-judge
 rubric, measuring execution correctness and scientific judgement separately.
 
-![Sci-Agent-Exam vs. existing benchmarks](assets/overview.png)
-
-This repository is a compact, self-contained **extract** of that benchmark: the
-**harbor run logic** that drives one evaluation end-to-end, **five complete
-example tasks** (five domains × five task types), and the **leaderboard** of the
-full evaluation. Large-scale batch runners and the complete task set are omitted.
-The layout follows the
-[Terminal-Bench-Science](https://terminal-bench-science.ai/) conventions, driven
-by the [`harbor`](https://github.com/harbor-framework/harbor) runner.
+<p align="center">
+  <img src="assets/overview.png" alt="Sci-Agent-Exam vs. existing benchmarks" width="820">
+</p>
 
 ## Results snapshot
 
@@ -29,8 +25,33 @@ Across **10 frontier agents** on the full task set (11 fields, 7 task types),
 **Claude Fable 5** leads at **67.3**. Per-run cost spans **$5–58** with no
 correlation to rank, and even the strongest agent clears the **Pass@0.95**
 reliability bar on only ~a quarter of tasks (contenders ≤10%) — substantial
-headroom remains. Full interactive results in
-[`leaderboard/index.html`](leaderboard/index.html).
+headroom remains. Full interactive results on the
+[live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/).
+
+## Quickstart
+
+**Prerequisites:** Docker, Python 3.12, and `harbor==0.20.0`.
+
+```bash
+uv tool install "harbor==0.20.0"   # or: pip install "harbor==0.20.0"
+
+# Run one example task with an agent (the shared base image builds on first run):
+bash harness/run_harbor_task.sh bioinformatics-error-diagnosis-01 claude-code <model-id>
+```
+
+This needs LLM credentials in your environment — see
+[Running an evaluation](#running-an-evaluation) for the full credential setup and
+the standalone grader-QC flow.
+
+## What's in this repository
+
+This repository is a compact, self-contained **extract** of that benchmark: the
+**harbor run logic** that drives one evaluation end-to-end, **five complete
+example tasks** (five domains × five task types), and the **leaderboard** of the
+full evaluation. Large-scale batch runners and the complete task set are omitted.
+The layout follows the
+[Terminal-Bench-Science](https://terminal-bench-science.ai/) conventions, driven
+by the [`harbor`](https://github.com/harbor-framework/harbor) runner.
 
 ## How a task is evaluated
 
@@ -78,42 +99,6 @@ known-good answer.
   scientifically right*) are graded independently, weighted per task type.
 - **Trajectory-level analysis:** beyond the final score, tracks dip / recover /
   regret behaviors and per-run cost, tokens, and turns.
-
-## Benchmark construction
-
-Sci-Agent-Exam is built through a staged workflow: expert task design against
-pinned real sources, task-package construction (Docker env + data + hidden
-verifier), independent review, solution checking, and judge calibration. The
-public evaluation covers **11 scientific fields** and **7 task types**; this
-repository ships five representative tasks plus the full leaderboard.
-
-![Benchmark construction and task taxonomy](assets/benchmark_pipeline.png)
-
-## Scoring
-
-The final reward is a weighted sum of the two components, fixed per task type (set
-in each `task.toml` `[verifier.env]` as `SCICODE_TASK_TYPE`, resolved in
-`tests/test.sh`):
-
-| Task type | Programmatic | LLM judge |
-|---|---|---|
-| code_generation | 0.70 | 0.30 |
-| error_diagnosis | 0.65 | 0.35 |
-| tool_orchestration | 0.55 | 0.45 |
-| end_to_end_analysis / hypothesis_validation | 0.50 | 0.50 |
-| result_interpretation | 0.45 | 0.55 |
-| literature_synthesis | 0.20 | 0.80 |
-
-```
-final_reward = prog_weight * programmatic_score + judge_weight * judge_score_fraction
-```
-
-Both scores are clamped to `[0, 1]`. The judge grades `rubric.json` one criterion
-at a time (PASS/FAIL) → `score_fraction = Σ(weight PASS) / Σ(weight all)`. A
-required-artifact preflight pre-fails only the criteria that declared a missing
-deliverable as input, so independent work is still graded against the full
-denominator. `test.sh` writes `0.0` upfront and preserves it on any crash, so an
-aborted verifier yields a real `0.0` rather than a harness error.
 
 ## Repository layout
 
@@ -181,12 +166,6 @@ and that source's license, and ships its golden reference solution under
 `solution/`. See [`tasks/README.md`](tasks/README.md) for one-line descriptions.
 
 ## Running an evaluation
-
-**Prerequisites:** Docker, Python 3.12, and `harbor==0.20.0`.
-
-```bash
-uv tool install "harbor==0.20.0"   # or: pip install "harbor==0.20.0"
-```
 
 **Credentials** (any OpenAI/Anthropic-compatible gateway, or the vendor APIs directly):
 
@@ -263,4 +242,3 @@ in each task's `README.md`.
       url={https://arxiv.org/abs/2610.32441}, 
 }
 ```
-
