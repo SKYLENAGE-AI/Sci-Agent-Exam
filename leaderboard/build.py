@@ -32,7 +32,8 @@ meta = d["meta"]
 # The data object injected verbatim into the page. json.dumps keeps it valid JS.
 DATA_JS = json.dumps(
     {"models": d["models"], "fields": d["fields"],
-     "task_types": d["task_types"], "scores": d["scores"]},
+     "task_types": d["task_types"], "scores": d["scores"],
+     "coverage": d.get("coverage", {})},
     ensure_ascii=False, separators=(",", ":"))
 
 TEMPLATE = r"""<!DOCTYPE html>
@@ -211,19 +212,14 @@ TEMPLATE = r"""<!DOCTYPE html>
   .mxc{text-align:center;padding:10px 2px;border-radius:6px;font-size:12px;font-variant-numeric:tabular-nums;font-weight:700;cursor:default}
   .mxcol0{position:sticky;left:0;z-index:1;background:linear-gradient(90deg,var(--panel) 80%,transparent)}
 
-  /* coverage (task distribution) */
-  .cov2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .covhd{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;margin:0 2px 16px}
-  .covhd .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
-  .covhd .covn{margin-left:auto;font-size:11px;font-weight:400;color:var(--muted)}
-  .covrow{display:grid;grid-template-columns:148px 1fr 56px;gap:12px;align-items:center;padding:7px 2px}
-  .covrow .cl{display:flex;align-items:center;gap:8px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .covrow .cl .ic{font-size:14px;flex:0 0 auto}
-  .covbar{height:10px;background:var(--barbg);border-radius:999px;overflow:hidden}
-  .covbar i{display:block;height:100%;width:0;border-radius:999px;
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .7s cubic-bezier(.22,1,.36,1)}
-  .covval{text-align:right;font-variant-numeric:tabular-nums;font-size:13px;font-weight:700}
-  .covval span{color:var(--muted);font-weight:400;font-size:11px;margin-left:3px}
+  /* coverage (domain x workflow matrix) */
+  .covrh{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;padding:0 12px 0 2px;min-width:0}
+  .covrh .ic{flex:0 0 auto}
+  .covrh .nm{min-width:0;white-space:normal;line-height:1.15;overflow-wrap:break-word}
+  .mxc.z{color:var(--muted);opacity:.3;font-weight:400}
+  .mxc.tot{font-weight:800;color:var(--txt);background:var(--panel-2)}
+  .mxh.tot{font-weight:800;color:var(--txt);justify-content:center;align-items:center}
+  .covrh.tot{font-weight:800;color:var(--accent-2)}
 
   /* svg charts */
   svg.chart{width:100%;height:auto;display:block;font-family:inherit;overflow:visible}
@@ -273,8 +269,6 @@ TEMPLATE = r"""<!DOCTYPE html>
     .hrow,.rows{padding-left:14px;padding-right:14px}
     .val{font-size:13px} .val.active{font-size:14px}
     .ctrls{gap:14px}
-    .cov2{grid-template-columns:1fr}
-    .covrow{grid-template-columns:130px 1fr 52px}
   }
 </style>
 </head>
@@ -330,21 +324,12 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   <!-- ===================== COVERAGE ===================== -->
   <section class="view" id="view-coverage">
-    <div class="cov2">
-      <div class="panel-card">
-        <div class="covhd"><span class="dot"></span>By Scientific Domain
-          <span class="covn" id="covFieldsN"></span></div>
-        <div id="covFields"></div>
-      </div>
-      <div class="panel-card">
-        <div class="covhd"><span class="dot"></span>By Workflow (Task Type)
-          <span class="covn" id="covTasksN"></span></div>
-        <div id="covTasks"></div>
-      </div>
+    <div class="panel-card">
+      <div class="mx"><div class="mxgrid" id="covgrid"></div></div>
     </div>
-    <p class="cap">Task coverage of the benchmark — how the <b>120</b> tasks distribute across the
-      <b>11</b> scientific domains and the <b>7</b> research workflows. Bars scale to the largest
-      bucket; the percentage is the share of all 120 tasks.</p>
+    <p class="cap">Task coverage — how the <b>120</b> tasks distribute across <b>11</b> scientific
+      domains (rows) and <b>7</b> research workflows (columns). Each cell is a task count, shaded
+      by density; <b>Σ</b> gives the row / column totals. Hover a cell for the exact figure.</p>
   </section>
 
   <!-- ===================== MATRIX ===================== -->
@@ -528,27 +513,33 @@ document.querySelectorAll("#view-leaderboard .sortbtn").forEach(b=>{
   });
 });
 
-/* ---------------- coverage (task distribution) ---------------- */
+/* ---------------- coverage (domain x workflow matrix) ---------------- */
 function renderCoverage(){
-  const fill = (listId, nId, cats)=>{
-    const items = cats.slice().sort((a,b)=>b.n-a.n);
-    const total = items.reduce((s,c)=>s+c.n,0);
-    const mx = Math.max(...items.map(c=>c.n));
-    document.getElementById(nId).textContent = items.length+" · "+total+" tasks";
-    document.getElementById(listId).innerHTML = items.map(c=>{
-      const pct = (c.n/total*100).toFixed(0);
-      return `<div class="covrow">
-        <div class="cl" title="${esc(c.label)}"><span class="ic">${c.ic}</span>${esc(c.label)}</div>
-        <div class="covbar"><i data-w="${(c.n/mx*100).toFixed(1)}"></i></div>
-        <div class="covval">${c.n}<span>${pct}%</span></div>
-      </div>`;
-    }).join("");
-  };
-  fill("covFields","covFieldsN", fieldCats());
-  fill("covTasks","covTasksN", TASKTYPES);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    document.querySelectorAll("#view-coverage .covbar i").forEach(b=> b.style.width = b.dataset.w+"%");
-  }));
+  const COV = DATA.coverage || {};
+  const doms = fieldCats().slice().sort((a,b)=>b.n-a.n);     // domains by task total, desc
+  const tts  = TASKTYPES.slice().sort((a,b)=>b.n-a.n);        // workflows by task total, desc
+  let mx=0; doms.forEach(dm=>tts.forEach(t=>{mx=Math.max(mx,(COV[dm.key]||{})[t.key]||0);}));
+  const [r,g,b] = [16,158,136];                               // teal, readable on both themes
+  const grid = document.getElementById("covgrid");
+  grid.style.gridTemplateColumns = `minmax(164px,1.2fr) repeat(${tts.length},minmax(44px,1fr)) minmax(46px,.7fr)`;
+  let html = `<div class="mxh lbl mxcol0" style="text-align:left">Domain ╲ Workflow</div>`;
+  html += tts.map(t=>`<div class="mxh" title="${esc(t.label)}"><span class="ic">${t.ic}</span><span class="nm">${esc(t.label)}</span></div>`).join("");
+  html += `<div class="mxh tot">Σ</div>`;
+  doms.forEach(dm=>{
+    html += `<div class="covrh mxcol0"><span class="ic">${dm.ic}</span><span class="nm">${esc(dm.label)}</span></div>`;
+    tts.forEach(t=>{
+      const v = (COV[dm.key]||{})[t.key]||0;
+      if(v===0){ html += `<div class="mxc z" title="${esc(dm.label)} · ${esc(t.label)} — 0 tasks">·</div>`; return; }
+      const norm=v/mx, a=(0.12+0.80*norm).toFixed(3), dark=norm>0.55;
+      html += `<div class="mxc" title="${esc(dm.label)} · ${esc(t.label)} — ${v} task${v>1?'s':''}" `+
+              `style="background:rgba(${r},${g},${b},${a});color:${dark?'#071016':'var(--txt)'}">${v}</div>`;
+    });
+    html += `<div class="mxc tot">${dm.n}</div>`;
+  });
+  html += `<div class="covrh tot mxcol0"><span class="ic">Σ</span><span class="nm">Total</span></div>`;
+  tts.forEach(t=>{ html += `<div class="mxc tot">${t.n}</div>`; });
+  html += `<div class="mxc tot" style="color:var(--accent-2)">120</div>`;
+  grid.innerHTML = html;
 }
 
 /* ---------------- matrix (heatmap) ---------------- */

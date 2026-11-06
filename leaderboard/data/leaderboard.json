@@ -2004,5 +2004,106 @@
         "turn": 54.6
       }
     }
+  },
+  "coverage": {
+    "physics": {
+      "code-generation": 3,
+      "end-to-end-analysis": 2,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 1,
+      "literature-synthesis": 0,
+      "result-interpretation": 2,
+      "tool-orchestration": 3
+    },
+    "physics-sim": {
+      "code-generation": 2,
+      "end-to-end-analysis": 2,
+      "error-diagnosis": 0,
+      "hypothesis-validation": 2,
+      "literature-synthesis": 2,
+      "result-interpretation": 0,
+      "tool-orchestration": 3
+    },
+    "scientific-computation": {
+      "code-generation": 2,
+      "end-to-end-analysis": 3,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 2,
+      "literature-synthesis": 0,
+      "result-interpretation": 1,
+      "tool-orchestration": 4
+    },
+    "data-science": {
+      "code-generation": 1,
+      "end-to-end-analysis": 2,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 2,
+      "literature-synthesis": 1,
+      "result-interpretation": 1,
+      "tool-orchestration": 2
+    },
+    "bioinformatics": {
+      "code-generation": 1,
+      "end-to-end-analysis": 5,
+      "error-diagnosis": 2,
+      "hypothesis-validation": 1,
+      "literature-synthesis": 0,
+      "result-interpretation": 0,
+      "tool-orchestration": 2
+    },
+    "biology": {
+      "code-generation": 2,
+      "end-to-end-analysis": 4,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 2,
+      "literature-synthesis": 1,
+      "result-interpretation": 1,
+      "tool-orchestration": 4
+    },
+    "cs": {
+      "code-generation": 3,
+      "end-to-end-analysis": 2,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 3,
+      "literature-synthesis": 0,
+      "result-interpretation": 0,
+      "tool-orchestration": 1
+    },
+    "materials-science": {
+      "code-generation": 1,
+      "end-to-end-analysis": 1,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 2,
+      "literature-synthesis": 0,
+      "result-interpretation": 2,
+      "tool-orchestration": 3
+    },
+    "chemistry": {
+      "code-generation": 2,
+      "end-to-end-analysis": 1,
+      "error-diagnosis": 1,
+      "hypothesis-validation": 1,
+      "literature-synthesis": 3,
+      "result-interpretation": 0,
+      "tool-orchestration": 3
+    },
+    "mathematics": {
+      "code-generation": 2,
+      "end-to-end-analysis": 2,
+      "error-diagnosis": 2,
+      "hypothesis-validation": 0,
+      "literature-synthesis": 1,
+      "result-interpretation": 1,
+      "tool-orchestration": 1
+    },
+    "engineering": {
+      "code-generation": 1,
+      "end-to-end-analysis": 1,
+      "error-diagnosis": 0,
+      "hypothesis-validation": 0,
+      "literature-synthesis": 2,
+      "result-interpretation": 2,
+      "tool-orchestration": 2
+    }
   }
 }

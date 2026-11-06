@@ -1,13 +1,11 @@
-# Sci-Agent-Exam
-
-**SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks**
+# SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks
 
 🔗 **Links:** [Paper](https://arxiv.org/pdf/2610.32441) · [Live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/)
 
 ![SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks](assets/main-figure.png)
 
 Sci-Agent-Exam is a workflow-oriented benchmark for LLM **agents** doing real
-scientific software engineering. Unlike final-answer science QA, every task drops
+scientific software engineering. Every task drops
 an agent into a Docker environment with real datasets, source code, and mounted
 papers, and asks it to *deliver working artifacts* — code, result tables, a
 figure, a short report, and a machine-readable `answer.json` — then scores them
@@ -18,19 +16,27 @@ rubric, measuring execution correctness and scientific judgement separately.
   <img src="assets/overview.png" alt="Sci-Agent-Exam vs. existing benchmarks" width="820">
 </p> -->
 
-## Results snapshot
+## Leaderboard
 
-Across **10 frontier agents** on the full task set (11 fields, 7 task types),
-**GPT-6 Astra** sets a frontier reference at **80.9** combined; among contenders
-**Claude Fable 5** leads at **67.3**. Per-run cost spans **$5–58** with no
-correlation to rank, and even the strongest agent clears the **Pass@0.95**
-reliability bar on only ~a quarter of tasks (contenders ≤10%) — substantial
-headroom remains. Full interactive results on the
-[live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/).
+**10 frontier agents**, full task set (11 fields, 7 task types):
+
+- **GPT-6 Astra** sets a frontier reference at **80.9** combined; among contenders **Claude Fable 5** leads at **67.3**.
+- Per-run cost spans **$5–58**, with **no correlation to rank**.
+- Even the strongest agent clears the **Pass@0.95** reliability bar on only **~¼ of tasks** (contenders **≤10%**) — substantial headroom remains.
+
+Full interactive results on the [live leaderboard](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/).
 
 <p align="center">
   <a href="https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/">
     <img src="assets/leaderboard.png" alt="Sci-Agent-Exam leaderboard — overall ranking" width="900">
+  </a>
+</p>
+
+**Task coverage** — the **120** tasks across **11** scientific domains × **7** research workflows ([`?view=coverage`](https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/?view=coverage)):
+
+<p align="center">
+  <a href="https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/?view=coverage">
+    <img src="assets/task_coverage.png" alt="Sci-Agent-Exam task coverage — domain × workflow matrix" width="900">
   </a>
 </p>
 
