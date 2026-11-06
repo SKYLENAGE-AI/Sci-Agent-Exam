@@ -249,4 +249,18 @@ task layer installs its own to avoid ABI corruption.
 Released under the **Apache License 2.0** (see `LICENSE`). Scientific sources
 redistributed within individual tasks retain their own upstream licenses, recorded
 in each task's `README.md`.
-</content>
+
+## Citation
+
+```bibtex
+@misc{zhong2026sciagentexam,
+      title={SCI-AGENT-EXAM: Benchmarking Agents on Scientific Research Tasks}, 
+      author={Tianyun Zhong and Wei Wang and Jialin Li and Jianhong Tu and Liyao Li and Chuqiao Kuang and Tianshi Zheng and Songchi Zhou and Weiqi Zhai and Qile Jin and Jiajia Li and Jiasheng Zheng and Boxi Cao and Yaojie Lu and Hongyu Lin and Shiwei Ye and Bing Zhao and Hu Wei and Lin Qu and Xianpei Han},
+      year={2026},
+      eprint={2610.32441},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2610.32441}, 
+}
+```
+
